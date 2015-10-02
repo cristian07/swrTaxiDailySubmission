@@ -3,6 +3,7 @@ git clone repositorio(url)
 git status
 git add . o git add --all
 git commit -m "mensaje"
+// es de buenas practicas (para no generar quilombo) antes de hacer el push hacer un pull. Entonces haces el commit traes los cambios que alguien capaz hizo (pull) y haces el push (donde se hace un merge)
 git push
 
 
