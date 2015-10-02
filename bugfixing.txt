@@ -1,0 +1,89 @@
+
+Clase Location.java
+
+---------------------------------------------------------------------------------------------------------------
+Condición para cortar en substring de 67 caracteres el nombre completo de aeropuerto, en metodo getFullName()
+-------------------------------------------------------------------------------------------------------------
+
+// System.out.println("<< fullNameStr: "+fullNameStr);
+   // System.out.println("<< fullNameStr_0_67: "+fullName.substring(0, 67) + "...");
+   // if( fullName.length() >= 70 ) {
+   //    	fullNameStr = fullName.substring(0, 67) + "...";
+   // }
+---------------------------------------------------------------------------------------------------------------
+Metodo para armar cuidad con Nombre del País, Reemplazo del metodo getFullName()
+----------------------------------------------------------------------------------------------------------------
+   public String getFullName(){
+	  	StringBuilder fullName= new StringBuilder(getCityName).append(" - ");
+	  	String cityName= getCityName();
+	  	String country= getCountry();
+	  	String airport=getAirportName();
+	  	
+	  	if(!isAirport()){
+	  		airport="Todos los aeropuertos";
+	  	}
+	  	else {
+	  	airport += "(" + getIataCode() + ")";
+	  	}
+	  	
+	  	fullName.append(country);
+	  	fullName.append(" - ");
+	  	fullName.append(airport);
+
+	  	String fullNameStr= fullName.toString();
+
+	  	return fullNameStr;
+
+	  }
+------------------------------------------------------------------------------------------------------------------
+Metodo para que valide los campos que sean validos antes de pasar de ventana
+-------------------------------------------------------------------------------------------------------------------
+
+
+Original------------------------------------------------------------------
+
+function submitFlightSearch() {
+  resetFilters();
+  $('#loadingContainer').show();
+  submitForm(
+    'flightSearch',
+    {
+      success: function(o) {
+        $('#loadingContainer').hide();
+        var responseText = o.responseText;
+        var jsonResponse = YAHOO.lang.JSON.parse(responseText);
+        trips = jsonResponse.tripList;
+        if(jsonResponse.success == "true") {
+          COMMON_CONTROLS.pager.setResults(jsonResponse.results, jsonResponse.gdsUnavailables);
+          COMMON_CONTROLS.pager.setResultsFilters(jsonResponse.results, jsonResponse.gdsUnavailables);
+          COMMON_CONTROLS.pager.showPage(1);
+          var flightSearch = document.getElementById('flightSearch');
+          var flightBook = document.getElementById('flightBook');
+
+          flightBook.elements['date'].value = flightSearch.elements['flightDate'].value;
+          flightBook.elements['returnDate'].value = flightSearch.elements['flightReturnDate'].value;
+          flightBook.elements['adults'].value = flightSearch.elements['adults'].value;
+          clearAirlines();
+          addAirlines(jsonResponse.results);
+        } else {
+          if(jsonResponse.errorCode != "") {
+            var errorPanelBody = document.getElementById('errorPanelBody');
+            errorPanelBody.innerHTML = jsonResponse.errorCode + "<br/>";
+            COMMON_CONTROLS.errorsPanel.show();
+          } else {
+            var validationPanelBody = document.getElementById('validationPanelBody');
+            validationPanelBody.innerHTML = "";
+            for(var i = 0; i < jsonResponse.results.length; ++i) {
+              var msg = jsonResponse.results[i];
+              validationPanelBody.innerHTML += msg;
+              validationPanelBody.innerHTML += "<br/>";
+            }
+            COMMON_CONTROLS.validationPanel.show();
+          }
+        }
+      },
+      failure: function(o) {
+        $('#loadingContainer').hide();
+      }
+    });
+}
