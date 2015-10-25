@@ -1,23 +1,53 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entidades;
 
-/**
- *
- * @author sebastian.suarez
- */
 public class Movil {
-    private String id;
-    private String patente;
-    private String modelo;
-    private int kilometraje;
-    private int correa;
-    private int aceite;
-    private int grasa;
-    private int filtro;
-    private String aditivoMotor;
-    private String aditivoCaja;
+
+    private int nroMovil;
+    private String nroPatente;
+    private String nroLicencia;
+    private int kmTablero;
+
+    public Movil() {
+
+    }
+
+    public Movil(int nroMovil, String nroPatente, String nroLicencia, int kmTablero) {
+        this.nroMovil = nroMovil;
+        this.nroPatente = nroPatente;
+        this.nroLicencia = nroLicencia;
+        this.kmTablero = kmTablero;
+    }
+
+    public int getNroMovil() {
+        return nroMovil;
+    }
+
+    public void setNroMovil(int nroMovil) {
+        this.nroMovil = nroMovil;
+    }
+
+    public String getNroPatente() {
+        return nroPatente;
+    }
+
+    public void setNroPatente(String nroPatente) {
+        this.nroPatente = nroPatente;
+    }
+
+    public String getNroLicencia() {
+        return nroLicencia;
+    }
+
+    public void setNroLicencia(String nroLicencia) {
+        this.nroLicencia = nroLicencia;
+    }
+
+    public int getKmTablero() {
+        return kmTablero;
+    }
+
+    public void setKmTablero(int kmTablero) {
+        this.kmTablero = kmTablero;
+    }
+
 }
