@@ -4,71 +4,155 @@ import java.util.Date;
 
 public class Chofer {
 
-    private int nroLicencia;
-    private String jurisdiccion;
-    private Date fechaOtotgado;
-    private Date fechaVencimiento;
-    private String categoria;
-    private Persona persona;
+    private int DNI;
+    private String nombre;
+    private String apellido;
+    private String domicilio;
+    private String localidad;
+    private String provincia;
+    private String telefono;
+    private String celular;
+    private Date fechaCarnet;
+    private int licenciaCarnet;
 
-    public Chofer(int nroLicencia, String jurisdiccion, Date fechaOtotgado, Date fechaVencimiento, String categoria, Persona persona) {
-        this.nroLicencia = nroLicencia;
-        this.jurisdiccion = jurisdiccion;
-        this.fechaOtotgado = fechaOtotgado;
-        this.fechaVencimiento = fechaVencimiento;
-        this.categoria = categoria;
-        this.persona = persona;
+    /**
+     * @return the DNI
+     */
+    public int getDNI() {
+        return DNI;
     }
 
-    public Chofer() {
+    /**
+     * @param DNI the DNI to set
+     */
+    public void setDNI(int DNI) {
+        this.DNI = DNI;
     }
 
-    public int getNroLicencia() {
-        return nroLicencia;
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNroLicencia(int nroLicencia) {
-        this.nroLicencia = nroLicencia;
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getJurisdiccion() {
-        return jurisdiccion;
+    /**
+     * @return the apellido
+     */
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setJurisdiccion(String jurisdiccion) {
-        this.jurisdiccion = jurisdiccion;
+    /**
+     * @param apellido the apellido to set
+     */
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public Date getFechaOtotgado() {
-        return fechaOtotgado;
+    /**
+     * @return the domicilio
+     */
+    public String getDomicilio() {
+        return domicilio;
     }
 
-    public void setFechaOtotgado(Date fechaOtotgado) {
-        this.fechaOtotgado = fechaOtotgado;
+    /**
+     * @param domicilio the domicilio to set
+     */
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
     }
 
-    public Date getFechaVencimiento() {
-        return fechaVencimiento;
+    /**
+     * @return the localidad
+     */
+    public String getLocalidad() {
+        return localidad;
     }
 
-    public void setFechaVencimiento(Date fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
+    /**
+     * @param localidad the localidad to set
+     */
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
     }
 
-    public String getCategoria() {
-        return categoria;
+    /**
+     * @return the provincia
+     */
+    public String getProvincia() {
+        return provincia;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    /**
+     * @param provincia the provincia to set
+     */
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
     }
 
-    public Persona getPersona() {
-        return persona;
+    /**
+     * @return the telefono
+     */
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setPersona(Persona persona) {
-        this.persona = persona;
+    /**
+     * @param telefono the telefono to set
+     */
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    /**
+     * @return the celular
+     */
+    public String getCelular() {
+        return celular;
+    }
+
+    /**
+     * @param celular the celular to set
+     */
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
+    /**
+     * @return the fechaCarnet
+     */
+    public Date getFechaCarnet() {
+        return fechaCarnet;
+    }
+
+    /**
+     * @param fechaCarnet the fechaCarnet to set
+     */
+    public void setFechaCarnet(Date fechaCarnet) {
+        this.fechaCarnet = fechaCarnet;
+    }
+
+    /**
+     * @return the licenciaCarnet
+     */
+    public int getLicenciaCarnet() {
+        return licenciaCarnet;
+    }
+
+    /**
+     * @param licenciaCarnet the licenciaCarnet to set
+     */
+    public void setLicenciaCarnet(int licenciaCarnet) {
+        this.licenciaCarnet = licenciaCarnet;
     }
 
 }

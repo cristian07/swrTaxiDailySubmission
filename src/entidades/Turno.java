@@ -1,5 +1,7 @@
 package entidades;
 
+import java.util.Calendar;
+
 public class Turno {
     private double gastosVarios;
     private double recaudacion;
@@ -8,6 +10,7 @@ public class Turno {
     private int kmFinal;
     private String ticketRelevo;
     private String tipo;
+    private String novedades;
     private int Movil_idMovil;
 
     public Turno(){
@@ -48,13 +51,7 @@ public class Turno {
         return fecha;
     }
 
-    /**
-     * @param fecha the fecha to set
-     */
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
+    
     /**
      * @return the kmInicial
      */
@@ -123,6 +120,27 @@ public class Turno {
      */
     public void setMovil_idMovil(int Movil_idMovil) {
         this.Movil_idMovil = Movil_idMovil;
+    }
+
+    /**
+     * @return the novedades
+     */
+    public String getNovedades() {
+        return novedades;
+    }
+
+    /**
+     * @param novedades the novedades to set
+     */
+    public void setNovedades(String novedades) {
+        this.novedades = novedades;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
   

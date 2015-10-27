@@ -5,6 +5,8 @@
  */
 package presentacion;
 
+import java.util.Calendar;
+
 /**
  *
  * @author Cristian
@@ -16,6 +18,13 @@ public class ComienzoRendicion extends javax.swing.JFrame {
      */
     public ComienzoRendicion() {
         initComponents();
+        Calendar calendario = Calendar.getInstance();
+        String fecha = new StringBuilder()
+                .append(Integer.toString(calendario.get(Calendar.DATE))).append("-")
+                .append(Integer.toString(calendario.get(Calendar.MONTH)+1)).append("-")
+                .append(Integer.toString(calendario.get(Calendar.YEAR))).toString();
+
+        jl_fechaHora.setText(fecha);
     }
 
     /**
@@ -28,10 +37,10 @@ public class ComienzoRendicion extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jl_fechaHora = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
+        jcb_turno = new javax.swing.JComboBox();
+        jb_iniciarRendicion = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
@@ -39,16 +48,21 @@ public class ComienzoRendicion extends javax.swing.JFrame {
 
         jLabel1.setText("Fecha");
 
-        jLabel2.setText("12/09/2015");
+        jl_fechaHora.setText("12/09/2015");
 
         jLabel3.setText("Seleccione Truno");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primer Turno", "Segundo Turno" }));
-
-        jButton1.setText("Iniciar Rendicion");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jcb_turno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primer Turno", "Segundo Turno" }));
+        jcb_turno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jcb_turnoActionPerformed(evt);
+            }
+        });
+
+        jb_iniciarRendicion.setText("Iniciar Rendicion");
+        jb_iniciarRendicion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_iniciarRendicionActionPerformed(evt);
             }
         });
 
@@ -79,11 +93,11 @@ public class ComienzoRendicion extends javax.swing.JFrame {
                                 .addGap(52, 52, 52)))
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)))
+                            .addComponent(jcb_turno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jl_fechaHora)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(136, 136, 136)
-                        .addComponent(jButton1)
+                        .addComponent(jb_iniciarRendicion)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)))
                 .addContainerGap(51, Short.MAX_VALUE))
@@ -96,14 +110,14 @@ public class ComienzoRendicion extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(jl_fechaHora))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcb_turno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jb_iniciarRendicion)
                     .addComponent(jButton2))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -116,11 +130,16 @@ public class ComienzoRendicion extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jb_iniciarRendicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_iniciarRendicionActionPerformed
         // TODO add your handling code here:
         LoginChofer login= new LoginChofer();
+        LoginChofer.jl_turno.setText(jcb_turno.getSelectedItem().toString());
         login.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jb_iniciarRendicionActionPerformed
+
+    private void jcb_turnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_turnoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcb_turnoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,17 +172,18 @@ public class ComienzoRendicion extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ComienzoRendicion().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton jb_iniciarRendicion;
+    private javax.swing.JComboBox jcb_turno;
+    private javax.swing.JLabel jl_fechaHora;
     // End of variables declaration//GEN-END:variables
 }

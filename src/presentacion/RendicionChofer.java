@@ -5,8 +5,12 @@
  */
 package presentacion;
 
+import DAO.ChoferDAO;
 import DAO.TurnoDAO;
+import entidades.Chofer;
 import entidades.Turno;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *
@@ -20,20 +24,33 @@ public class RendicionChofer extends javax.swing.JFrame {
     public RendicionChofer() {
         initComponents();
         this.setLocationRelativeTo(null);
+        Calendar calendario = Calendar.getInstance();
+        String fechaHoraSQL = new StringBuilder()
+                .append(Integer.toString(calendario.get(Calendar.DATE))).append("/")
+                .append(Integer.toString(calendario.get(Calendar.MONTH)+1)).append("/")
+                .append(Integer.toString(calendario.get(Calendar.YEAR))).toString();
+        jl_Fecha.setText(fechaHoraSQL);
+        
+       
     }
     private void registrarTurno() {
         TurnoDAO turnoDAO = new TurnoDAO();
         Turno turno = new Turno();
         
-        turno.setGastosVarios(12.2);
-        turno.setRecaudacion(10.05);
-        turno.setFecha("2015-10-01 00:00:00");
-        turno.setKmInicial(666);
-        turno.setKmFinal(668);
-        turno.setTicketRelevo("123456789");
-        turno.setTipo("M");
-        turno.setMovil_idMovil(123);
+        turno.setGastosVarios(Double.parseDouble(jtf_Gastos.getText()));
+        turno.setRecaudacion(Double.parseDouble(jtf_Recaudacion.getText()));
+        turno.setKmInicial(Integer.parseInt(jtf_KmInicial.getText()));
+        turno.setKmFinal(Integer.parseInt(jtf_KmFinal.getText()));
+        turno.setTicketRelevo(jtf_TicketRelevo.getText());
         
+        if (jl_Tipo.getText().equals("Primer Turno")) {
+             turno.setTipo("P"); 
+        } else if (jl_Tipo.getText().equals("Segundo Turno")) {
+            turno.setTipo("S");
+        }
+        
+        turno.setMovil_idMovil(Integer.parseInt(jtf_Movil.getText()));
+        turno.setNovedades(jta_Novedades.getText());
         turnoDAO.altaTurno(turno);
     }
     /**
@@ -54,27 +71,29 @@ public class RendicionChofer extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jta_Novedades = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jtf_KmInicial = new javax.swing.JTextField();
         jtf_TicketRelevo = new javax.swing.JTextField();
         jtf_Recaudacion = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        jtf_Gastos = new javax.swing.JTextField();
         jtf_KmFinal = new javax.swing.JTextField();
         jl_Tipo = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        jl_chofer = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel5 = new javax.swing.JLabel();
+        jl_DNI = new javax.swing.JLabel();
+        jtf_Movil = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jtf_Comision = new javax.swing.JTextField();
+        jtf_Neto = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,7 +106,7 @@ public class RendicionChofer extends javax.swing.JFrame {
 
         jLabel4.setText("Fecha");
 
-        jl_Fecha.setText("12/09/2015");
+        jl_Fecha.setText("<Fecha>");
 
         jLabel6.setText("Chofer");
 
@@ -97,19 +116,15 @@ public class RendicionChofer extends javax.swing.JFrame {
 
         jLabel9.setText("Recaudación");
 
-        jLabel10.setText("Comisión");
-
         jLabel11.setText("Gastos");
-
-        jLabel12.setText("Neto");
 
         jLabel13.setText("Km Final");
 
         jLabel14.setText("NOVEDADES");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jta_Novedades.setColumns(20);
+        jta_Novedades.setRows(5);
+        jScrollPane1.setViewportView(jta_Novedades);
 
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -132,71 +147,91 @@ public class RendicionChofer extends javax.swing.JFrame {
             }
         });
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+        jtf_Recaudacion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtf_RecaudacionFocusLost(evt);
             }
         });
 
-        jl_Tipo.setText("Primer Turno");
+        jtf_Gastos.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtf_GastosFocusLost(evt);
+            }
+        });
+        jtf_Gastos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_GastosActionPerformed(evt);
+            }
+        });
 
-        jLabel16.setText("1234");
+        jl_Tipo.setText("<Turno>");
 
-        jLabel17.setText("Juan Pedro");
+        jl_chofer.setText("<Chofer>");
+
+        jLabel5.setText("DNI");
+
+        jl_DNI.setText("<DNI>");
+
+        jLabel10.setText("Comision");
+
+        jtf_Comision.setEnabled(false);
+
+        jLabel12.setText("Neto");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap(233, Short.MAX_VALUE)
+                    .addComponent(jButton1)
+                    .addGap(18, 18, 18)
+                    .addComponent(jButton2)
+                    .addGap(18, 18, 18)
+                    .addComponent(jButton3)
+                    .addContainerGap(56, Short.MAX_VALUE))
+                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGap(37, 37, 37)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton2)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton3)
-                            .addGap(18, 18, 18))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(37, 37, 37)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel14)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabel7)
-                                        .addComponent(jLabel8)
-                                        .addComponent(jLabel9)
-                                        .addComponent(jLabel10)
-                                        .addComponent(jLabel11)
-                                        .addComponent(jLabel12)
-                                        .addComponent(jLabel13))
-                                    .addGap(31, 31, 31)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jtf_KmInicial, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                                        .addComponent(jtf_TicketRelevo)
-                                        .addComponent(jtf_Recaudacion)
-                                        .addComponent(jTextField4)
-                                        .addComponent(jTextField5)
-                                        .addComponent(jTextField6)
-                                        .addComponent(jtf_KmFinal)
-                                        .addComponent(jl_Fecha)
-                                        .addComponent(jLabel17)
-                                        .addComponent(jLabel16)
-                                        .addComponent(jl_Tipo))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(39, Short.MAX_VALUE))
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel8)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel11)
+                                .addComponent(jLabel13)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel10)
+                                .addComponent(jLabel12))
+                            .addGap(31, 31, 31)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jtf_KmInicial, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                                .addComponent(jtf_TicketRelevo)
+                                .addComponent(jtf_Recaudacion)
+                                .addComponent(jtf_Gastos)
+                                .addComponent(jtf_KmFinal)
+                                .addComponent(jl_Fecha)
+                                .addComponent(jl_chofer)
+                                .addComponent(jl_Tipo)
+                                .addComponent(jl_DNI)
+                                .addComponent(jtf_Movil, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                                .addComponent(jtf_Comision)
+                                .addComponent(jtf_Neto, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel14)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(46, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,17 +246,21 @@ public class RendicionChofer extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jl_Tipo, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jl_chofer)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel16))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel17))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel5)
+                    .addComponent(jl_DNI))
+                .addGap(16, 16, 16)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jtf_Movil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -234,18 +273,18 @@ public class RendicionChofer extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jtf_Recaudacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtf_Comision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf_Gastos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf_Neto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
@@ -254,7 +293,7 @@ public class RendicionChofer extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -266,9 +305,9 @@ public class RendicionChofer extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void jtf_GastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_GastosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_jtf_GastosActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
             this.dispose();
@@ -284,6 +323,34 @@ public class RendicionChofer extends javax.swing.JFrame {
         // TODO add your handling code here:
         registrarTurno();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jtf_RecaudacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_RecaudacionFocusLost
+        // TODO add your handling code here:
+        if (jtf_Recaudacion.getText().length()>0){
+            try{
+                Double recaudacion = Double.parseDouble(jtf_Recaudacion.getText());
+                jtf_Comision.setText(Double.toString(recaudacion*0.35));
+            } catch(Exception e) {
+                jtf_Recaudacion.setText("");
+                jtf_Comision.setText("");
+            }
+        } 
+    }//GEN-LAST:event_jtf_RecaudacionFocusLost
+
+    private void jtf_GastosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_GastosFocusLost
+      if (jtf_Recaudacion.getText().length()>0 && jtf_Comision.getText().length()>0 && jtf_Gastos.getText().length()>0 ){
+            try{
+                Double recaudacion = Double.parseDouble(jtf_Recaudacion.getText());
+                Double comision = Double.parseDouble(jtf_Comision.getText());
+                Double gastos = Double.parseDouble(jtf_Gastos.getText());
+                jtf_Neto.setText(Double.toString(recaudacion-comision-gastos));
+            } catch(Exception e) {
+                jtf_Recaudacion.setText("");
+                jtf_Comision.setText("");
+                jtf_Gastos.setText("");
+            }
+        } 
+    }//GEN-LAST:event_jtf_GastosFocusLost
 
     /**
      * @param args the command line arguments
@@ -331,25 +398,27 @@ public class RendicionChofer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    public static javax.swing.JLabel jl_DNI;
     private javax.swing.JLabel jl_Fecha;
-    private javax.swing.JLabel jl_Tipo;
+    public static javax.swing.JLabel jl_Tipo;
+    public static javax.swing.JLabel jl_chofer;
+    private javax.swing.JTextArea jta_Novedades;
+    private javax.swing.JTextField jtf_Comision;
+    private javax.swing.JTextField jtf_Gastos;
     private javax.swing.JTextField jtf_KmFinal;
     private javax.swing.JTextField jtf_KmInicial;
+    private javax.swing.JTextField jtf_Movil;
+    private javax.swing.JTextField jtf_Neto;
     private javax.swing.JTextField jtf_Recaudacion;
     private javax.swing.JTextField jtf_TicketRelevo;
     // End of variables declaration//GEN-END:variables

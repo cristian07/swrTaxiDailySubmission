@@ -9,6 +9,7 @@ package DAO;
 import entidades.Turno;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 import servicio.DbConnection;
 
 /**
@@ -19,19 +20,25 @@ public class TurnoDAO {
     
     public void altaTurno(Turno turno) {
         DbConnection conex= new DbConnection();
+        Calendar calendario = Calendar.getInstance();
+        String fechaHoraSQL = new StringBuilder()
+                .append(Integer.toString(calendario.get(Calendar.YEAR))).append("-")
+                .append(Integer.toString(calendario.get(Calendar.MONTH)+1)).append("-")
+                .append(Integer.toString(calendario.get(Calendar.DATE))).toString();
         try {
             Statement estatuto = conex.getConnection().createStatement();
-            
             estatuto.executeUpdate("INSERT INTO Turno "
                     + "VALUES (NULL,'"
                 +turno.getGastosVarios()+"', '"
                 +turno.getRecaudacion()+"', '"
-                +turno.getFecha()+"', '"
+                +fechaHoraSQL+"', '"
+                //+turno.getFecha()+"', '"
                 +turno.getKmInicial()+"', '"
                 +turno.getKmFinal()+"', '"
                 +turno.getTicketRelevo()+"', '"
                 +turno.getTipo()+"', '"
-                +turno.getMovil_idMovil()+"')");
+                +turno.getMovil_idMovil()+"', '"
+                +turno.getNovedades()+"')");
             
             estatuto.close();
             conex.desconectar();
