@@ -1,119 +1,130 @@
 package entidades;
 
 public class Turno {
-
-    private int idTurno;
-    private Turno tipoTurno;
-    private double comision;
-    private double gastosGncCtaCte;
-    private double gastoGncOtros;
-    private double gastoLavado;
-    private double gastoOtros;
-    private double gananciaNeta;
-    private String novedades;
+    private double gastosVarios;
+    private double recaudacion;
+    private String fecha;
     private int kmInicial;
     private int kmFinal;
+    private String ticketRelevo;
+    private String tipo;
+    private int Movil_idMovil;
 
-    public Turno(int idTurno, Turno tipoTurno, double comision, double gastosGncCtaCte, double gastoGncOtros, double gastoLavado, double gastoOtros, double gananciaNeta, String novedades, int kmInicial, int kmFinal) {
-        this.idTurno = idTurno;
-        this.tipoTurno = tipoTurno;
-        this.comision = comision;
-        this.gastosGncCtaCte = gastosGncCtaCte;
-        this.gastoGncOtros = gastoGncOtros;
-        this.gastoLavado = gastoLavado;
-        this.gastoOtros = gastoOtros;
-        this.gananciaNeta = gananciaNeta;
-        this.novedades = novedades;
-        this.kmInicial = kmInicial;
-        this.kmFinal = kmFinal;
+    public Turno(){
+        
+    }
+    /**
+     * @return the gastosVarios
+     */
+    public double getGastosVarios() {
+        return gastosVarios;
     }
 
-    public int getIdTurno() {
-        return idTurno;
+    /**
+     * @param gastosVarios the gastosVarios to set
+     */
+    public void setGastosVarios(double gastosVarios) {
+        this.gastosVarios = gastosVarios;
     }
 
-    public void setIdTurno(int idTurno) {
-        this.idTurno = idTurno;
+    /**
+     * @return the recaudacion
+     */
+    public double getRecaudacion() {
+        return recaudacion;
     }
 
-    public Turno getTipoTurno() {
-        return tipoTurno;
+    /**
+     * @param recaudacion the recaudacion to set
+     */
+    public void setRecaudacion(double recaudacion) {
+        this.recaudacion = recaudacion;
     }
 
-    public void setTipoTurno(Turno tipoTurno) {
-        this.tipoTurno = tipoTurno;
+    /**
+     * @return the fecha
+     */
+    public String getFecha() {
+        return fecha;
     }
 
-    public double getComision() {
-        return comision;
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
-    public void setComision(double comision) {
-        this.comision = comision;
-    }
-
-    public double getGastosGncCtaCte() {
-        return gastosGncCtaCte;
-    }
-
-    public void setGastosGncCtaCte(double gastosGncCtaCte) {
-        this.gastosGncCtaCte = gastosGncCtaCte;
-    }
-
-    public double getGastoGncOtros() {
-        return gastoGncOtros;
-    }
-
-    public void setGastoGncOtros(double gastoGncOtros) {
-        this.gastoGncOtros = gastoGncOtros;
-    }
-
-    public double getGastoLavado() {
-        return gastoLavado;
-    }
-
-    public void setGastoLavado(double gastoLavado) {
-        this.gastoLavado = gastoLavado;
-    }
-
-    public double getGastoOtros() {
-        return gastoOtros;
-    }
-
-    public void setGastoOtros(double gastoOtros) {
-        this.gastoOtros = gastoOtros;
-    }
-
-    public double getGananciaNeta() {
-        return gananciaNeta;
-    }
-
-    public void setGananciaNeta(double gananciaNeta) {
-        this.gananciaNeta = gananciaNeta;
-    }
-
-    public String getNovedades() {
-        return novedades;
-    }
-
-    public void setNovedades(String novedades) {
-        this.novedades = novedades;
-    }
-
+    /**
+     * @return the kmInicial
+     */
     public int getKmInicial() {
         return kmInicial;
     }
 
+    /**
+     * @param kmInicial the kmInicial to set
+     */
     public void setKmInicial(int kmInicial) {
         this.kmInicial = kmInicial;
     }
 
+    /**
+     * @return the kmFinal
+     */
     public int getKmFinal() {
         return kmFinal;
     }
 
+    /**
+     * @param kmFinal the kmFinal to set
+     */
     public void setKmFinal(int kmFinal) {
         this.kmFinal = kmFinal;
     }
 
+    /**
+     * @return the ticketRelevo
+     */
+    public String getTicketRelevo() {
+        return ticketRelevo;
+    }
+
+    /**
+     * @param ticketRelevo the ticketRelevo to set
+     */
+    public void setTicketRelevo(String ticketRelevo) {
+        this.ticketRelevo = ticketRelevo;
+    }
+
+    /**
+     * @return the tipo
+     */
+    public String getTipo() {
+        return tipo;
+    }
+
+    /**
+     * @param tipo the tipo to set
+     */
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    /**
+     * @return the Movil_idMovil
+     */
+    public int getMovil_idMovil() {
+        return Movil_idMovil;
+    }
+
+    /**
+     * @param Movil_idMovil the Movil_idMovil to set
+     */
+    public void setMovil_idMovil(int Movil_idMovil) {
+        this.Movil_idMovil = Movil_idMovil;
+    }
+
+  
+    
 }
