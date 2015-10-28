@@ -44,7 +44,6 @@ public class ComienzoRendicion extends javax.swing.JFrame {
         jb_iniciarRendicion = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pantalla selección de turno");
@@ -81,9 +80,6 @@ public class ComienzoRendicion extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel4.setText("Inicio Rendición");
 
-        jLabel2.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
-        jLabel2.setText("Seleccione fecha y turno a registrar");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,8 +96,7 @@ public class ComienzoRendicion extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2))
+                                .addGap(192, 192, 192))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -116,9 +111,7 @@ public class ComienzoRendicion extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2))
+                .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -147,6 +140,7 @@ public class ComienzoRendicion extends javax.swing.JFrame {
         LoginChofer login= new LoginChofer();
         LoginChofer.jl_turno.setText(jcb_turno.getSelectedItem().toString());
         login.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jb_iniciarRendicionActionPerformed
 
     private void jcb_turnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_turnoActionPerformed
@@ -192,7 +186,6 @@ public class ComienzoRendicion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton jb_iniciarRendicion;

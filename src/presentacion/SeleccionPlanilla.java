@@ -5,6 +5,9 @@
  */
 package presentacion;
 
+import DAO.TurnoDAO;
+import java.util.ArrayList;
+
 /**
  *
  * @author Cristian
@@ -17,6 +20,17 @@ public class SeleccionPlanilla extends javax.swing.JFrame {
     public SeleccionPlanilla() {
         initComponents();
          this.setLocationRelativeTo(null);
+         TurnoDAO turnosDAO = new TurnoDAO();
+         ArrayList<String> fechas = new ArrayList<String>();
+         ArrayList<String> moviles = new ArrayList<String>();
+         fechas = turnosDAO.obtenerFechasTurnos();
+         moviles = turnosDAO.obtenerMoviles();
+         for (String str : fechas) {
+             jcb_Fechas.addItem(str);
+         }
+         for (String str : moviles) {
+             jcb_Moviles.addItem(str);
+         }
     }
 
     /**
@@ -29,13 +43,13 @@ public class SeleccionPlanilla extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jcb_Fechas = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        jcb_Turnos = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
+        jcb_Moviles = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,12 +58,10 @@ public class SeleccionPlanilla extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel1.setText("Seleccione la Fecha ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel2.setText("Seleccione el turno");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primer Turno", "Segundo Turno" }));
+        jcb_Turnos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primer Turno", "Segundo Turno" }));
 
         jButton1.setText("Ver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -67,8 +79,6 @@ public class SeleccionPlanilla extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel3.setText("Seleccione Movil");
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1234", "3467", "6752" }));
 
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel4.setText("Filtro para planillas");
@@ -93,9 +103,9 @@ public class SeleccionPlanilla extends javax.swing.JFrame {
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox2, 0, 274, Short.MAX_VALUE)
-                                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(jcb_Fechas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jcb_Turnos, 0, 274, Short.MAX_VALUE)
+                                    .addComponent(jcb_Moviles, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(57, 57, 57))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,15 +121,15 @@ public class SeleccionPlanilla extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcb_Fechas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcb_Turnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcb_Moviles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -138,7 +148,11 @@ public class SeleccionPlanilla extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Planilla planilla=new Planilla();
+        Planilla.jl_Fecha.setText(jcb_Fechas.getSelectedItem().toString());
+        Planilla.jl_Movil.setText(jcb_Moviles.getSelectedItem().toString());
+        Planilla.jl_Turno.setText(jcb_Turnos.getSelectedItem().toString());
         planilla.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -180,12 +194,12 @@ public class SeleccionPlanilla extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JComboBox jcb_Fechas;
+    private javax.swing.JComboBox jcb_Moviles;
+    private javax.swing.JComboBox jcb_Turnos;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,8 @@
  */
 package presentacion;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Cristian
@@ -28,27 +30,28 @@ public class Planilla extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jt_planilla = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jl_Movil = new javax.swing.JLabel();
+        jl_Licencia = new javax.swing.JLabel();
+        jl_Fecha = new javax.swing.JLabel();
+        jl_Turno = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pantalla Planillas");
 
-        jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel1.setText("LICENCIA 7614 SUTRAPPA");
-
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel2.setText("Fecha : 12/09/2015");
+        jLabel2.setText("Fecha :");
 
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel3.setText("Turno: Primer Turno");
+        jLabel3.setText("Turno:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jt_planilla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -74,7 +77,8 @@ public class Planilla extends javax.swing.JFrame {
                 "Km Inicial", "Km Final", "Gastos Varios", "Chofer", "Recaudacion", "GNC Brutol cta. Cte", "GNC Bruto Fuera cta.cte", "Km Ocupado", "Km Libre", "Neto", "Comision", "Precio Km", "GNC bonificado", "Rendimiento GNC"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jt_planilla.setRequestFocusEnabled(false);
+        jScrollPane1.setViewportView(jt_planilla);
 
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -90,6 +94,21 @@ public class Planilla extends javax.swing.JFrame {
             }
         });
 
+        jl_Movil.setText("<Movil>");
+
+        jl_Licencia.setText("<Licencia>");
+
+        jl_Fecha.setText("<Fecha>");
+
+        jl_Turno.setText("<Turno>");
+
+        jButton3.setText("jButton3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,39 +117,53 @@ public class Planilla extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addGap(57, 57, 57)
                         .addComponent(jButton2)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1012, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jl_Movil)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jl_Licencia))
+                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel2)
-                                        .addGap(44, 44, 44)
-                                        .addComponent(jLabel3))
-                                    .addComponent(jLabel1))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jl_Fecha)
+                                        .addGap(89, 89, 89)
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jl_Turno)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1012, Short.MAX_VALUE))))
                 .addGap(51, 51, 51))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(37, 37, 37)
+                    .addComponent(jLabel3)
+                    .addComponent(jl_Fecha)
+                    .addComponent(jl_Turno))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jl_Movil)
+                    .addComponent(jl_Licencia))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addContainerGap(39, Short.MAX_VALUE))
+                    .addComponent(jButton1)
+                    .addComponent(jButton3))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -147,6 +180,15 @@ public class Planilla extends javax.swing.JFrame {
         seleccion.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel modelo = (DefaultTableModel) jt_planilla.getModel();
+        String[] datos = {"hola1", "hola2", "hola3","hola4","hola5","hola6","hola7","hola","hola","hola","hola","hola","hola","hola14"};
+        modelo.setNumRows(0);
+        modelo.addRow(datos);
+        jt_planilla.setModel(modelo);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,10 +228,14 @@ public class Planilla extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public static javax.swing.JLabel jl_Fecha;
+    private javax.swing.JLabel jl_Licencia;
+    public static javax.swing.JLabel jl_Movil;
+    public static javax.swing.JLabel jl_Turno;
+    private javax.swing.JTable jt_planilla;
     // End of variables declaration//GEN-END:variables
 }
