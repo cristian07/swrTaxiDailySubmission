@@ -151,6 +151,7 @@ public class SeleccionPlanilla extends javax.swing.JFrame {
         Planilla.jl_Fecha.setText(jcb_Fechas.getSelectedItem().toString());
         Planilla.jl_Movil.setText(jcb_Moviles.getSelectedItem().toString());
         Planilla.jl_Turno.setText(jcb_Turnos.getSelectedItem().toString());
+        Planilla.fechaConsulta=jcb_Fechas.getSelectedItem().toString();
         planilla.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

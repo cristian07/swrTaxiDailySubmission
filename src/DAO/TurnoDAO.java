@@ -142,8 +142,13 @@ public class TurnoDAO {
 
             while(res.next()){
                 Fila fila = new Fila();
-                fila.setKmInicial(res.getString("idMovil"));
-                turnos.add(turno);
+                fila.setGastosVarios(res.getString("gastosVarios"));
+                fila.setRecaudacion(res.getString("recaudacion"));
+                fila.setKmInicial(res.getString("kmInicial"));
+                fila.setKmFinal(res.getString("kmFinal"));
+                fila.setChofer(res.getString("apellido")+", "+res.getString("nombre"));
+                
+                filas.add(fila);
             }
             res.close();
             consulta.close();

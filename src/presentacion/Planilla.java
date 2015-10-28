@@ -5,6 +5,9 @@
  */
 package presentacion;
 
+import DAO.TurnoDAO;
+import entidades.Fila;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,9 +19,22 @@ public class Planilla extends javax.swing.JFrame {
     /**
      * Creates new form Planilla
      */
+    public static String fechaConsulta;
     public Planilla() {
         initComponents();
          this.setLocationRelativeTo(null);
+          TurnoDAO turnosDAO = new TurnoDAO();
+          ArrayList<Fila> filas = new ArrayList<Fila>();
+          filas = turnosDAO.obtenerTurnos("2015-10-28");
+          System.out.print(jl_Fecha.getText());
+          DefaultTableModel modelo = (DefaultTableModel) jt_planilla.getModel();
+          modelo.setNumRows(0);
+          for (Fila fila: filas) {
+              System.out.print(fila);
+           String[] datos =  fila.procesar(); 
+           modelo.addRow(datos);
+          }
+          jt_planilla.setModel(modelo);
     }
 
     /**
@@ -76,7 +92,15 @@ public class Planilla extends javax.swing.JFrame {
             new String [] {
                 "Km Inicial", "Km Final", "Gastos Varios", "Chofer", "Recaudacion", "GNC Brutol cta. Cte", "GNC Bruto Fuera cta.cte", "Km Ocupado", "Km Libre", "Neto", "Comision", "Precio Km", "GNC bonificado", "Rendimiento GNC"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jt_planilla.setRequestFocusEnabled(false);
         jScrollPane1.setViewportView(jt_planilla);
 
@@ -183,11 +207,7 @@ public class Planilla extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel modelo = (DefaultTableModel) jt_planilla.getModel();
-        String[] datos = {"hola1", "hola2", "hola3","hola4","hola5","hola6","hola7","hola","hola","hola","hola","hola","hola","hola14"};
-        modelo.setNumRows(0);
-        modelo.addRow(datos);
-        jt_planilla.setModel(modelo);
+               
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

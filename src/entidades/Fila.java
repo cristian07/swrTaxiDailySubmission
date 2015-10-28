@@ -25,6 +25,43 @@ public class Fila {
     private String gncBonificado;
     private String rendimiento;
 
+    
+    public String[] procesar() {
+        double recaudacion = 0 ;
+        double comision = 0;
+        double gastosVarios = 0;
+        double precioKm = 0;
+        try{
+            recaudacion = Double.parseDouble(this.recaudacion);
+            comision = recaudacion*0.35;
+            this.comision = Double.toString(comision);
+            gastosVarios = Double.parseDouble(this.gastosVarios);
+            precioKm = Double.parseDouble(this.kmFinal) - Double.parseDouble(this.kmInicial);
+            this.precioKm = Double.toString(precioKm);
+        } catch (Exception e){
+        
+        }
+        if (recaudacion > 0 && comision > 0 && gastosVarios > 0) {
+            this.neto = Double.toString(recaudacion-comision-gastosVarios);
+        }
+        String[] fila = {
+        this.kmInicial,
+        this.kmFinal,
+        this.gastosVarios,
+        this.chofer,
+        this.recaudacion,
+        this.gncBruto,
+        this.gncCtaCte,
+        this.kmOcupado,
+        this.kmLibres,
+        this.neto,
+        this.comision,
+        this.precioKm,
+        this.gncBonificado,
+        this.rendimiento}; // revisar 
+        return fila;
+    }
+            
     /**
      * @return the kmInicial
      */
