@@ -7,6 +7,7 @@
 package DAO;
 
 import entidades.Fila;
+import entidades.Movil;
 import entidades.Turno;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import servicio.DbConnection;
 
 /**
@@ -34,7 +37,7 @@ public class TurnoDAO {
         String idTurno = "0";
         try {
             Statement estatuto = conex.getConnection().createStatement();
-            estatuto.executeUpdate("INSERT INTO Turno VALUES (NULL,'"
+           /* estatuto.executeUpdate("INSERT INTO Turno VALUES (NULL,'"
                 +turno.getGastosVarios()+"', '"
                 +turno.getRecaudacion()+"', '"
                 +fechaHoraSQL+"', '"
@@ -44,7 +47,7 @@ public class TurnoDAO {
                 +turno.getTicketRelevo()+"', '"
                 +turno.getTipo()+"', '"
                 +turno.getNovedades()+"', '"
-                +turno.getMovil_idMovil()+"')");
+                +turno.getMovil_idMovil()+"')");*/
                 
             estatuto.close();
             conex.desconectar();
@@ -68,10 +71,10 @@ public class TurnoDAO {
         }
          try {
             Statement estatuto2 = conex2.getConnection().createStatement();
-            estatuto2.executeUpdate("INSERT INTO Chofer_has_Turno VALUES('"
+            /*estatuto2.executeUpdate("INSERT INTO Chofer_has_Turno VALUES('"
                 +DNI+"', '"
                 +idTurno+"', '"
-                +turno.getMovil_idMovil()+"')");
+                +turno.getMovil_idMovil()+"')"); */
             estatuto2.close();
             conex2.desconectar();
         } catch (SQLException e) {
@@ -159,7 +162,31 @@ public class TurnoDAO {
             }
        return filas;       
     }
-            
+    public ArrayList<Movil> obtenerMovilesSinRendicion(String fecha) {
+        DbConnection conex= new DbConnection();
+        ArrayList<Movil> moviles = new ArrayList<Movil>();
+        PreparedStatement consulta;
+        try {
+            consulta = conex.getConnection()
+                    .prepareStatement("SELECT idMovil FROM Movil WHERE 1");
+            //consulta: seleccionar todos los moviles que aun no entraron en la rendicion
+            //consulta.setString(1, fecha);
+           ResultSet res = consulta.executeQuery();
+           while(res.next()){
+               Movil movil = new Movil();
+               movil.setIdMovil(Integer.parseInt(res.getString("idMovil")));
+               moviles.add(movil);
+           }
+           res.close();
+            consulta.close();
+            conex.desconectar();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TurnoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return moviles;
+    }       
             
 }
 

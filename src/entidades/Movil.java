@@ -2,52 +2,220 @@ package entidades;
 
 public class Movil {
 
-    private int nroMovil;
-    private String nroPatente;
-    private String nroLicencia;
-    private int kmTablero;
-
+    private int idMovil;
+    private String modelo;
+    private String kilometraje;
+    private int correa;
+    private int aceite;
+    private int grasa;
+    private int filtro;
+    private String aditivoMotor;
+    private String aditivoCaja;
+    private String patente;
+    private double ajusteReloj;
+    private String fechaLicencia;
+    private int numeroLicencia;
+    private String licencia;
     public Movil() {
 
     }
 
-    public Movil(int nroMovil, String nroPatente, String nroLicencia, int kmTablero) {
-        this.nroMovil = nroMovil;
-        this.nroPatente = nroPatente;
-        this.nroLicencia = nroLicencia;
-        this.kmTablero = kmTablero;
+    /**
+     * @return the idMovil
+     */
+    public int getIdMovil() {
+        return idMovil;
     }
 
-    public int getNroMovil() {
-        return nroMovil;
+    /**
+     * @param idMovil the idMovil to set
+     */
+    public void setIdMovil(int idMovil) {
+        this.idMovil = idMovil;
     }
 
-    public void setNroMovil(int nroMovil) {
-        this.nroMovil = nroMovil;
+    /**
+     * @return the modelo
+     */
+    public String getModelo() {
+        return modelo;
     }
 
-    public String getNroPatente() {
-        return nroPatente;
+    /**
+     * @param modelo the modelo to set
+     */
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 
-    public void setNroPatente(String nroPatente) {
-        this.nroPatente = nroPatente;
+    /**
+     * @return the kilometraje
+     */
+    public String getKilometraje() {
+        return kilometraje;
     }
 
-    public String getNroLicencia() {
-        return nroLicencia;
+    /**
+     * @param kilometraje the kilometraje to set
+     */
+    public void setKilometraje(String kilometraje) {
+        this.kilometraje = kilometraje;
     }
 
-    public void setNroLicencia(String nroLicencia) {
-        this.nroLicencia = nroLicencia;
+    /**
+     * @return the correa
+     */
+    public int getCorrea() {
+        return correa;
     }
 
-    public int getKmTablero() {
-        return kmTablero;
+    /**
+     * @param correa the correa to set
+     */
+    public void setCorrea(int correa) {
+        this.correa = correa;
     }
 
-    public void setKmTablero(int kmTablero) {
-        this.kmTablero = kmTablero;
+    /**
+     * @return the aceite
+     */
+    public int getAceite() {
+        return aceite;
     }
+
+    /**
+     * @param aceite the aceite to set
+     */
+    public void setAceite(int aceite) {
+        this.aceite = aceite;
+    }
+
+    /**
+     * @return the grasa
+     */
+    public int getGrasa() {
+        return grasa;
+    }
+
+    /**
+     * @param grasa the grasa to set
+     */
+    public void setGrasa(int grasa) {
+        this.grasa = grasa;
+    }
+
+    /**
+     * @return the filtro
+     */
+    public int getFiltro() {
+        return filtro;
+    }
+
+    /**
+     * @param filtro the filtro to set
+     */
+    public void setFiltro(int filtro) {
+        this.filtro = filtro;
+    }
+
+    /**
+     * @return the aditivoMotor
+     */
+    public String getAditivoMotor() {
+        return aditivoMotor;
+    }
+
+    /**
+     * @param aditivoMotor the aditivoMotor to set
+     */
+    public void setAditivoMotor(String aditivoMotor) {
+        this.aditivoMotor = aditivoMotor;
+    }
+
+    /**
+     * @return the aditivoCaja
+     */
+    public String getAditivoCaja() {
+        return aditivoCaja;
+    }
+
+    /**
+     * @param aditivoCaja the aditivoCaja to set
+     */
+    public void setAditivoCaja(String aditivoCaja) {
+        this.aditivoCaja = aditivoCaja;
+    }
+
+    /**
+     * @return the patente
+     */
+    public String getPatente() {
+        return patente;
+    }
+
+    /**
+     * @param patente the patente to set
+     */
+    public void setPatente(String patente) {
+        this.patente = patente;
+    }
+
+    /**
+     * @return the ajusteReloj
+     */
+    public double getAjusteReloj() {
+        return ajusteReloj;
+    }
+
+    /**
+     * @param ajusteReloj the ajusteReloj to set
+     */
+    public void setAjusteReloj(double ajusteReloj) {
+        this.ajusteReloj = ajusteReloj;
+    }
+
+    /**
+     * @return the fechaLicencia
+     */
+    public String getFechaLicencia() {
+        return fechaLicencia;
+    }
+
+    /**
+     * @param fechaLicencia the fechaLicencia to set
+     */
+    public void setFechaLicencia(String fechaLicencia) {
+        this.fechaLicencia = fechaLicencia;
+    }
+
+    /**
+     * @return the numeroLicencia
+     */
+    public int getNumeroLicencia() {
+        return numeroLicencia;
+    }
+
+    /**
+     * @param numeroLicencia the numeroLicencia to set
+     */
+    public void setNumeroLicencia(int numeroLicencia) {
+        this.numeroLicencia = numeroLicencia;
+    }
+
+    /**
+     * @return the licencia
+     */
+    public String getLicencia() {
+        return licencia;
+    }
+
+    /**
+     * @param licencia the licencia to set
+     */
+    public void setLicencia(String licencia) {
+        this.licencia = licencia;
+    }
+
+    
 
 }
