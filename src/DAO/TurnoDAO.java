@@ -25,62 +25,42 @@ import servicio.DbConnection;
  */
 public class TurnoDAO {
     
-    public void altaTurno(Turno turno,String DNI) {
+    public void altaTurno(Turno turno, String DNI, String idMovil) {
         DbConnection conex= new DbConnection();
         DbConnection conex2= new DbConnection();
-        DbConnection conex3= new DbConnection();
+      
         Calendar calendario = Calendar.getInstance();
         String fechaHoraSQL = new StringBuilder()
                 .append(Integer.toString(calendario.get(Calendar.YEAR))).append("-")
                 .append(Integer.toString(calendario.get(Calendar.MONTH)+1)).append("-")
                 .append(Integer.toString(calendario.get(Calendar.DATE))).toString();
         String idTurno = "0";
+        AjustesDAO ajustesDAO = new AjustesDAO();
         try {
             Statement estatuto = conex.getConnection().createStatement();
-           /* estatuto.executeUpdate("INSERT INTO Turno VALUES (NULL,'"
-                +turno.getGastosVarios()+"', '"
-                +turno.getRecaudacion()+"', '"
+            estatuto.executeUpdate("INSERT INTO Turno VALUES (NULL,'"
+                +idMovil+"', '"
+                +ajustesDAO.obtenerIdUltimosAjustes()+"', '"
+                +DNI+"', '"
                 +fechaHoraSQL+"', '"
-                //+turno.getFecha()+"', '"
                 +turno.getKmInicial()+"', '"
                 +turno.getKmFinal()+"', '"
-                +turno.getTicketRelevo()+"', '"
+                +turno.getGastosVarios()+"', '"
+                +turno.getRecaudacion()+"', '"
+                +turno.getGncBrutoCtaCte()+"', '"
+                +turno.getGncFueraCtaCte()+"', '"
+                +turno.getKmOcupados()+"', '"
+                +turno.getKmLibres()+"', '"
+                +turno.getTicketRelevo1()+"', '"
+                +turno.getTicketRelevo2()+"', '"
                 +turno.getTipo()+"', '"
-                +turno.getNovedades()+"', '"
-                +turno.getMovil_idMovil()+"')");*/
-                
+                +turno.getGastosChequera()+"', '"
+                +turno.getNovedades()+"')");
             estatuto.close();
             conex.desconectar();
         } catch (SQLException e) {
             System.out.println("insertar en turno"+e.getMessage());
         }
-        try { 
-            PreparedStatement consulta = conex3.getConnection().prepareStatement("SELECT max(idTurno) AS 'idTurno' FROM Turno");
-            ResultSet res = consulta.executeQuery();
-            
-            while(res.next()){
-                idTurno = res.getString("idTurno");
-            }
-            System.out.println(idTurno);
-            res.close();
-            consulta.close();
-            conex.desconectar();
-
-        } catch (Exception e) {
-                System.out.println(e);
-        }
-         try {
-            Statement estatuto2 = conex2.getConnection().createStatement();
-            /*estatuto2.executeUpdate("INSERT INTO Chofer_has_Turno VALUES('"
-                +DNI+"', '"
-                +idTurno+"', '"
-                +turno.getMovil_idMovil()+"')"); */
-            estatuto2.close();
-            conex2.desconectar();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }   
-        
     }
     public ArrayList<String> obtenerFechasTurnos()
     {
@@ -132,14 +112,14 @@ public class TurnoDAO {
             }
        return moviles;
     }
-    public  ArrayList<Fila> obtenerTurnos(String fecha)
+    public  ArrayList<Fila> obtenerTurnos(String fecha,String idMovil)
     {
         DbConnection conex= new DbConnection();
         ArrayList<Fila> filas = new ArrayList<Fila>();
         
         try {
             PreparedStatement consulta = conex.getConnection()
-                    .prepareStatement("SELECT * FROM Turno T INNER JOIN Chofer_has_Turno CHT ON CHT.Turno_idTurno = T.idTurno INNER JOIN Chofer C ON C.DNI = CHT.Chofer_DNI WHERE T.fecha=?");
+                    .prepareStatement("SELECT * FROM Turno T INNER JOIN Chofer C ON C.DNI = CHT.Chofer_DNI WHERE T.fecha=? DNI ");
            consulta.setString(1, fecha);
            ResultSet res = consulta.executeQuery();
 
@@ -187,7 +167,27 @@ public class TurnoDAO {
         
         return moviles;
     }       
+    public String obtenerUltimoTurnoIngresado(){
+        String idTurno="";
+        DbConnection conex= new DbConnection();
+        try { 
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT max(idTurno) AS 'idTurno' FROM Turno");
+            ResultSet res = consulta.executeQuery();
             
+            while(res.next()){
+                idTurno = res.getString("idTurno");
+            }
+            System.out.println(idTurno);
+            res.close();
+            consulta.close();
+            conex.desconectar();
+
+        } catch (Exception e) {
+                System.out.println(e);
+        }
+        return idTurno;
+    }    
+   
 }
 
 
