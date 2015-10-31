@@ -160,6 +160,7 @@ public class LoginWindow extends javax.swing.JFrame {
              jtf_Usuario.setText("");
              jtf_Clave.setText("");
              JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrecta.", "Error", JOptionPane.ERROR_MESSAGE);
+             jtf_Usuario.requestFocus();
         } else {
             
             main.setTitle(". : : P a n t a l l a   P r i n c i p a l - "+nombre+"@"+acceso+" : : .");

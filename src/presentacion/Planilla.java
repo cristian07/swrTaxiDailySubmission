@@ -242,7 +242,7 @@ public class Planilla extends javax.swing.JFrame {
     private void jb_VerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_VerActionPerformed
         TurnoDAO turnosDAO = new TurnoDAO();
         ArrayList<Fila> filas = new ArrayList<Fila>();
-        filas = turnosDAO.obtenerTurnos(jcb_Fechas.getSelectedItem().toString());
+       // filas = turnosDAO.obtenerTurnos(jcb_Fechas.getSelectedItem().toString());
         DefaultTableModel modelo = (DefaultTableModel) jt_planilla.getModel();
         modelo.setNumRows(0);
         for (Fila fila: filas) {
