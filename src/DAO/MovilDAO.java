@@ -6,6 +6,7 @@
 
 package DAO;
 
+import entidades.Movil;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import servicio.DbConnection;
@@ -34,5 +35,27 @@ public class MovilDAO {
                 System.out.println(e);
             }
         return ajusteReloj;
+    }
+    public Movil obtenerDetalleLicencia(int idMovil) {
+        DbConnection conex= new DbConnection();
+        Movil movil = new Movil();
+        try {
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT numeroLicencia,licencia FROM movil where idMovil = ? ");
+            consulta.setInt(1, idMovil);
+            ResultSet res = consulta.executeQuery();
+    
+            if(res.next()){
+                movil.setNumeroLicencia(res.getInt("numeroLicencia"));
+                movil.setLicencia(res.getString("licencia"));
+              
+            }
+            
+            res.close();
+            consulta.close();
+            conex.desconectar();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        return movil;
     }
 }

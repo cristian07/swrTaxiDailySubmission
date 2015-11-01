@@ -49,8 +49,8 @@ public class FilaDAO {
            neto = turno.getRecaudacion()-comision-turno.getGastosVarios();
         }
         String[] fila = {
-            "dia",
-            "turno",
+            turno.getFecha().substring(8,10),
+            turno.getTipo(),
             Integer.toString(turno.getKmInicial()),
             Integer.toString(turno.getKmFinal()),
             String.valueOf(turno.getGastosVarios()),
