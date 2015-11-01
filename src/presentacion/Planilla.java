@@ -5,9 +5,14 @@
  */
 package presentacion;
 
+import DAO.AjustesDAO;
+import DAO.FilaDAO;
 import DAO.TurnoDAO;
+import entidades.Ajustes;
 import entidades.Fila;
+import entidades.Turno;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Cristian
  */
 public class Planilla extends javax.swing.JFrame {
-
+  
     public Planilla() {
         //this.modelo = (DefaultTableModel) jt_planilla.getModel();
         initComponents();
@@ -25,9 +30,7 @@ public class Planilla extends javax.swing.JFrame {
          ArrayList<String> moviles = new ArrayList<String>();
          fechas = turnosDAO.obtenerFechasTurnos();
          moviles = turnosDAO.obtenerMoviles();
-         for (String str : fechas) {
-             jcb_Fechas.addItem(str);
-         }
+         
          for (String str : moviles) {
              jcb_Moviles.addItem(str);
          }
@@ -50,11 +53,11 @@ public class Planilla extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jb_Ver = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jcb_Fechas = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
-        jcb_Turno = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         jcb_Moviles = new javax.swing.JComboBox();
+        jcb_FechaInicio = new datechooser.beans.DateChooserCombo();
+        jcb_FechaFin = new datechooser.beans.DateChooserCombo();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
 
@@ -68,36 +71,25 @@ public class Planilla extends javax.swing.JFrame {
 
         jt_planilla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Km Inicial", "Km Final", "Gastos Varios", "Chofer", "Recaudacion", "GNC Brutol cta. Cte", "GNC Bruto Fuera cta.cte", "Km Ocupado", "Km Libre", "Neto", "Comision", "Precio Km", "GNC bonificado", "Rendimiento GNC"
+                "Dia", "Turno", "Km Inicial", "Km Final", "Gastos Varios", "Chofer", "Recaudacion", "GNC Brutol cta. Cte", "GNC Bruto Fuera cta.cte", "Km Ocupado", "Km Libre", "Neto", "Total Km reloj", "Total Km tablero", "Comision", "Precio Km", "GNC bonificado", "Rendimiento GNC"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, true, false, true, true, true, true, true, true, true, true, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jt_planilla.setRequestFocusEnabled(false);
@@ -124,18 +116,10 @@ public class Planilla extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel2.setText("Fecha :");
-
-        jcb_Fechas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcb_FechasActionPerformed(evt);
-            }
-        });
+        jLabel2.setText("Fecha Inicio:");
 
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel3.setText("Turno:");
-
-        jcb_Turno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primer Turno", "Segundo Turno" }));
+        jLabel3.setText("Fecha fin:");
 
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel4.setText("Movil:");
@@ -148,16 +132,16 @@ public class Planilla extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jcb_Fechas, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcb_FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jcb_Turno, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcb_FechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(83, 83, 83)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jcb_Moviles, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jb_Ver)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -165,14 +149,16 @@ public class Planilla extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jcb_Fechas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcb_Turno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jcb_Moviles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jb_Ver))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcb_FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel4)
+                        .addComponent(jcb_Moviles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jb_Ver))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jcb_FechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)))
                 .addContainerGap())
         );
 
@@ -208,8 +194,8 @@ public class Planilla extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jl_Licencia)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(27, 27, 27)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -235,18 +221,18 @@ public class Planilla extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jcb_FechasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_FechasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcb_FechasActionPerformed
-
     private void jb_VerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_VerActionPerformed
         TurnoDAO turnosDAO = new TurnoDAO();
-        ArrayList<Fila> filas = new ArrayList<Fila>();
-       // filas = turnosDAO.obtenerTurnos(jcb_Fechas.getSelectedItem().toString());
+        FilaDAO filaDAO = new FilaDAO();
+        AjustesDAO ajustesDAO = new AjustesDAO();
+        ArrayList<Turno> turnos = new ArrayList<Turno>();
+        
+       turnos = turnosDAO.obtenerTurnosFechas("2014-10-01", "2015-10-31", 123);
+        
         DefaultTableModel modelo = (DefaultTableModel) jt_planilla.getModel();
         modelo.setNumRows(0);
-        for (Fila fila: filas) {
-            String[] datos =  fila.procesar(); 
+        for (Turno turno: turnos){
+            String[] datos = filaDAO.obtenerFila(turno);
             modelo.addRow(datos);
         }
         jt_planilla.setModel(modelo);       
@@ -298,9 +284,9 @@ public class Planilla extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jb_Ver;
-    private javax.swing.JComboBox jcb_Fechas;
+    private datechooser.beans.DateChooserCombo jcb_FechaFin;
+    private datechooser.beans.DateChooserCombo jcb_FechaInicio;
     private javax.swing.JComboBox jcb_Moviles;
-    private javax.swing.JComboBox jcb_Turno;
     private javax.swing.JLabel jl_Licencia;
     private javax.swing.JTable jt_planilla;
     // End of variables declaration//GEN-END:variables

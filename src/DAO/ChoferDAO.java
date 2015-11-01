@@ -26,6 +26,7 @@ public class ChoferDAO {
     
             if(res.next()){
               Chofer chofer= new Chofer();
+              chofer.setDNI(documento);
               chofer.setNombre(res.getString("nombre"));
               chofer.setApellido(res.getString("apellido"));
               choferes.add(chofer);

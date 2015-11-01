@@ -3,6 +3,9 @@ package entidades;
 import java.util.Calendar;
 
 public class Turno {
+    private int Movil_idMovil;
+    private int Ajustes_idAjustes;
+    private int Chofer_DNI;
     private int kmInicial;
     private int kmFinal;
     private double gastosVarios;
@@ -11,13 +14,13 @@ public class Turno {
     private double gncFueraCtaCte;
     private int kmOcupados;
     private int kmLibres;
-    private String ticketRelevo1;
-    private String ticketRelevo2;
+    private double ticketRelevo1;
+    private double ticketRelevo2;
     private String fecha;
     private double gastosChequera;
     private String tipo;
     private String novedades;
-
+    
     public Turno(){
         
     }
@@ -135,34 +138,6 @@ public class Turno {
     }
 
     /**
-     * @return the ticketRelevo1
-     */
-    public String getTicketRelevo1() {
-        return ticketRelevo1;
-    }
-
-    /**
-     * @param ticketRelevo1 the ticketRelevo1 to set
-     */
-    public void setTicketRelevo1(String ticketRelevo1) {
-        this.ticketRelevo1 = ticketRelevo1;
-    }
-
-    /**
-     * @return the ticketRelevo2
-     */
-    public String getTicketRelevo2() {
-        return ticketRelevo2;
-    }
-
-    /**
-     * @param ticketRelevo2 the ticketRelevo2 to set
-     */
-    public void setTicketRelevo2(String ticketRelevo2) {
-        this.ticketRelevo2 = ticketRelevo2;
-    }
-
-    /**
      * @return the fecha
      */
     public String getFecha() {
@@ -216,5 +191,75 @@ public class Turno {
      */
     public void setNovedades(String novedades) {
         this.novedades = novedades;
+    }
+
+    /**
+     * @return the ticketRelevo1
+     */
+    public double getTicketRelevo1() {
+        return ticketRelevo1;
+    }
+
+    /**
+     * @param ticketRelevo1 the ticketRelevo1 to set
+     */
+    public void setTicketRelevo1(double ticketRelevo1) {
+        this.ticketRelevo1 = ticketRelevo1;
+    }
+
+    /**
+     * @return the ticketRelevo2
+     */
+    public double getTicketRelevo2() {
+        return ticketRelevo2;
+    }
+
+    /**
+     * @param ticketRelevo2 the ticketRelevo2 to set
+     */
+    public void setTicketRelevo2(double ticketRelevo2) {
+        this.ticketRelevo2 = ticketRelevo2;
+    }
+
+    /**
+     * @return the Movil_idMovil
+     */
+    public int getMovil_idMovil() {
+        return Movil_idMovil;
+    }
+
+    /**
+     * @param Movil_idMovil the Movil_idMovil to set
+     */
+    public void setMovil_idMovil(int Movil_idMovil) {
+        this.Movil_idMovil = Movil_idMovil;
+    }
+
+    /**
+     * @return the Ajustes_idAjustes
+     */
+    public int getAjustes_idAjustes() {
+        return Ajustes_idAjustes;
+    }
+
+    /**
+     * @param Ajustes_idAjustes the Ajustes_idAjustes to set
+     */
+    public void setAjustes_idAjustes(int Ajustes_idAjustes) {
+        this.Ajustes_idAjustes = Ajustes_idAjustes;
+    }
+
+    /**
+     * @return the Chofer_DNI
+     */
+    public int getChofer_DNI() {
+        return Chofer_DNI;
+    }
+
+    /**
+     * @param Chofer_DNI the Chofer_DNI to set
+     */
+    public void setChofer_DNI(int Chofer_DNI) {
+        this.Chofer_DNI = Chofer_DNI;
     }
 }

@@ -62,5 +62,31 @@ public class AjustesDAO {
         }
         return ajustes;
     }
-    
+    public Ajustes obtenerAjustesId(int idAjustes){
+        
+        DbConnection conex= new DbConnection();
+        Ajustes ajustes = new Ajustes();
+        try { 
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM Ajustes WHERE idAjustes=?");
+             consulta.setInt(1, idAjustes);
+            ResultSet res = consulta.executeQuery();
+            
+            if(res.next()){
+                ajustes.setIdAjustes(Integer.parseInt(res.getString("idAjustes")));
+                ajustes.setComisionChofer(Double.parseDouble(res.getString("comisionChofer")));
+                ajustes.setAjusteGas(Double.parseDouble(res.getString("ajusteGas")));
+                ajustes.setPrecioGasCtaCte(Double.parseDouble(res.getString("precioGasCtaCte")));
+                ajustes.setPrecioGasFuera(Double.parseDouble(res.getString("precioGasFuera")));
+                ajustes.setEstado(res.getString("estado"));
+            }
+            
+            res.close();
+            consulta.close();
+            conex.desconectar();
+
+        } catch (Exception e) {
+                System.out.println(e);
+        }
+        return ajustes;
+    }
 }

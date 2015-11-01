@@ -9,6 +9,7 @@ package DAO;
 import entidades.Fila;
 import entidades.Movil;
 import entidades.Turno;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -112,26 +113,39 @@ public class TurnoDAO {
             }
        return moviles;
     }
-    public  ArrayList<Fila> obtenerTurnos(String fecha,String idMovil)
-    {
+    public  ArrayList<Turno> obtenerTurnos(String fecha,int idMovil, String tipo){
         DbConnection conex= new DbConnection();
-        ArrayList<Fila> filas = new ArrayList<Fila>();
+        ArrayList<Turno> turnos = new ArrayList<Turno>();
         
         try {
             PreparedStatement consulta = conex.getConnection()
-                    .prepareStatement("SELECT * FROM Turno T INNER JOIN Chofer C ON C.DNI = CHT.Chofer_DNI WHERE T.fecha=? DNI ");
-           consulta.setString(1, fecha);
-           ResultSet res = consulta.executeQuery();
+                    .prepareStatement("SELECT * FROM Turno T WHERE T.fecha=? AND T.Movil_idMovil=? AND T.tipo=?");
+            
+            consulta.setString(1, fecha);
+            consulta.setInt(2, idMovil);
+            consulta.setString(3, tipo);
+            ResultSet res = consulta.executeQuery();
 
             while(res.next()){
-                Fila fila = new Fila();
-                fila.setGastosVarios(res.getString("gastosVarios"));
-                fila.setRecaudacion(res.getString("recaudacion"));
-                fila.setKmInicial(res.getString("kmInicial"));
-                fila.setKmFinal(res.getString("kmFinal"));
-                fila.setChofer(res.getString("apellido")+", "+res.getString("nombre"));
-                
-                filas.add(fila);
+                Turno turno = new Turno();
+                turno.setMovil_idMovil(res.getInt("Movil_idMovil"));
+                turno.setAjustes_idAjustes(res.getInt("Ajustes_idAjustes"));
+                turno.setChofer_DNI(res.getInt("Chofer_DNI"));
+                turno.setKmInicial(res.getInt("kmInicial"));
+                turno.setKmFinal(res.getInt("kmFinal"));
+                turno.setGastosVarios(res.getDouble("gastosVarios"));
+                turno.setRecaudacion(res.getDouble("recaudacion"));
+                turno.setGncBrutoCtaCte(res.getDouble("gncBrutoCtaCte"));
+                turno.setGncFueraCtaCte(res.getDouble("gncFueraCtaCte"));
+                turno.setKmOcupados(res.getInt("kmOcupados"));
+                turno.setKmLibres(res.getInt("kmLibres"));
+                turno.setTicketRelevo1(res.getDouble("ticketRelevo1"));
+                turno.setTicketRelevo2(res.getDouble("ticketRelevo2"));
+                turno.setFecha(res.getString("fecha"));
+                turno.setGastosChequera(res.getDouble("gastosChequera"));
+                turno.setTipo(res.getString("tipo"));
+                turno.setNovedades(res.getString("novedades"));
+                turnos.add(turno);
             }
             res.close();
             consulta.close();
@@ -140,8 +154,9 @@ public class TurnoDAO {
             } catch (Exception e) {
                 System.out.println(e);
             }
-       return filas;       
+       return turnos;       
     }
+    
     public ArrayList<Movil> obtenerMovilesSinRendicion(String fecha) {
         DbConnection conex= new DbConnection();
         ArrayList<Movil> moviles = new ArrayList<Movil>();
@@ -187,7 +202,51 @@ public class TurnoDAO {
         }
         return idTurno;
     }    
-   
+   public  ArrayList<Turno> obtenerTurnosFechas(String fechaInicio,String fechaFin,int idMovil){
+       DbConnection conex= new DbConnection();
+        ArrayList<Turno> turnos = new ArrayList<Turno>();
+        
+        try {
+            PreparedStatement consulta = conex.getConnection()
+                    .prepareStatement("SELECT * FROM Turno T WHERE  T.Movil_idMovil=?");
+            
+            //consulta.setString(1, fechaInicio);
+           // consulta.setString(2, fechaFin);
+            consulta.setInt(1, idMovil);
+            
+            ResultSet res = consulta.executeQuery();
+
+            while(res.next()){
+                Turno turno = new Turno();
+                turno.setMovil_idMovil(res.getInt("Movil_idMovil"));
+                turno.setAjustes_idAjustes(res.getInt("Ajustes_idAjustes"));
+                turno.setChofer_DNI(res.getInt("Chofer_DNI"));
+                turno.setKmInicial(res.getInt("kmInicial"));
+                turno.setKmFinal(res.getInt("kmFinal"));
+                turno.setGastosVarios(res.getDouble("gastosVarios"));
+                turno.setRecaudacion(res.getDouble("recaudacion"));
+                turno.setGncBrutoCtaCte(res.getDouble("gncBrutoCtaCte"));
+                turno.setGncFueraCtaCte(res.getDouble("gncFueraCtaCte"));
+                turno.setKmOcupados(res.getInt("kmOcupados"));
+                turno.setKmLibres(res.getInt("kmLibres"));
+                turno.setTicketRelevo1(res.getDouble("ticketRelevo1"));
+                turno.setTicketRelevo2(res.getDouble("ticketRelevo2"));
+                turno.setFecha(res.getString("fecha"));
+                turno.setGastosChequera(res.getDouble("gastosChequera"));
+                turno.setTipo(res.getString("tipo"));
+                turno.setNovedades(res.getString("novedades"));
+                turnos.add(turno);
+            }
+            res.close();
+            consulta.close();
+            conex.desconectar();
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+       return turnos;        
+    }
+
 }
 
 

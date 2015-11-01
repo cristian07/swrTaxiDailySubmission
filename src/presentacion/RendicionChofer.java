@@ -52,8 +52,8 @@ public class RendicionChofer extends javax.swing.JFrame {
         turno.setKmInicial(Integer.parseInt(jtf_KmInicial.getText()));
         turno.setKmFinal(Integer.parseInt(jtf_KmFinal.getText()));
         turno.setRecaudacion(Double.parseDouble(jtf_Recaudacion.getText()));
-        turno.setTicketRelevo1(jtf_TicketRelevo1.getText());
-        turno.setTicketRelevo2(jtf_TicketRelevo2.getText());
+        turno.setTicketRelevo1(Double.parseDouble(jtf_TicketRelevo1.getText()));
+        turno.setTicketRelevo2(Double.parseDouble(jtf_TicketRelevo2.getText()));
         turno.setGastosVarios(Double.parseDouble(jtf_Gastos.getText()));
         turno.setGncBrutoCtaCte(Double.parseDouble(jtf_GNCBruto.getText()));
         turno.setGncFueraCtaCte(Double.parseDouble(jtf_GNCFuera.getText()));
