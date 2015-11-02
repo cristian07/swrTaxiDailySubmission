@@ -6,6 +6,7 @@
 package presentacion;
 
 import DAO.LoginPrincipalDAO;
+import com.sun.glass.events.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -53,6 +54,11 @@ public class LoginWindow extends javax.swing.JFrame {
         jtf_Clave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtf_ClaveActionPerformed(evt);
+            }
+        });
+        jtf_Clave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtf_ClaveKeyPressed(evt);
             }
         });
 
@@ -182,6 +188,28 @@ public class LoginWindow extends javax.swing.JFrame {
     private void jtf_ClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_ClaveActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtf_ClaveActionPerformed
+
+    private void jtf_ClaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_ClaveKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+        MainWindow main= new MainWindow();
+        LoginPrincipalDAO loginPrincipalDAO = new LoginPrincipalDAO();
+        String nombre = jtf_Usuario.getText();
+        String clave = jtf_Clave.getText();
+        String acceso = loginPrincipalDAO.logueoPrincipal(nombre,clave);
+        if (acceso.equals("DENEGADO")){
+             jtf_Usuario.setText("");
+             jtf_Clave.setText("");
+             JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrecta.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            
+            main.setTitle(". : : P a n t a l l a   P r i n c i p a l - "+nombre+"@"+acceso+" : : .");
+            MainWindow.jl_Permisos.setText(acceso);
+            main.setVisible(true);
+            this.dispose();
+        }
+        }
+    }//GEN-LAST:event_jtf_ClaveKeyPressed
 
     /**
      * @param args the command line arguments

@@ -174,6 +174,9 @@ public class RendicionChofer extends javax.swing.JFrame {
             }
         });
         jtf_KmInicial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtf_KmInicialKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtf_KmInicialKeyTyped(evt);
             }
@@ -614,25 +617,24 @@ public class RendicionChofer extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21)
                         .addComponent(jButton3))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jl_Fecha)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jl_Tipo)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel6)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jl_chofer)
-                            .addGap(98, 98, 98)
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jl_DNI))
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jl_Fecha)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jl_Tipo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jl_chofer)
+                        .addGap(98, 98, 98)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jl_DNI))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -697,46 +699,36 @@ public class RendicionChofer extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-        if(jtf_KmInicial.getText().isEmpty()){
+        if (jtf_KmInicial.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        else if(jtf_KmFinal.getText().isEmpty()){
+        } else if (jtf_KmFinal.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        else if(jtf_Recaudacion.getText().isEmpty()){
+        } else if (jtf_Recaudacion.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        else if(jtf_TicketRelevo1.getText().isEmpty()){
+        } else if (jtf_TicketRelevo1.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        else if(jtf_TicketRelevo2.getText().isEmpty()){
+        } else if (jtf_TicketRelevo2.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        else if(jtf_Gastos.getText().isEmpty()){
+        } else if (jtf_Gastos.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        else if(jtf_GNCBruto.getText().isEmpty()){
+        } else if (jtf_GNCBruto.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        else if(jtf_GNCFuera.getText().isEmpty()){
+        } else if (jtf_GNCFuera.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        else if(jtf_KmOcupados.getText().isEmpty()){
+        } else if (jtf_KmOcupados.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        else if(jtf_KmLibres.getText().isEmpty()){
+        } else if (jtf_KmLibres.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        else if(jtf_GastosChequera.getText().isEmpty()){
+        } else if (jtf_GastosChequera.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            registrarTurno();
+            LoginChofer login = new LoginChofer();
+            LoginChofer.jl_turno.setText(jl_Tipo.getText());
+            login.setVisible(true);
+            this.dispose();
         }
-       
-        
-        registrarTurno();
-        LoginChofer login= new LoginChofer();
-        LoginChofer.jl_turno.setText(jl_Tipo.getText());
-        login.setVisible(true);
-        this.dispose();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jtf_RecaudacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_RecaudacionFocusLost
@@ -920,6 +912,13 @@ public class RendicionChofer extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jtf_KmFinalFocusLost
+
+    private void jtf_KmInicialKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_KmInicialKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            jtf_KmFinal.requestFocus();
+        }
+    }//GEN-LAST:event_jtf_KmInicialKeyPressed
 
     /**
      * @param args the command line arguments
