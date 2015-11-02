@@ -5,10 +5,14 @@
  */
 package presentacion;
 
-import DAO.ChoferDAO;
+import DAO.AjustesDAO;
 import DAO.TurnoDAO;
+<<<<<<< HEAD
 import com.sun.glass.events.KeyEvent;
 import entidades.Chofer;
+=======
+import entidades.Ajustes;
+>>>>>>> 9ed889a5a9f31efa1634b654941b868afe11cd97
 import entidades.Movil;
 import entidades.Turno;
 import static java.lang.Integer.parseInt;
@@ -36,7 +40,11 @@ public class RendicionChofer extends javax.swing.JFrame {
         jl_Fecha.setText(fechaHoraSQL);
         TurnoDAO turnoDAO = new TurnoDAO();
         ArrayList<Movil> moviles = new ArrayList<Movil>();
-        moviles = turnoDAO.obtenerMovilesSinRendicion("TODO");
+        AjustesDAO ajustesDAO = new AjustesDAO();
+        
+        
+        moviles = turnoDAO.obtenerMovilesSinRendicion("TODO");//TO DO
+        
         jtf_Movil.addItem("");
         for(Movil auto : moviles){
             jtf_Movil.addItem(auto.getIdMovil());
@@ -45,22 +53,28 @@ public class RendicionChofer extends javax.swing.JFrame {
     private void registrarTurno() {
         TurnoDAO turnoDAO = new TurnoDAO();
         Turno turno = new Turno();
-        
+        String DNI = jl_DNI.getText();
+        String idMovil = jtf_Movil.getSelectedItem().toString();
         turno.setGastosVarios(Double.parseDouble(jtf_Gastos.getText()));
-        turno.setRecaudacion(Double.parseDouble(jtf_Recaudacion.getText()));
         turno.setKmInicial(Integer.parseInt(jtf_KmInicial.getText()));
         turno.setKmFinal(Integer.parseInt(jtf_KmFinal.getText()));
-        turno.setTicketRelevo1(jtf_TicketRelevo1.getText());
+        turno.setRecaudacion(Double.parseDouble(jtf_Recaudacion.getText()));
+        turno.setTicketRelevo1(Double.parseDouble(jtf_TicketRelevo1.getText()));
+        turno.setTicketRelevo2(Double.parseDouble(jtf_TicketRelevo2.getText()));
+        turno.setGastosVarios(Double.parseDouble(jtf_Gastos.getText()));
+        turno.setGncBrutoCtaCte(Double.parseDouble(jtf_GNCBruto.getText()));
+        turno.setGncFueraCtaCte(Double.parseDouble(jtf_GNCFuera.getText()));
+        turno.setKmOcupados(Integer.parseInt(jtf_KmOcupados.getText()));
+        turno.setKmLibres(Integer.parseInt(jtf_KmLibres.getText()));
+        turno.setGastosChequera(Double.parseDouble(jtf_GastosChequera.getText()));
+        turno.setNovedades(jta_Novedades.getText());
         
         if (jl_Tipo.getText().equals("Primer Turno")) {
              turno.setTipo("P"); 
         } else if (jl_Tipo.getText().equals("Segundo Turno")) {
             turno.setTipo("S");
         }
-        
-        //turno.setMovil_idMovil(Integer.parseInt(jtf_Movil.getText()));
-        turno.setNovedades(jta_Novedades.getText());
-        turnoDAO.altaTurno(turno,jl_DNI.getText());
+        turnoDAO.altaTurno(turno,DNI,idMovil);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -733,10 +747,11 @@ public class RendicionChofer extends javax.swing.JFrame {
 
     private void jtf_RecaudacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_RecaudacionFocusLost
         // TODO add your handling code here:
+        AjustesDAO ajustesDAO = new AjustesDAO();
         if (jtf_Recaudacion.getText().length()>0){
             try{
                 Double recaudacion = Double.parseDouble(jtf_Recaudacion.getText());
-                jtf_Comision.setText(Double.toString(recaudacion*0.35));
+                jtf_Comision.setText(Double.toString(recaudacion*ajustesDAO.obtenerUltimosAjustes().getComisionChofer()));
             } catch(Exception e) {
                 jtf_Recaudacion.setText("");
                 jtf_Comision.setText("");

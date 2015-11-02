@@ -8,6 +8,7 @@ package presentacion;
 import DAO.ChoferDAO;
 import entidades.Chofer;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -124,12 +125,18 @@ public class LoginChofer extends javax.swing.JFrame {
         ArrayList<Chofer> choferes = new ArrayList<Chofer>(); 
         choferes = choferDAO.consultarChofer(Integer.parseInt(jtf_DNI.getText()));
         //jl_chofer.setText();
-        RendicionChofer rendicion= new RendicionChofer();
-        rendicion.setVisible(true);
-        RendicionChofer.jl_Tipo.setText(jl_turno.getText());
-        RendicionChofer.jl_DNI.setText(jtf_DNI.getText());
-        RendicionChofer.jl_chofer.setText(choferes.get(0).getApellido()+", "+choferes.get(0).getNombre());
-        this.dispose();
+        if (choferes.isEmpty()){
+            jtf_DNI.setText("");
+            JOptionPane.showMessageDialog(null, "Chofer no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
+            jtf_DNI.requestFocus();
+        } else {
+            RendicionChofer rendicion= new RendicionChofer();
+            rendicion.setVisible(true);
+            RendicionChofer.jl_Tipo.setText(jl_turno.getText());
+            RendicionChofer.jl_DNI.setText(jtf_DNI.getText());
+            RendicionChofer.jl_chofer.setText(choferes.get(0).getApellido()+", "+choferes.get(0).getNombre());
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
