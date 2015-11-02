@@ -48,6 +48,7 @@ public class LoginWindow extends javax.swing.JFrame {
         setTitle("Pantalla Login");
 
         jPanel1.setBackground(new java.awt.Color(19, 19, 19));
+        jPanel1.setBorder(null);
 
         jtf_Clave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

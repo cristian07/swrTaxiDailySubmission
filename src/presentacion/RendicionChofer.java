@@ -7,11 +7,14 @@ package presentacion;
 
 import DAO.ChoferDAO;
 import DAO.TurnoDAO;
+import com.sun.glass.events.KeyEvent;
 import entidades.Chofer;
 import entidades.Movil;
 import entidades.Turno;
+import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -100,6 +103,18 @@ public class RendicionChofer extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jta_Novedades = new javax.swing.JTextArea();
         jtf_Movil = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jtf_Comision = new javax.swing.JTextField();
@@ -113,6 +128,7 @@ public class RendicionChofer extends javax.swing.JFrame {
         jl_chofer = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jl_DNI = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
 
         jtf_Gastos2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -125,8 +141,9 @@ public class RendicionChofer extends javax.swing.JFrame {
             }
         });
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Rendicion chofer");
+        setResizable(false);
 
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +168,23 @@ public class RendicionChofer extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jtf_KmInicial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_KmInicialActionPerformed(evt);
+            }
+        });
+        jtf_KmInicial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_KmInicialKeyTyped(evt);
+            }
+        });
+
+        jtf_TicketRelevo1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_TicketRelevo1KeyTyped(evt);
+            }
+        });
+
         jtf_GNCFuera.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jtf_GNCFueraFocusLost(evt);
@@ -159,6 +193,11 @@ public class RendicionChofer extends javax.swing.JFrame {
         jtf_GNCFuera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtf_GNCFueraActionPerformed(evt);
+            }
+        });
+        jtf_GNCFuera.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_GNCFueraKeyTyped(evt);
             }
         });
 
@@ -170,6 +209,11 @@ public class RendicionChofer extends javax.swing.JFrame {
         jtf_KmOcupados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtf_KmOcupadosActionPerformed(evt);
+            }
+        });
+        jtf_KmOcupados.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_KmOcupadosKeyTyped(evt);
             }
         });
 
@@ -203,6 +247,11 @@ public class RendicionChofer extends javax.swing.JFrame {
                 jtf_RecaudacionFocusLost(evt);
             }
         });
+        jtf_Recaudacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_RecaudacionKeyTyped(evt);
+            }
+        });
 
         jtf_Gastos.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -212,6 +261,22 @@ public class RendicionChofer extends javax.swing.JFrame {
         jtf_Gastos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtf_GastosActionPerformed(evt);
+            }
+        });
+        jtf_Gastos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_GastosKeyTyped(evt);
+            }
+        });
+
+        jtf_KmFinal.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtf_KmFinalFocusLost(evt);
+            }
+        });
+        jtf_KmFinal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_KmFinalKeyTyped(evt);
             }
         });
 
@@ -230,6 +295,12 @@ public class RendicionChofer extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel15.setText("Tickets Relevo 2");
 
+        jtf_TicketRelevo2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_TicketRelevo2KeyTyped(evt);
+            }
+        });
+
         jLabel16.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel16.setText("GNC bruto cuenta corriente");
 
@@ -241,6 +312,11 @@ public class RendicionChofer extends javax.swing.JFrame {
         jtf_GNCBruto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtf_GNCBrutoActionPerformed(evt);
+            }
+        });
+        jtf_GNCBruto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_GNCBrutoKeyTyped(evt);
             }
         });
 
@@ -274,106 +350,191 @@ public class RendicionChofer extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel1.setText("*");
+
+        jLabel21.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel21.setText("*");
+
+        jLabel22.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel22.setText("*");
+
+        jLabel23.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel23.setText("*");
+
+        jLabel24.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel24.setText("*");
+
+        jLabel25.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel25.setText("*");
+
+        jLabel26.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel26.setText("*");
+
+        jLabel27.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel27.setText("*");
+
+        jLabel28.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel28.setText("*");
+
+        jLabel29.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel29.setText("*");
+
+        jLabel30.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel30.setText("*");
+
+        jLabel31.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel31.setText("*");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(10, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
+                            .addComponent(jLabel9)
                             .addComponent(jLabel11)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15)
                             .addComponent(jLabel16)
-                            .addComponent(jLabel17)
                             .addComponent(jLabel18)
-                            .addComponent(jLabel19)
                             .addComponent(jLabel20))
                         .addGap(36, 36, 36)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jtf_TicketRelevo1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtf_Gastos, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtf_KmInicial, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
-                            .addComponent(jtf_TicketRelevo2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtf_GNCBruto, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtf_GNCFuera, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtf_KmOcupados, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtf_KmLibres, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtf_GastosChequera, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtf_Movil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
-                        .addComponent(jtf_Recaudacion, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jtf_KmFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jtf_GNCBruto, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel27))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jtf_Gastos, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel26))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jtf_Recaudacion, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel22))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jtf_TicketRelevo1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel23))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jtf_KmInicial, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                                    .addComponent(jtf_KmOcupados, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtf_GastosChequera, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtf_Movil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel31)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel21)
+                                            .addComponent(jLabel29))
+                                        .addGap(32, 32, 32)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                                        .addComponent(jLabel15)
+                                                        .addGap(96, 96, 96)
+                                                        .addComponent(jtf_TicketRelevo2, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                                        .addComponent(jLabel13)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(jtf_KmFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel24)
+                                                    .addComponent(jLabel25)))
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel17)
+                                                    .addComponent(jLabel19))
+                                                .addGap(37, 37, 37)
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                                        .addComponent(jtf_KmLibres, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(jLabel30))
+                                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                                        .addComponent(jtf_GNCFuera, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(jLabel28))))))))))
+                    .addComponent(jLabel14))
+                .addGap(0, 38, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jtf_Movil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf_Movil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jtf_KmInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtf_KmInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel13)
                     .addComponent(jtf_KmFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
+                    .addComponent(jLabel24))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtf_Recaudacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jtf_TicketRelevo1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel9)
+                    .addComponent(jtf_Recaudacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel8)
+                    .addComponent(jtf_TicketRelevo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
                     .addComponent(jtf_TicketRelevo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtf_Gastos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jtf_GNCBruto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jtf_GNCFuera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(jtf_KmOcupados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel25))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtf_Gastos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel26)
+                            .addComponent(jLabel11))
+                        .addGap(7, 7, 7)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(jtf_GNCFuera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel28)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtf_GNCBruto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel27)
+                            .addComponent(jLabel16))))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(jtf_KmLibres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel18)
+                    .addComponent(jtf_KmOcupados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtf_KmLibres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29)
+                    .addComponent(jLabel30))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(jtf_GastosChequera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel31)
+                .addGap(84, 84, 84))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -393,15 +554,15 @@ public class RendicionChofer extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jtf_Comision, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtf_Neto)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jtf_Neto, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -435,42 +596,44 @@ public class RendicionChofer extends javax.swing.JFrame {
 
         jl_DNI.setText("33050305");
 
+        jLabel32.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
+        jLabel32.setText("Los campos obligatorios estan marcados con *");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton3))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jl_Fecha)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jl_Tipo)
+                        .addComponent(jLabel32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 749, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jl_chofer)
-                        .addGap(98, 98, 98)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jl_DNI)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)
+                        .addComponent(jButton3))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jl_Fecha)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jl_Tipo)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jl_chofer)
+                            .addGap(98, 98, 98)
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jl_DNI))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -486,16 +649,17 @@ public class RendicionChofer extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jl_DNI))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(jLabel32)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton3)
+                        .addComponent(jButton1)
                         .addComponent(jButton2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
@@ -511,17 +675,68 @@ public class RendicionChofer extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        
+        jta_Novedades.setText(null);
+        jtf_Comision.setText(null);
+        jtf_GNCBruto.setText(null);
+        jtf_GNCFuera.setText(null);
+        jtf_Gastos.setText(null);
+        jtf_Gastos2.setText(null);
+        jtf_GastosChequera.setText(null);
+        jtf_KmFinal.setText(null);
+        jtf_KmInicial.setText(null);
+        jtf_KmLibres.setText(null);
+        jtf_KmOcupados.setText(null);
+        jtf_Neto.setText(null);
+        jtf_Recaudacion.setText(null);
+        jtf_TicketRelevo1.setText(null);
+        jtf_TicketRelevo2.setText(null);
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        if(jtf_KmInicial.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(jtf_KmFinal.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(jtf_Recaudacion.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(jtf_TicketRelevo1.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(jtf_TicketRelevo2.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(jtf_Gastos.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(jtf_GNCBruto.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(jtf_GNCFuera.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(jtf_KmOcupados.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(jtf_KmLibres.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(jtf_GastosChequera.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+       
+        
         registrarTurno();
         LoginChofer login= new LoginChofer();
         LoginChofer.jl_turno.setText(jl_Tipo.getText());
         login.setVisible(true);
-        this.dispose();;
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jtf_RecaudacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_RecaudacionFocusLost
@@ -604,6 +819,108 @@ public class RendicionChofer extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtf_MovilActionPerformed
 
+    private void jtf_KmInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_KmInicialActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jtf_KmInicialActionPerformed
+
+    private void jtf_KmInicialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_KmInicialKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != '.') {
+            evt.consume();
+            if (evt.getKeyChar() == '.' && jtf_KmInicial.getText().contains(".")) {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_jtf_KmInicialKeyTyped
+
+    private void jtf_KmFinalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_KmFinalKeyTyped
+        // TODO add your handling code here:
+        if (!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != '.') {
+            evt.consume();
+            if (evt.getKeyChar() == '.' && jtf_KmFinal.getText().contains(".")) {
+                evt.consume();
+            }
+        }
+
+    }//GEN-LAST:event_jtf_KmFinalKeyTyped
+
+    private void jtf_RecaudacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_RecaudacionKeyTyped
+        // TODO add your handling code here:
+        if  (!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != '.') {
+            evt.consume();
+            if (evt.getKeyChar() == '.' && jtf_Recaudacion.getText().contains(".")) {
+                evt.consume();
+            }
+    }//GEN-LAST:event_jtf_RecaudacionKeyTyped
+    }
+    private void jtf_TicketRelevo1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_TicketRelevo1KeyTyped
+        // TODO add your handling code here:
+        if  (!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != '.') {
+            evt.consume();
+            if (evt.getKeyChar() == '.' && jtf_TicketRelevo1.getText().contains(".")) {
+                evt.consume();
+            }
+        }    
+    }//GEN-LAST:event_jtf_TicketRelevo1KeyTyped
+
+    private void jtf_TicketRelevo2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_TicketRelevo2KeyTyped
+        // TODO add your handling code here:
+        if  (!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != '.') {
+            evt.consume();
+            if (evt.getKeyChar() == '.' && jtf_TicketRelevo2.getText().contains(".")) {
+                evt.consume();
+            }
+        }
+        
+    }//GEN-LAST:event_jtf_TicketRelevo2KeyTyped
+
+    private void jtf_GastosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_GastosKeyTyped
+        // TODO add your handling code here:
+        if  (!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != '.') {
+            evt.consume();
+            if (evt.getKeyChar() == '.' && jtf_Gastos.getText().contains(".")) {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_jtf_GastosKeyTyped
+
+    private void jtf_GNCBrutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_GNCBrutoKeyTyped
+        // TODO add your handling code here:
+        if  (!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != '.') {
+            evt.consume();
+            if (evt.getKeyChar() == '.' && jtf_GNCBruto.getText().contains(".")) {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_jtf_GNCBrutoKeyTyped
+
+    private void jtf_GNCFueraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_GNCFueraKeyTyped
+        // TODO add your handling code here:
+        if  (!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != '.') {
+            evt.consume();
+            if (evt.getKeyChar() == '.' && jtf_GNCFuera.getText().contains(".")) {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_jtf_GNCFueraKeyTyped
+
+    private void jtf_KmOcupadosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_KmOcupadosKeyTyped
+        // TODO add your handling code here:
+        if  (!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != '.') {
+            evt.consume();
+            if (evt.getKeyChar() == '.' && jtf_KmOcupados.getText().contains(".")) {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_jtf_KmOcupadosKeyTyped
+
+    private void jtf_KmFinalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_KmFinalFocusLost
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jtf_KmFinalFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -640,10 +957,12 @@ public class RendicionChofer extends javax.swing.JFrame {
         });
     }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -656,7 +975,19 @@ public class RendicionChofer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
