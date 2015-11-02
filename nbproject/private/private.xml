@@ -6,10 +6,15 @@
             <file>file:/C:/swrTaxiDailySubmission/src/presentacion/Planilla.java</file>
             <file>file:/C:/swrTaxiDailySubmission/src/DAO/ChoferDAO.java</file>
             <file>file:/C:/swrTaxiDailySubmission/src/presentacion/Main.java</file>
+            <file>file:/C:/swrTaxiDailySubmission/src/entidades/Fila.java</file>
+            <file>file:/C:/swrTaxiDailySubmission/src/DAO/FilaDAO.java</file>
+            <file>file:/C:/swrTaxiDailySubmission/src/presentacion/VentanaChofer.java</file>
+            <file>file:/C:/swrTaxiDailySubmission/src/presentacion/ComienzoRendicion.java</file>
             <file>file:/C:/swrTaxiDailySubmission/src/presentacion/RendicionChofer.java</file>
             <file>file:/C:/swrTaxiDailySubmission/src/entidades/Usuario.java</file>
             <file>file:/C:/swrTaxiDailySubmission/src/presentacion/MainWindow.java</file>
             <file>file:/C:/swrTaxiDailySubmission/src/DAO/TurnoDAO.java</file>
+            <file>file:/C:/swrTaxiDailySubmission/src/presentacion/LoginWindow.java</file>
         </group>
     </open-files>
 </project-private>
