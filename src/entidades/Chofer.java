@@ -12,7 +12,7 @@ public class Chofer {
     private String provincia;
     private String telefono;
     private String celular;
-    private Date fechaCarnet;
+    private String fechaCarnet;
     private int licenciaCarnet;
 
     /**
@@ -130,14 +130,14 @@ public class Chofer {
     /**
      * @return the fechaCarnet
      */
-    public Date getFechaCarnet() {
+    public String getFechaCarnet() {
         return fechaCarnet;
     }
 
     /**
      * @param fechaCarnet the fechaCarnet to set
      */
-    public void setFechaCarnet(Date fechaCarnet) {
+    public void setFechaCarnet(String fechaCarnet) {
         this.fechaCarnet = fechaCarnet;
     }
 

@@ -9,7 +9,6 @@ import DAO.AjustesDAO;
 import DAO.FilaDAO;
 import DAO.MovilDAO;
 import DAO.TurnoDAO;
-import entidades.Ajustes;
 import entidades.Fila;
 import entidades.Movil;
 import entidades.Turno;
