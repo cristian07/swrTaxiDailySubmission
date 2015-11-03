@@ -13,6 +13,7 @@ import entidades.Movil;
 import entidades.Turno;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -720,11 +721,17 @@ public class RendicionChofer extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        registrarTurno();
-        LoginChofer login= new LoginChofer();
-        LoginChofer.jl_turno.setText(jl_Tipo.getText());
-        login.setVisible(true);
-        this.dispose();
+        int a = JOptionPane.showConfirmDialog(null, "Esta seguro que desea guardar?");
+        if (a == JOptionPane.YES_OPTION) {
+            registrarTurno();
+            LoginChofer login = new LoginChofer();
+            LoginChofer.jl_turno.setText(jl_Tipo.getText());
+            login.setVisible(true);
+            this.dispose();
+        } else {
+            LimpiarCampos();
+        }
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jtf_Gastos2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_Gastos2FocusLost
