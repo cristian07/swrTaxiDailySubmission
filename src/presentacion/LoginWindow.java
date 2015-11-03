@@ -25,7 +25,29 @@ public class LoginWindow extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-
+    
+    private void ingresar(){
+        LoginPrincipalDAO loginPrincipalDAO = new LoginPrincipalDAO();
+        String nombre = jtf_Usuario.getText();
+        String clave = jtf_Clave.getText();
+        String acceso = loginPrincipalDAO.logueoPrincipal(nombre,clave);
+        MainWindow main= new MainWindow();
+        if (acceso.equals("DENEGADO")){
+             jtf_Usuario.setText("");
+             jtf_Clave.setText("");
+             JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrecta.", "Error", JOptionPane.ERROR_MESSAGE);
+             jtf_Usuario.requestFocus();
+        } else{
+            main.setTitle(". : : P a n t a l l a   P r i n c i p a l - "+nombre+"@"+acceso+" : : .");
+            if (acceso.equals("A")){
+                MainWindow.jp_Administrador.setVisible(false);
+            }
+            MainWindow.jl_Permisos.setText(acceso);
+            this.dispose();
+            main.pack();
+            main.setVisible(true);
+        } 
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,8 +63,8 @@ public class LoginWindow extends javax.swing.JFrame {
         jtf_Usuario = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jb_Ingresar = new javax.swing.JButton();
+        jb_Salir = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -77,17 +99,17 @@ public class LoginWindow extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Contraseña");
 
-        jButton1.setText("Ingresar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jb_Ingresar.setText("Ingresar");
+        jb_Ingresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jb_IngresarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jb_Salir.setText("Salir");
+        jb_Salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jb_SalirActionPerformed(evt);
             }
         });
 
@@ -103,9 +125,9 @@ public class LoginWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jb_Ingresar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jb_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -131,8 +153,8 @@ public class LoginWindow extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)))
+                            .addComponent(jb_Ingresar)
+                            .addComponent(jb_Salir)))
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -155,35 +177,17 @@ public class LoginWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtf_UsuarioActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jb_IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_IngresarActionPerformed
         // TODO add your handling code here:
-        MainWindow main= new MainWindow();
-        LoginPrincipalDAO loginPrincipalDAO = new LoginPrincipalDAO();
-        String nombre = jtf_Usuario.getText();
-        String clave = jtf_Clave.getText();
-        String acceso = loginPrincipalDAO.logueoPrincipal(nombre,clave);
-        if (acceso.equals("DENEGADO")){
-             jtf_Usuario.setText("");
-             jtf_Clave.setText("");
-             JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrecta.", "Error", JOptionPane.ERROR_MESSAGE);
-             jtf_Usuario.requestFocus();
-        } else {
-            
-            main.setTitle(". : : P a n t a l l a   P r i n c i p a l - "+nombre+"@"+acceso+" : : .");
-            MainWindow.jl_Permisos.setText(acceso);
-            main.setVisible(true);
-            this.dispose();
-        }
-            
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+        ingresar();
+                    
+    }//GEN-LAST:event_jb_IngresarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jb_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_SalirActionPerformed
         // TODO add your handling code here
         System.exit(0);
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jb_SalirActionPerformed
 
     private void jtf_ClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_ClaveActionPerformed
         // TODO add your handling code here:
@@ -191,25 +195,6 @@ public class LoginWindow extends javax.swing.JFrame {
 
     private void jtf_ClaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_ClaveKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-        MainWindow main= new MainWindow();
-        
-        LoginPrincipalDAO loginPrincipalDAO = new LoginPrincipalDAO();
-        String nombre = jtf_Usuario.getText();
-        String clave = jtf_Clave.getText();
-        String acceso = loginPrincipalDAO.logueoPrincipal(nombre,clave);
-        if (acceso.equals("DENEGADO")){
-             jtf_Usuario.setText("");
-             jtf_Clave.setText("");
-             JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrecta.", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            
-            main.setTitle(". : : P a n t a l l a   P r i n c i p a l - "+nombre+"@"+acceso+" : : .");
-            MainWindow.jl_Permisos.setText(acceso);
-            main.setVisible(true);
-            this.dispose();
-        }
-        }
     }//GEN-LAST:event_jtf_ClaveKeyPressed
 
     /**
@@ -249,12 +234,12 @@ public class LoginWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jb_Ingresar;
+    private javax.swing.JButton jb_Salir;
     private javax.swing.JPasswordField jtf_Clave;
     private javax.swing.JTextField jtf_Usuario;
     // End of variables declaration//GEN-END:variables
