@@ -132,26 +132,7 @@ public class VentanaChofer extends javax.swing.JFrame {
 
         JTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Juan Pedro", "3039302", "15567852", "Salta 100", null, null},
-                {"Marcelo Soria", "2799792", "1546826", "Suipacha 178", null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Nombre", "Dni", "Telefono fijo", "Telefono Celular", "Domicilio", "Vencimiento Carnet"

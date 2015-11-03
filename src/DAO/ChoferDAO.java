@@ -62,7 +62,6 @@ public class ChoferDAO {
                 chofer.setLicenciaCarnet(res.getInt("licenciaCarnet"));
                 choferes.add(chofer);
             }
-            
             res.close();
             consulta.close();
             conex.desconectar();
