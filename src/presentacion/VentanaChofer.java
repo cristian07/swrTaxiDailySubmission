@@ -34,7 +34,7 @@ public class VentanaChofer extends javax.swing.JFrame {
                 chofer.getApellido()+", "+chofer.getNombre(),
                 chofer.getTelefono(),
                 chofer.getCelular(),
-                chofer.getFechaCarnet(),
+                chofer.getFechaCarnetVencimiento(),
                 chofer.getDomicilio()};
             modelo.addRow(datos);
         }
@@ -54,7 +54,7 @@ public class VentanaChofer extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        jtf_DNI = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -79,10 +79,15 @@ public class VentanaChofer extends javax.swing.JFrame {
         });
 
         jButton4.setText("Buscar");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jtf_DNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_DNIActionPerformed(evt);
             }
         });
 
@@ -103,7 +108,7 @@ public class VentanaChofer extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtf_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -122,7 +127,7 @@ public class VentanaChofer extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtf_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jButton3))
                 .addContainerGap())
@@ -135,7 +140,7 @@ public class VentanaChofer extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Dni", "Telefono fijo", "Telefono Celular", "Domicilio", "Vencimiento Carnet"
+                "Dni", "Nombre", "Telefono fijo", "Telefono Celular", "Vencimiento Carnet", "Domicilio"
             }
         ));
         jScrollPane1.setViewportView(JTable);
@@ -194,9 +199,40 @@ public class VentanaChofer extends javax.swing.JFrame {
         //
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jtf_DNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_DNIActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jtf_DNIActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        ChoferDAO choferDAO = new ChoferDAO();
+        ArrayList<Chofer> choferes = new ArrayList<Chofer>();
+        DefaultTableModel modelo = (DefaultTableModel) JTable.getModel();
+        modelo.setNumRows(0);
+        int dni;
+        try {
+            dni = Integer.parseInt(jtf_DNI.getText());
+            if (dni == 0 || dni < 0 ){
+                JOptionPane.showMessageDialog(null, "Ingrese un DNI valido.", "Error", JOptionPane.ERROR_MESSAGE);
+                jtf_DNI.setText("");
+                jtf_DNI.requestFocus();
+            }
+            choferes = choferDAO.consultarChofer(dni);
+            for (Chofer chofer: choferes){
+                String[] datos = {
+                    String.valueOf(chofer.getDNI()),
+                    chofer.getApellido()+", "+chofer.getNombre(),
+                    chofer.getTelefono(),
+                    chofer.getCelular(),
+                    chofer.getFechaCarnetVencimiento(),
+                    chofer.getDomicilio()};
+                modelo.addRow(datos);
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Ingrese un DNI valido.", "Error", JOptionPane.ERROR_MESSAGE);
+            jtf_DNI.setText("");
+            jtf_DNI.requestFocus();
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,6 +280,6 @@ public class VentanaChofer extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jtf_DNI;
     // End of variables declaration//GEN-END:variables
 }

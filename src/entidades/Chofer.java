@@ -12,8 +12,9 @@ public class Chofer {
     private String provincia;
     private String telefono;
     private String celular;
-    private String fechaCarnet;
-    private int licenciaCarnet;
+    private String fechaCarnetOtorgamiento;
+    private String fechaCarnetVencimiento;
+    private String categoria;
 
     /**
      * @return the DNI
@@ -127,32 +128,46 @@ public class Chofer {
         this.celular = celular;
     }
 
-    /**
-     * @return the fechaCarnet
+     /**
+     * @return the fechaCarnetOtorgamiento
      */
-    public String getFechaCarnet() {
-        return fechaCarnet;
+    public String getFechaCarnetOtorgamiento() {
+        return fechaCarnetOtorgamiento;
     }
 
     /**
-     * @param fechaCarnet the fechaCarnet to set
+     * @param fechaCarnetOtorgamiento the fechaCarnetOtorgamiento to set
      */
-    public void setFechaCarnet(String fechaCarnet) {
-        this.fechaCarnet = fechaCarnet;
+    public void setFechaCarnetOtorgamiento(String fechaCarnetOtorgamiento) {
+        this.fechaCarnetOtorgamiento = fechaCarnetOtorgamiento;
     }
 
     /**
-     * @return the licenciaCarnet
+     * @return the fechaCarnetVencimiento
      */
-    public int getLicenciaCarnet() {
-        return licenciaCarnet;
+    public String getFechaCarnetVencimiento() {
+        return fechaCarnetVencimiento;
     }
 
     /**
-     * @param licenciaCarnet the licenciaCarnet to set
+     * @param fechaCarnetVencimiento the fechaCarnetVencimiento to set
      */
-    public void setLicenciaCarnet(int licenciaCarnet) {
-        this.licenciaCarnet = licenciaCarnet;
+    public void setFechaCarnetVencimiento(String fechaCarnetVencimiento) {
+        this.fechaCarnetVencimiento = fechaCarnetVencimiento;
+    }
+
+    /**
+     * @return the categoria
+     */
+    public String getCategoria() {
+        return categoria;
+    }
+
+    /**
+     * @param categoria the categoria to set
+     */
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
 }

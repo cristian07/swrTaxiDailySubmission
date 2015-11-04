@@ -20,16 +20,23 @@ public class ChoferDAO {
         ArrayList<Chofer> choferes = new ArrayList<Chofer>();
         DbConnection conex= new DbConnection();
         try {
-            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT nombre,apellido FROM chofer where DNI = ? ");
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM chofer where DNI = ? ");
             consulta.setInt(1, documento);
             ResultSet res = consulta.executeQuery();
     
             if(res.next()){
-              Chofer chofer= new Chofer();
-              chofer.setDNI(documento);
-              chofer.setNombre(res.getString("nombre"));
-              chofer.setApellido(res.getString("apellido"));
-              choferes.add(chofer);
+                Chofer chofer= new Chofer();
+                chofer.setDNI(documento);
+                chofer.setNombre(res.getString("nombre"));
+                chofer.setApellido(res.getString("apellido"));
+                chofer.setDomicilio(res.getString("domicilio"));
+                chofer.setLocalidad(res.getString("localidad"));
+                chofer.setProvincia(res.getString("provincia"));
+                chofer.setTelefono(res.getString("telefono"));
+                chofer.setCelular(res.getString("celular"));
+                chofer.setFechaCarnetOtorgamiento(res.getString("fechaCarnetOtorgamiento"));
+                chofer.setFechaCarnetVencimiento(res.getString("fechaCarnetVencimiento"));
+                choferes.add(chofer);
             }
             
             res.close();
@@ -45,10 +52,10 @@ public class ChoferDAO {
         ArrayList<Chofer> choferes = new ArrayList<Chofer>();
         DbConnection conex= new DbConnection();
         try {
-            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM chofer where 1=1 ");
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM chofer");
             ResultSet res = consulta.executeQuery();
     
-            if(res.next()){
+            while(res.next()){
                 Chofer chofer= new Chofer();
                 chofer.setDNI(res.getInt("DNI"));
                 chofer.setNombre(res.getString("nombre"));
@@ -58,8 +65,8 @@ public class ChoferDAO {
                 chofer.setProvincia(res.getString("provincia"));
                 chofer.setTelefono(res.getString("telefono"));
                 chofer.setCelular(res.getString("celular"));
-                chofer.setFechaCarnet(res.getString("fechaCarnet"));
-                chofer.setLicenciaCarnet(res.getInt("licenciaCarnet"));
+                chofer.setFechaCarnetOtorgamiento(res.getString("fechaCarnetOtorgamiento"));
+                chofer.setFechaCarnetVencimiento(res.getString("fechaCarnetVencimiento"));
                 choferes.add(chofer);
             }
             res.close();
