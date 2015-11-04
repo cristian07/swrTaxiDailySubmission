@@ -5,6 +5,7 @@
  */
 package presentacion;
 
+import DAO.ChoferDAO;
 import entidades.Chofer;
 
 /**
@@ -58,7 +59,7 @@ public class ABMChofer extends javax.swing.JFrame {
         jtf_FechaVencimiento = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
         jb_Guardar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jb_Volver = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -211,25 +212,30 @@ public class ABMChofer extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Cancelar");
+        jb_Volver.setText("Volver");
+        jb_Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_VolverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(343, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jb_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jb_Volver, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jb_Guardar)
-                    .addComponent(jButton3))
+                    .addComponent(jb_Volver))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -240,12 +246,13 @@ public class ABMChofer extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 5, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,6 +274,7 @@ public class ABMChofer extends javax.swing.JFrame {
 
     private void jb_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_GuardarActionPerformed
         Chofer chofer = new Chofer();
+        ChoferDAO choferDAO = new ChoferDAO();
         chofer.setDNI(Integer.parseInt(jtf_DNI.getText()));
         chofer.setNombre(jtf_Nombre.getText());
         chofer.setApellido(jtf_DNI.getText());
@@ -278,8 +286,15 @@ public class ABMChofer extends javax.swing.JFrame {
         chofer.setFechaCarnetOtorgamiento(jtf_FechaOtorgamiento.getText());
         chofer.setFechaCarnetVencimiento(jtf_FechaVencimiento.getText());
         chofer.setCategoria(jtf_Categoria.getText());
+        choferDAO.altaChofer(chofer);
         
     }//GEN-LAST:event_jb_GuardarActionPerformed
+
+    private void jb_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_VolverActionPerformed
+        this.dispose();
+        VentanaChofer choferwindow= new VentanaChofer();
+        choferwindow.setVisible(true); 
+    }//GEN-LAST:event_jb_VolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,7 +332,6 @@ public class ABMChofer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -335,6 +349,7 @@ public class ABMChofer extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton jb_Guardar;
+    private javax.swing.JButton jb_Volver;
     private javax.swing.JTextField jtf_Apellido;
     private javax.swing.JTextField jtf_Categoria;
     private javax.swing.JTextField jtf_DNI;

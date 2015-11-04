@@ -8,6 +8,8 @@ package DAO;
 import entidades.Chofer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import servicio.DbConnection;
 
@@ -76,5 +78,29 @@ public class ChoferDAO {
                 System.out.println(e);
             }
         return choferes;
+    }
+    public void altaChofer(Chofer chofer){
+        DbConnection conex= new DbConnection();
+        DbConnection conex2= new DbConnection();
+      
+        try {
+            Statement estatuto = conex.getConnection().createStatement();
+            estatuto.executeUpdate("INSERT INTO Chofer VALUES ('"
+                +chofer.getDNI()+"', '"
+                +chofer.getNombre()+"', '"
+                +chofer.getApellido()+"', '"
+                +chofer.getDomicilio()+"', '"
+                +chofer.getLocalidad()+"', '"
+                +chofer.getProvincia()+"', '"
+                +chofer.getTelefono()+"', '"
+                +chofer.getCelular()+"', '"
+                +chofer.getFechaCarnetOtorgamiento()+"', '"
+                +chofer.getFechaCarnetVencimiento()+"', '"
+                +chofer.getCategoria()+"')");
+            estatuto.close();
+            conex.desconectar();
+        } catch (SQLException e) {
+            System.out.println("insertar en turno"+e.getMessage());
+        }
     }
 }
