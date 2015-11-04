@@ -7,13 +7,11 @@ package presentacion;
 
 import DAO.AjustesDAO;
 import DAO.TurnoDAO;
-import com.sun.glass.events.KeyEvent;
-import entidades.Ajustes;
 import entidades.Movil;
 import entidades.Turno;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Calendar;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -370,6 +368,11 @@ public class RendicionChofer extends javax.swing.JFrame {
         jta_Novedades.setColumns(20);
         jta_Novedades.setRows(3);
         jta_Novedades.setTabSize(3);
+        jta_Novedades.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jta_NovedadesKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jta_Novedades);
 
         jtf_Movil.setEditable(true);
@@ -526,15 +529,17 @@ public class RendicionChofer extends javax.swing.JFrame {
                     .addComponent(jtf_TicketRelevo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel27))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtf_Recaudacion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel28))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(jLabel28))
+                    .addComponent(jtf_Recaudacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtf_Gastos, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel29))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(jLabel29))
+                    .addComponent(jtf_Gastos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtf_GNCBruto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -722,17 +727,12 @@ public class RendicionChofer extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int a = JOptionPane.showConfirmDialog(null, "Esta seguro que desea guardar?");
-        if (a == JOptionPane.YES_OPTION) {
             registrarTurno();
             LoginChofer login = new LoginChofer();
             LoginChofer.jl_turno.setText(jl_Tipo.getText());
             login.setVisible(true);
             this.dispose();
-        } else {
-            LimpiarCampos();
-        }
-       
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jtf_Gastos2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_Gastos2FocusLost
@@ -822,80 +822,87 @@ public class RendicionChofer extends javax.swing.JFrame {
 
     private void jtf_KmInicialKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_KmInicialKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-            jtf_KmFinal.requestFocus();
-        }
+//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+//            jtf_KmFinal.requestFocus();
+//        }
     }//GEN-LAST:event_jtf_KmInicialKeyPressed
 
     private void jtf_KmFinalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_KmFinalKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-            jtf_TicketRelevo1.requestFocus();
-        }
+//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+//            jtf_TicketRelevo1.requestFocus();
+//        }
     }//GEN-LAST:event_jtf_KmFinalKeyPressed
 
     private void jtf_TicketRelevo1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_TicketRelevo1KeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-            jtf_TicketRelevo2.requestFocus();
-        }
+//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+//            jtf_TicketRelevo2.requestFocus();
+//        }
     }//GEN-LAST:event_jtf_TicketRelevo1KeyPressed
 
     private void jtf_TicketRelevo2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_TicketRelevo2KeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-            jtf_Recaudacion.requestFocus();
-        }
+//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+//            jtf_Recaudacion.requestFocus();
+//        }
     }//GEN-LAST:event_jtf_TicketRelevo2KeyPressed
 
     private void jtf_RecaudacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_RecaudacionKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-            jtf_Gastos.requestFocus();
-        }
+//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+//            jtf_Gastos.requestFocus();
+//        }
     }//GEN-LAST:event_jtf_RecaudacionKeyPressed
 
     private void jtf_GastosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_GastosKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-            jtf_GNCBruto.requestFocus();
-        }
+//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+//            jtf_GNCBruto.requestFocus();
+//        }
     }//GEN-LAST:event_jtf_GastosKeyPressed
 
     private void jtf_GNCBrutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_GNCBrutoKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-            jtf_GNCFuera.requestFocus();
-        }
+//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+//            jtf_GNCFuera.requestFocus();
+//        }
     }//GEN-LAST:event_jtf_GNCBrutoKeyPressed
 
     private void jtf_GNCFueraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_GNCFueraKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-            jtf_KmOcupados.requestFocus();
-        }
+//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+//            jtf_KmOcupados.requestFocus();
+//        }
     }//GEN-LAST:event_jtf_GNCFueraKeyPressed
 
     private void jtf_KmOcupadosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_KmOcupadosKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-            jtf_KmLibres.requestFocus();
-        }
+//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+//            jtf_KmLibres.requestFocus();
+//        }
     }//GEN-LAST:event_jtf_KmOcupadosKeyPressed
 
     private void jtf_KmLibresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_KmLibresKeyPressed
         // TODO add your handling code here:
-         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-            jtf_GastosChequera.requestFocus();
-        }
+//         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+//            jtf_GastosChequera.requestFocus();
+//        }
     }//GEN-LAST:event_jtf_KmLibresKeyPressed
 
     private void jtf_GastosChequeraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_GastosChequeraKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-            jta_Novedades.requestFocus();
-        }
+//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+//            jta_Novedades.requestFocus();
+//        }
     }//GEN-LAST:event_jtf_GastosChequeraKeyPressed
+
+    private void jta_NovedadesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jta_NovedadesKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+           jButton1.requestFocus();
+        }
+    }//GEN-LAST:event_jta_NovedadesKeyPressed
 
     /**
      * @param args the command line arguments
