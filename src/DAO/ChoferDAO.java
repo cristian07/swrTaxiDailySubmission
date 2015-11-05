@@ -22,7 +22,7 @@ public class ChoferDAO {
         ArrayList<Chofer> choferes = new ArrayList<Chofer>();
         DbConnection conex= new DbConnection();
         try {
-            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM chofer where DNI = ? ");
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM chofer where DNI = ? and estado='A'");
             consulta.setInt(1, documento);
             ResultSet res = consulta.executeQuery();
     
@@ -38,6 +38,7 @@ public class ChoferDAO {
                 chofer.setCelular(res.getString("celular"));
                 chofer.setFechaCarnetOtorgamiento(res.getString("fechaCarnetOtorgamiento"));
                 chofer.setFechaCarnetVencimiento(res.getString("fechaCarnetVencimiento"));
+                chofer.setCategoria(res.getString("categoria"));
                 choferes.add(chofer);
             }
             
@@ -54,7 +55,7 @@ public class ChoferDAO {
         ArrayList<Chofer> choferes = new ArrayList<Chofer>();
         DbConnection conex= new DbConnection();
         try {
-            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM chofer");
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM chofer WHERE estado='A'");
             ResultSet res = consulta.executeQuery();
     
             while(res.next()){
@@ -69,6 +70,7 @@ public class ChoferDAO {
                 chofer.setCelular(res.getString("celular"));
                 chofer.setFechaCarnetOtorgamiento(res.getString("fechaCarnetOtorgamiento"));
                 chofer.setFechaCarnetVencimiento(res.getString("fechaCarnetVencimiento"));
+                chofer.setCategoria(res.getString("categoria"));
                 choferes.add(chofer);
             }
             res.close();
@@ -96,11 +98,45 @@ public class ChoferDAO {
                 +chofer.getCelular()+"', '"
                 +chofer.getFechaCarnetOtorgamiento()+"', '"
                 +chofer.getFechaCarnetVencimiento()+"', '"
-                +chofer.getCategoria()+"')");
+                +chofer.getCategoria()+"','A')");
             estatuto.close();
             conex.desconectar();
         } catch (SQLException e) {
             System.out.println("insertar en turno"+e.getMessage());
         }
+    }
+    public void modificarChofer(Chofer chofer){
+        DbConnection conex= new DbConnection();
+        try {
+            Statement estatuto = conex.getConnection().createStatement();
+            estatuto.executeUpdate("UPDATE Chofer SET nombre='"
+                +chofer.getNombre()+"', apellido='"
+                +chofer.getApellido()+"', domicilio='"
+                +chofer.getDomicilio()+"', localidad='"
+                +chofer.getLocalidad()+"', provincia='"
+                +chofer.getProvincia()+"', telefono='"
+                +chofer.getTelefono()+"', celular='"
+                +chofer.getCelular()+"', fechaCarnetOtorgamiento='"
+                +chofer.getFechaCarnetOtorgamiento()+"', fechaCarnetVencimiento='"
+                +chofer.getFechaCarnetVencimiento()+"', categoria='"
+                +chofer.getCategoria()+"' WHERE DNI='"
+                +chofer.getDNI()+"'");
+            estatuto.close();
+            conex.desconectar();
+        } catch (SQLException e) {
+            System.out.println("insertar en turno"+e.getMessage());
+        }
+    }
+    public void eliminarChofer(int dni){
+        DbConnection conex= new DbConnection();
+        try {
+             Statement estatuto = conex.getConnection().createStatement();
+            estatuto.executeUpdate("UPDATE Chofer SET estado='B' WHERE DNI='"
+                    +dni+ "'");
+            estatuto.close();
+            conex.desconectar();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
     }
 }

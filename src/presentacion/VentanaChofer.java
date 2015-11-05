@@ -7,7 +7,14 @@ package presentacion;
 
 import DAO.ChoferDAO;
 import entidades.Chofer;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,9 +30,13 @@ public class VentanaChofer extends javax.swing.JFrame {
     public VentanaChofer() {
         initComponents();
         this.setLocationRelativeTo(null);
+        verTodos();
+            
+    }
+    public void verTodos(){
         ChoferDAO choferDAO = new ChoferDAO();
         ArrayList<Chofer> choferes = new ArrayList<Chofer>();
-        DefaultTableModel modelo = (DefaultTableModel) JTable.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jt_Chofer.getModel();
         modelo.setNumRows(0);
         choferes = choferDAO.getChoferes();
         for (Chofer chofer: choferes){
@@ -38,7 +49,6 @@ public class VentanaChofer extends javax.swing.JFrame {
                 chofer.getDomicilio()};
             modelo.addRow(datos);
         }
-            
     }
 
     /**
@@ -50,16 +60,35 @@ public class VentanaChofer extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popupMenu = new javax.swing.JPopupMenu();
+        Modificar = new javax.swing.JMenuItem();
+        Borrar = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jb_Nuevo = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jb_Buscar = new javax.swing.JButton();
         jtf_DNI = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        JTable = new javax.swing.JTable();
+        jt_Chofer = new javax.swing.JTable();
+
+        Modificar.setText("Modificar");
+        Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarActionPerformed(evt);
+            }
+        });
+        popupMenu.add(Modificar);
+
+        Borrar.setText("Borrar");
+        Borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BorrarActionPerformed(evt);
+            }
+        });
+        popupMenu.add(Borrar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -71,17 +100,10 @@ public class VentanaChofer extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Modificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jb_Buscar.setText("Buscar");
+        jb_Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setText("Buscar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jb_BuscarActionPerformed(evt);
             }
         });
 
@@ -100,42 +122,49 @@ public class VentanaChofer extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Ver todos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(67, 67, 67)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtf_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jb_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jb_Nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
+                .addGap(225, 225, 225)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jb_Nuevo)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4)
+                    .addComponent(jb_Buscar)
                     .addComponent(jtf_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3)
                     .addComponent(jLabel1)
-                    .addComponent(jButton3))
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        JTable.setModel(new javax.swing.table.DefaultTableModel(
+        jt_Chofer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -143,7 +172,8 @@ public class VentanaChofer extends javax.swing.JFrame {
                 "Dni", "Nombre", "Telefono fijo", "Telefono Celular", "Vencimiento Carnet", "Domicilio"
             }
         ));
-        jScrollPane1.setViewportView(JTable);
+        jt_Chofer.setComponentPopupMenu(popupMenu);
+        jScrollPane1.setViewportView(jt_Chofer);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -182,6 +212,8 @@ public class VentanaChofer extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
         ABMChofer abmchofer= new ABMChofer();
+        ABMChofer.jb_Guardar.setEnabled(true);
+        ABMChofer.jb_Modificar.setVisible(false);
         abmchofer.setVisible(true);
     }//GEN-LAST:event_jb_NuevoActionPerformed
 
@@ -190,24 +222,14 @@ public class VentanaChofer extends javax.swing.JFrame {
        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-         DefaultTableModel modelo = (DefaultTableModel) JTable.getModel();
-         
-        JOptionPane.showMessageDialog(null, modelo.getValueAt(JTable.getSelectedRow(), 1).toString(), "Error", JOptionPane.ERROR_MESSAGE);
-/*        ABMChofer abmchofer= new ABMChofer();
-        abmchofer.setVisible(true);*/
-        //
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jtf_DNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_DNIActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtf_DNIActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jb_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_BuscarActionPerformed
         ChoferDAO choferDAO = new ChoferDAO();
         ArrayList<Chofer> choferes = new ArrayList<Chofer>();
-        DefaultTableModel modelo = (DefaultTableModel) JTable.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jt_Chofer.getModel();
         modelo.setNumRows(0);
         int dni;
         try {
@@ -233,7 +255,63 @@ public class VentanaChofer extends javax.swing.JFrame {
             jtf_DNI.setText("");
             jtf_DNI.requestFocus();
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jb_BuscarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        verTodos();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) jt_Chofer.getModel();
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateOtorgamiento = null;
+        Date dateVencimiento = null;
+        int fila = jt_Chofer.getSelectedRow();
+        int dni = Integer.parseInt(modelo.getValueAt(jt_Chofer.getSelectedRow(), 0).toString());
+        ChoferDAO choferDAO = new ChoferDAO();
+        ArrayList<Chofer> choferes = new ArrayList<Chofer>();
+        if (fila<0){
+            JOptionPane.showMessageDialog(null,"Seleccione un chofer para realizar esta operacion.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            this.dispose();
+            ABMChofer abmchofer= new ABMChofer();
+            ABMChofer.jb_Modificar.setEnabled(true);
+            ABMChofer.jb_Guardar.setVisible(false);
+            
+            choferes = choferDAO.consultarChofer(dni);
+            ABMChofer.jtf_DNI.setText(String.valueOf(choferes.get(0).getDNI()));
+            ABMChofer.jtf_Nombre.setText(choferes.get(0).getNombre());
+            ABMChofer.jtf_Apellido.setText(choferes.get(0).getApellido());
+            ABMChofer.jtf_Domicilio.setText(choferes.get(0).getDomicilio());
+            ABMChofer.jtf_Localidad.setText(choferes.get(0).getLocalidad());
+            ABMChofer.jtf_Provincia.setText(choferes.get(0).getProvincia());
+            ABMChofer.jtf_TelefonoFijo.setText(choferes.get(0).getTelefono());
+            ABMChofer.jtf_TelefonoCelular.setText(choferes.get(0).getCelular());
+            ABMChofer.jtf_Categoria.setText(choferes.get(0).getCategoria());
+            try {
+                dateOtorgamiento = format.parse(choferes.get(0).getFechaCarnetOtorgamiento());
+                dateVencimiento = format.parse(choferes.get(0).getFechaCarnetVencimiento());
+            } catch (ParseException ex) {
+                Logger.getLogger(ABMChofer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            ABMChofer.jtf_FechaOtorgamiento.setSelectedDate(new GregorianCalendar(dateOtorgamiento.getYear(),dateOtorgamiento.getMonth(),dateOtorgamiento.getDay()-1));
+            ABMChofer.jtf_FechaVencimiento.setSelectedDate(new GregorianCalendar(dateVencimiento.getYear(),dateVencimiento.getMonth(),dateVencimiento.getDay()-1));
+            abmchofer.setVisible(true);
+        }
+    }//GEN-LAST:event_ModificarActionPerformed
+
+    private void BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) jt_Chofer.getModel();
+        int fila = jt_Chofer.getSelectedRow();
+        int dni = Integer.parseInt(modelo.getValueAt(jt_Chofer.getSelectedRow(), 0).toString());
+        ChoferDAO choferDAO = new ChoferDAO();
+        if (fila<0){
+        JOptionPane.showMessageDialog(null,"Seleccione el chofer que desea borrar.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            choferDAO.eliminarChofer(dni);
+            modelo.removeRow(jt_Chofer.getSelectedRow()); 
+        }
+    }//GEN-LAST:event_BorrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,15 +350,18 @@ public class VentanaChofer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable JTable;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JMenuItem Borrar;
+    private javax.swing.JMenuItem Modificar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jb_Buscar;
     private javax.swing.JButton jb_Nuevo;
+    private javax.swing.JTable jt_Chofer;
     private javax.swing.JTextField jtf_DNI;
+    private javax.swing.JPopupMenu popupMenu;
     // End of variables declaration//GEN-END:variables
 }

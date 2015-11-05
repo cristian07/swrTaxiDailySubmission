@@ -7,6 +7,15 @@ package presentacion;
 
 import DAO.ChoferDAO;
 import entidades.Chofer;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -55,17 +64,18 @@ public class ABMChofer extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jtf_Categoria = new javax.swing.JTextField();
-        jtf_FechaOtorgamiento = new javax.swing.JFormattedTextField();
-        jtf_FechaVencimiento = new javax.swing.JFormattedTextField();
+        jtf_FechaOtorgamiento = new datechooser.beans.DateChooserCombo();
+        jtf_FechaVencimiento = new datechooser.beans.DateChooserCombo();
         jPanel3 = new javax.swing.JPanel();
         jb_Guardar = new javax.swing.JButton();
         jb_Volver = new javax.swing.JButton();
+        jb_Modificar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingrese los datos del chofer"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del chofer"));
 
         jLabel7.setText("DNI");
 
@@ -82,6 +92,8 @@ public class ABMChofer extends javax.swing.JFrame {
         jLabel13.setText("Telefono Fijo");
 
         jLabel14.setText("Telefono Celular");
+
+        jtf_Provincia.setText("Tucuman");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -161,12 +173,6 @@ public class ABMChofer extends javax.swing.JFrame {
 
         jLabel18.setText("Categoría");
 
-        jtf_FechaOtorgamiento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtf_FechaOtorgamientoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -177,35 +183,36 @@ public class ABMChofer extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addGap(18, 18, 18)
-                        .addComponent(jtf_FechaOtorgamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtf_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jtf_FechaOtorgamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtf_FechaVencimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jtf_FechaVencimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtf_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel18)
-                    .addComponent(jtf_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel16)
+                        .addComponent(jLabel18)
+                        .addComponent(jtf_Categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jtf_FechaOtorgamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel17)
                     .addComponent(jtf_FechaVencimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         jb_Guardar.setText("Guardar");
+        jb_Guardar.setEnabled(false);
         jb_Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_GuardarActionPerformed(evt);
@@ -219,12 +226,22 @@ public class ABMChofer extends javax.swing.JFrame {
             }
         });
 
+        jb_Modificar.setText("Modificar");
+        jb_Modificar.setEnabled(false);
+        jb_Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_ModificarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jb_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jb_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jb_Volver, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,7 +252,8 @@ public class ABMChofer extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jb_Guardar)
-                    .addComponent(jb_Volver))
+                    .addComponent(jb_Volver)
+                    .addComponent(jb_Modificar))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -268,10 +286,6 @@ public class ABMChofer extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtf_FechaOtorgamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_FechaOtorgamientoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtf_FechaOtorgamientoActionPerformed
-
     private void jb_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_GuardarActionPerformed
         Chofer chofer = new Chofer();
         ChoferDAO choferDAO = new ChoferDAO();
@@ -286,6 +300,7 @@ public class ABMChofer extends javax.swing.JFrame {
         chofer.setFechaCarnetOtorgamiento(jtf_FechaOtorgamiento.getText());
         chofer.setFechaCarnetVencimiento(jtf_FechaVencimiento.getText());
         chofer.setCategoria(jtf_Categoria.getText());
+        //chofer.setFechaCarnetOtorgamiento(new SimpleDateFormat("yyyy-MM-dd").format(jtf_FechaOtorgamiento.getSelectedDate().getTime()));
         choferDAO.altaChofer(chofer);
         
     }//GEN-LAST:event_jb_GuardarActionPerformed
@@ -295,6 +310,26 @@ public class ABMChofer extends javax.swing.JFrame {
         VentanaChofer choferwindow= new VentanaChofer();
         choferwindow.setVisible(true); 
     }//GEN-LAST:event_jb_VolverActionPerformed
+
+    private void jb_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ModificarActionPerformed
+        Chofer chofer = new Chofer();
+        ChoferDAO choferDAO = new ChoferDAO();
+        chofer.setDNI(Integer.parseInt(jtf_DNI.getText()));
+        chofer.setNombre(jtf_Nombre.getText());
+        chofer.setApellido(jtf_Apellido.getText());
+        chofer.setDomicilio(jtf_Domicilio.getText());
+        chofer.setLocalidad(jtf_Localidad.getText());
+        chofer.setProvincia(jtf_Provincia.getText());
+        chofer.setTelefono(jtf_TelefonoFijo.getText());
+        chofer.setCelular(jtf_TelefonoCelular.getText());
+        chofer.setFechaCarnetOtorgamiento(jtf_FechaOtorgamiento.getText());
+        chofer.setFechaCarnetVencimiento(jtf_FechaVencimiento.getText());
+        chofer.setCategoria(jtf_Categoria.getText());
+        chofer.setFechaCarnetOtorgamiento("2015-01-01");
+        chofer.setFechaCarnetVencimiento("2015-01-01");
+        choferDAO.modificarChofer(chofer);
+        
+    }//GEN-LAST:event_jb_ModificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -348,18 +383,19 @@ public class ABMChofer extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JButton jb_Guardar;
+    public static javax.swing.JButton jb_Guardar;
+    public static javax.swing.JButton jb_Modificar;
     private javax.swing.JButton jb_Volver;
-    private javax.swing.JTextField jtf_Apellido;
-    private javax.swing.JTextField jtf_Categoria;
-    private javax.swing.JTextField jtf_DNI;
-    private javax.swing.JTextField jtf_Domicilio;
-    private javax.swing.JFormattedTextField jtf_FechaOtorgamiento;
-    private javax.swing.JFormattedTextField jtf_FechaVencimiento;
-    private javax.swing.JTextField jtf_Localidad;
-    private javax.swing.JTextField jtf_Nombre;
-    private javax.swing.JTextField jtf_Provincia;
-    private javax.swing.JTextField jtf_TelefonoCelular;
-    private javax.swing.JTextField jtf_TelefonoFijo;
+    public static javax.swing.JTextField jtf_Apellido;
+    public static javax.swing.JTextField jtf_Categoria;
+    public static javax.swing.JTextField jtf_DNI;
+    public static javax.swing.JTextField jtf_Domicilio;
+    public static datechooser.beans.DateChooserCombo jtf_FechaOtorgamiento;
+    public static datechooser.beans.DateChooserCombo jtf_FechaVencimiento;
+    public static javax.swing.JTextField jtf_Localidad;
+    public static javax.swing.JTextField jtf_Nombre;
+    public static javax.swing.JTextField jtf_Provincia;
+    public static javax.swing.JTextField jtf_TelefonoCelular;
+    public static javax.swing.JTextField jtf_TelefonoFijo;
     // End of variables declaration//GEN-END:variables
 }
