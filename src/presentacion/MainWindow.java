@@ -39,7 +39,7 @@ public class MainWindow extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jb_Usuario = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jp_Encargado = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -124,13 +124,13 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario-administrador-personal-icono-9746-64.png"))); // NOI18N
-        jButton6.setText("Usuario");
-        jButton6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jb_Usuario.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jb_Usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario-administrador-personal-icono-9746-64.png"))); // NOI18N
+        jb_Usuario.setText("Usuario");
+        jb_Usuario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jb_Usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jb_UsuarioActionPerformed(evt);
             }
         });
 
@@ -155,7 +155,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jp_AdministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                    .addComponent(jb_Usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jp_AdministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -171,7 +171,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(jp_AdministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jb_Usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jp_AdministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jp_AdministradorLayout.createSequentialGroup()
@@ -214,7 +214,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(jp_EncargadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jp_EncargadoLayout.setVerticalGroup(
             jp_EncargadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,11 +382,10 @@ public class MainWindow extends javax.swing.JFrame {
         parte.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+    private void jb_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_UsuarioActionPerformed
         VentanaUsuario usuario=new VentanaUsuario();
         usuario.setVisible(true);
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jb_UsuarioActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -441,7 +440,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -456,6 +454,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JButton jb_Usuario;
     public static javax.swing.JLabel jl_Permisos;
     public static javax.swing.JPanel jp_Administrador;
     public static javax.swing.JPanel jp_Encargado;

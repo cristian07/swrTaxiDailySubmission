@@ -2,43 +2,52 @@ package entidades;
 
 public class Usuario {
 
-    private int idUsuario;
-    private String nombreUsuario;
-    private String contraseñaUsuario;
+    private String nombre;
+    private String clave;
+    private String permisos;
 
-    public Usuario() {
-
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
     }
 
-    public Usuario(int idUsuario, String nombreUsuario, String contraseñaUsuario) {
-
-        this.idUsuario = idUsuario;
-        this.nombreUsuario = nombreUsuario;
-        this.contraseñaUsuario = contraseñaUsuario;
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    /**
+     * @return the clave
+     */
+    public String getClave() {
+        return clave;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    /**
+     * @param clave the clave to set
+     */
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    /**
+     * @return the permisos
+     */
+    public String getPermisos() {
+        return permisos;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    /**
+     * @param permisos the permisos to set
+     */
+    public void setPermisos(String permisos) {
+        this.permisos = permisos;
     }
 
-    public String getContraseñaUsuario() {
-        return contraseñaUsuario;
-    }
-
-    public void setContraseñaUsuario(String contraseñaUsuario) {
-        this.contraseñaUsuario = contraseñaUsuario;
-    }
+  
 
 }

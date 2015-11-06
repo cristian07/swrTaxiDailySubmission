@@ -74,6 +74,7 @@ public class LoginWindow extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(19, 19, 19));
 
+        jtf_Clave.setBorder(null);
         jtf_Clave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtf_ClaveActionPerformed(evt);
@@ -85,6 +86,7 @@ public class LoginWindow extends javax.swing.JFrame {
             }
         });
 
+        jtf_Usuario.setBorder(null);
         jtf_Usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtf_UsuarioActionPerformed(evt);

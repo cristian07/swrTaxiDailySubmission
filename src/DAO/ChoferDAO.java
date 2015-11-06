@@ -83,8 +83,6 @@ public class ChoferDAO {
     }
     public void altaChofer(Chofer chofer){
         DbConnection conex= new DbConnection();
-        DbConnection conex2= new DbConnection();
-      
         try {
             Statement estatuto = conex.getConnection().createStatement();
             estatuto.executeUpdate("INSERT INTO Chofer VALUES ('"

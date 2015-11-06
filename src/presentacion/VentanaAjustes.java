@@ -5,6 +5,9 @@
  */
 package presentacion;
 
+import DAO.AjustesDAO;
+import entidades.Ajustes;
+
 /**
  *
  * @author Cristian
@@ -17,6 +20,14 @@ public class VentanaAjustes extends javax.swing.JFrame {
     public VentanaAjustes() {
         initComponents();
         this.setLocationRelativeTo(null);
+        AjustesDAO ajustesDAO = new AjustesDAO();
+        Ajustes ajustes = new Ajustes();
+        ajustes = ajustesDAO.obtenerUltimosAjustes();
+        jtf_ComisionChofer.setText(Double.toString(ajustes.getComisionChofer()));
+        jte_AjusteGas.setText(Double.toString(ajustes.getAjusteGas()));
+        jte_PrecioGasCtaCte.setText(Double.toString(ajustes.getPrecioGasCtaCte()));
+        jte_PrecioGasFueraCta.setText(Double.toString(ajustes.getPrecioGasFuera()));
+        
     }
 
     /**
@@ -37,15 +48,14 @@ public class VentanaAjustes extends javax.swing.JFrame {
         jte_AjusteGas = new javax.swing.JTextField();
         jte_PrecioGasCtaCte = new javax.swing.JTextField();
         jte_PrecioGasFueraCta = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        jb_Actualizar = new javax.swing.JButton();
+        jb_Salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Configuración de ajustes");
         setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajustes"));
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel1.setText("Comisión Chofer");
@@ -79,10 +89,9 @@ public class VentanaAjustes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jte_PrecioGasFueraCta, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jte_PrecioGasCtaCte, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                        .addComponent(jte_AjusteGas)
-                        .addComponent(jtf_ComisionChofer)))
+                    .addComponent(jte_PrecioGasCtaCte, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                    .addComponent(jte_AjusteGas, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtf_ComisionChofer, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -107,42 +116,43 @@ public class VentanaAjustes extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Actualizar");
+        jb_Actualizar.setText("Actualizar");
+        jb_Actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_ActualizarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Salir");
-
-        jLabel5.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        jLabel5.setText("Ingresar los campos que desea actualizar");
+        jb_Salir.setText("Volver");
+        jb_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_SalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                    .addComponent(jb_Actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addComponent(jb_Actualizar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jb_Salir)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -151,6 +161,20 @@ public class VentanaAjustes extends javax.swing.JFrame {
     private void jte_AjusteGasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jte_AjusteGasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jte_AjusteGasActionPerformed
+
+    private void jb_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ActualizarActionPerformed
+        AjustesDAO ajustesDAO = new AjustesDAO();
+        Ajustes ajustes = new Ajustes();
+        ajustes.setComisionChofer(Double.parseDouble(jtf_ComisionChofer.getText()));
+        ajustes.setAjusteGas(Double.parseDouble(jte_AjusteGas.getText()));
+        ajustes.setPrecioGasCtaCte(Double.parseDouble(jte_PrecioGasCtaCte.getText()));
+        ajustes.setPrecioGasFuera(Double.parseDouble(jte_PrecioGasFueraCta.getText()));
+        ajustesDAO.actualizarAjustes(ajustes);
+    }//GEN-LAST:event_jb_ActualizarActionPerformed
+
+    private void jb_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_SalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jb_SalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,14 +212,13 @@ public class VentanaAjustes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jb_Actualizar;
+    private javax.swing.JButton jb_Salir;
     private javax.swing.JTextField jte_AjusteGas;
     private javax.swing.JTextField jte_PrecioGasCtaCte;
     private javax.swing.JTextField jte_PrecioGasFueraCta;
