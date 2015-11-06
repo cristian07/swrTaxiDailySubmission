@@ -10,8 +10,11 @@ import DAO.TurnoDAO;
 import entidades.Movil;
 import entidades.Turno;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -726,12 +729,26 @@ public class RendicionChofer extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
+
+            // TODO add your handling code here:
+            
             registrarTurno();
             LoginChofer login = new LoginChofer();
             LoginChofer.jl_turno.setText(jl_Tipo.getText());
             login.setVisible(true);
             this.dispose();
+            
+            /* Cristian, armate una consulta para que el PARAMETRO que envie sea el utlimo turno creado
+            Por Ej:
+            SELECT idturno FROM turno ORDER BY idturno DESC LIMIT 1
+            El valor que te devuelva es el que tenes q enviar.
+            Tiene que ser un Int
+            La linea q tenes q agregar al codigo es la de abajo
+            Saludos*/           
+            
+            //new reportes.ImprimirReportes().RendicionCuenta(PARAMETRO,jtf_Comision.getText(),jtf_Neto.getText());
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
