@@ -20,6 +20,7 @@ public class ABMUsuario extends javax.swing.JFrame {
      */
     public ABMUsuario() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -42,7 +43,8 @@ public class ABMUsuario extends javax.swing.JFrame {
         jb_Guardar = new javax.swing.JButton();
         jb_Salir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
