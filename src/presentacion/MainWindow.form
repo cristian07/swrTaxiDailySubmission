@@ -147,7 +147,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jp_Administrador" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jp_Encargado" pref="239" max="32767" attributes="0"/>
+                      <Component id="jp_Encargado" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -160,7 +160,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jp_Administrador" min="-2" max="-2" attributes="0"/>
-                  <Component id="jp_Encargado" min="-2" pref="341" max="-2" attributes="0"/>
+                  <Component id="jp_Encargado" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
@@ -422,7 +422,7 @@
                   <Component id="jButton1" min="-2" pref="140" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jButton4" min="-2" pref="136" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

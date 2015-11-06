@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import servicio.DbConnection;
 
 /**
@@ -85,5 +86,62 @@ public class MovilDAO {
                 System.out.println(e);
             }
         return movil;
+    }
+    public ArrayList<Movil> obtenerIdMoviles()
+    {
+        DbConnection conex= new DbConnection();
+        ArrayList<Movil> moviles = new ArrayList<Movil>();
+        
+        try {
+            PreparedStatement consulta = conex.getConnection()
+                    .prepareStatement("select * from movil");
+            ResultSet res = consulta.executeQuery();
+
+            while(res.next()){
+                Movil movil = new Movil();
+                movil.setIdMovil(res.getInt("idMovil"));    
+                movil.setPatente(res.getString("patente"));
+                movil.setModelo(res.getString("modelo"));
+                movil.setLicencia(res.getString("licencia"));
+                movil.setNumeroLicencia(res.getInt("numeroLicencia"));
+                
+                moviles.add(movil);
+            }
+            res.close();
+            consulta.close();
+            conex.desconectar();
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+       return moviles;
+    }
+    
+    public Movil obtenerMoviles(int idMovil)
+    {
+        DbConnection conex= new DbConnection();
+        Movil movil = new Movil();
+        
+        try {
+            PreparedStatement consulta = conex.getConnection()
+                    .prepareStatement("select * from movil WHERE idMovil="
+                            + idMovil);
+            ResultSet res = consulta.executeQuery();
+
+            if(res.next()){
+                movil.setIdMovil(res.getInt("idMovil"));    
+                movil.setPatente(res.getString("patente"));
+                movil.setModelo(res.getString("modelo"));
+                movil.setLicencia(res.getString("licencia"));
+                movil.setNumeroLicencia(res.getInt("numeroLicencia"));
+            }
+            res.close();
+            consulta.close();
+            conex.desconectar();
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+       return movil;
     }
 }
