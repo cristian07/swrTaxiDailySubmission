@@ -77,20 +77,28 @@ public class ABMChofer extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del chofer"));
 
+        jLabel7.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jLabel7.setText("DNI");
 
+        jLabel8.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jLabel8.setText("Nombre");
 
+        jLabel9.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jLabel9.setText("Apellido");
 
+        jLabel10.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jLabel10.setText("Domicilio");
 
+        jLabel11.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jLabel11.setText("Localidad");
 
+        jLabel12.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jLabel12.setText("Provincia");
 
+        jLabel13.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jLabel13.setText("Telefono Fijo");
 
+        jLabel14.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jLabel14.setText("Telefono Celular");
 
         jtf_Provincia.setText("Tucuman");
@@ -167,10 +175,13 @@ public class ABMChofer extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Carnet de manejo"));
 
+        jLabel16.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jLabel16.setText("Fecha otorgado");
 
+        jLabel17.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jLabel17.setText("Fecha Vencimiento");
 
+        jLabel18.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jLabel18.setText("Categoría");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -268,7 +279,7 @@ public class ABMChofer extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 5, Short.MAX_VALUE))
+                .addGap(0, 23, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())

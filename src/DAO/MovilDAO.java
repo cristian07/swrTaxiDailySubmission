@@ -9,6 +9,8 @@ package DAO;
 import entidades.Movil;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import servicio.DbConnection;
 
 /**
@@ -36,6 +38,32 @@ public class MovilDAO {
             }
         return ajusteReloj;
     }
+    public void altaMovil(Movil movil){
+        DbConnection conex= new DbConnection();
+        try {
+            Statement estatuto = conex.getConnection().createStatement();
+            estatuto.executeUpdate("INSERT INTO movil VALUES ('"
+                +movil.getIdMovil()+"', '"
+                +movil.getModelo()+"', '"
+                +movil.getPatente()+"', '"
+                +movil.getLicencia()+"', '"
+                +movil.getNumeroLicencia()+"', '"
+                +movil.getFechaLicencia()+"', '"
+                +movil.getKilometraje()+"', '"
+                +movil.getAjusteReloj()+"', '"
+                +movil.getAditivoCaja()+"', '"
+                +movil.getAditivoMotor()+"', '"
+                +movil.getAceite()+"','"
+                + movil.getFiltro()+"','"
+                +movil.getCorrea()+"','"
+                +movil.getGrasa()+")");
+            estatuto.close();
+            conex.desconectar();
+        } catch (SQLException e) {
+            System.out.println("insertar en Movil"+e.getMessage());
+        }
+    }
+    
     public Movil obtenerDetalleLicencia(int idMovil) {
         DbConnection conex= new DbConnection();
         Movil movil = new Movil();

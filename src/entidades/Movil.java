@@ -4,7 +4,7 @@ public class Movil {
 
     private int idMovil;
     private String modelo;
-    private String kilometraje;
+    private int kilometraje;
     private int correa;
     private int aceite;
     private int grasa;
@@ -51,14 +51,14 @@ public class Movil {
     /**
      * @return the kilometraje
      */
-    public String getKilometraje() {
+    public int getKilometraje() {
         return kilometraje;
     }
 
     /**
      * @param kilometraje the kilometraje to set
      */
-    public void setKilometraje(String kilometraje) {
+    public void setKilometraje(int kilometraje) {
         this.kilometraje = kilometraje;
     }
 

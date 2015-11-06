@@ -5,6 +5,9 @@
  */
 package presentacion;
 
+import DAO.MovilDAO;
+import entidades.Movil;
+
 /**
  *
  * @author Cristian
@@ -43,21 +46,21 @@ public class ABMMovil extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        jte_nroMovil = new javax.swing.JTextField();
+        jte_kilometraje = new javax.swing.JTextField();
+        jte_patente = new javax.swing.JTextField();
+        jte_correa = new javax.swing.JTextField();
+        jte_modelo = new javax.swing.JTextField();
+        jte_nroLicencia = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
+        jte_Licencia = new javax.swing.JTextField();
+        jte_fechaVto = new javax.swing.JTextField();
+        jte_aceite = new javax.swing.JTextField();
+        jte_aditivoMotor = new javax.swing.JTextField();
+        jte_filtro = new javax.swing.JTextField();
+        jte_grasa = new javax.swing.JTextField();
+        jte_aditivoCaja = new javax.swing.JTextField();
+        jte_AjusteReloj = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -98,6 +101,12 @@ public class ABMMovil extends javax.swing.JFrame {
 
         jTextField7.setText("jTextField7");
 
+        jte_aditivoCaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jte_aditivoCajaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -114,14 +123,14 @@ public class ABMMovil extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField3)
+                    .addComponent(jte_nroMovil)
+                    .addComponent(jte_patente)
                     .addComponent(jTextField7)
-                    .addComponent(jTextField8)
-                    .addComponent(jTextField9)
-                    .addComponent(jTextField5)
-                    .addComponent(jTextField6)
-                    .addComponent(jTextField15, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
+                    .addComponent(jte_Licencia)
+                    .addComponent(jte_fechaVto)
+                    .addComponent(jte_modelo)
+                    .addComponent(jte_nroLicencia)
+                    .addComponent(jte_AjusteReloj, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
                 .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
@@ -133,13 +142,13 @@ public class ABMMovil extends javax.swing.JFrame {
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField11)
-                    .addComponent(jTextField10)
-                    .addComponent(jTextField4)
-                    .addComponent(jTextField13)
-                    .addComponent(jTextField14))
+                    .addComponent(jte_filtro, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                    .addComponent(jte_kilometraje)
+                    .addComponent(jte_aditivoMotor)
+                    .addComponent(jte_aceite)
+                    .addComponent(jte_correa)
+                    .addComponent(jte_grasa)
+                    .addComponent(jte_aditivoCaja))
                 .addGap(46, 46, 46))
         );
         jPanel1Layout.setVerticalGroup(
@@ -148,20 +157,20 @@ public class ABMMovil extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jte_nroMovil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jte_kilometraje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jte_patente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jte_correa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jte_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jte_aceite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,36 +179,41 @@ public class ABMMovil extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel12)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jte_nroLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel13)
                                     .addComponent(jLabel6)
-                                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jte_filtro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(23, 23, 23)
                                 .addComponent(jLabel7))
-                            .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jte_grasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
                             .addComponent(jLabel8)
-                            .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jte_AjusteReloj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jte_Licencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jte_fechaVto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14)
-                            .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jte_aditivoMotor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jte_aditivoCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(21, 21, 21))
         );
 
         jButton1.setText("Guardar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Limpiar");
 
@@ -243,6 +257,33 @@ public class ABMMovil extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Movil movil =new Movil();
+        MovilDAO movilDAO=new MovilDAO();
+        movil.setIdMovil(Integer.parseInt(jte_nroMovil.getText()));
+        movil.setNumeroLicencia(Integer.parseInt(jte_nroLicencia.getText()));
+        movil.setPatente(jte_patente.getText());
+        movil.setModelo(jte_modelo.getText());
+        movil.setKilometraje(Integer.parseInt(jte_kilometraje.getText()));
+        movil.setLicencia(jte_Licencia.getText());
+        movil.setFechaLicencia(jte_fechaVto.getText());
+        movil.setAceite(Integer.parseInt(jte_aceite.getText()));
+        movil.setAjusteReloj(PROPERTIES);
+        movil.setAditivoCaja(jte_aditivoCaja.getText());
+        movil.setAditivoMotor(jte_aditivoMotor.getText());
+        movil.setFiltro(Integer.parseInt(jte_filtro.getText()));
+        movil.setCorrea(Integer.parseInt(jte_correa.getText()));
+        movil.setGrasa(Integer.parseInt(jte_grasa.getText()));
+        movilDAO.altaMovil(movil);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    
+    private void jte_aditivoCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jte_aditivoCajaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jte_aditivoCajaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,20 +340,20 @@ public class ABMMovil extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField jte_AjusteReloj;
+    private javax.swing.JTextField jte_Licencia;
+    private javax.swing.JTextField jte_aceite;
+    private javax.swing.JTextField jte_aditivoCaja;
+    private javax.swing.JTextField jte_aditivoMotor;
+    private javax.swing.JTextField jte_correa;
+    private javax.swing.JTextField jte_fechaVto;
+    private javax.swing.JTextField jte_filtro;
+    private javax.swing.JTextField jte_grasa;
+    private javax.swing.JTextField jte_kilometraje;
+    private javax.swing.JTextField jte_modelo;
+    private javax.swing.JTextField jte_nroLicencia;
+    private javax.swing.JTextField jte_nroMovil;
+    private javax.swing.JTextField jte_patente;
     // End of variables declaration//GEN-END:variables
 }
