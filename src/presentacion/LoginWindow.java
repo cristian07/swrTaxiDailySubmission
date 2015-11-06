@@ -42,6 +42,9 @@ public class LoginWindow extends javax.swing.JFrame {
             if (acceso.equals("A")){
                 MainWindow.jp_Administrador.setVisible(false);
             }
+            else{
+                MainWindow.jp_Encargado.setSize(200, 500);
+            }
             MainWindow.jl_Permisos.setText(acceso);
             this.dispose();
             main.pack();
