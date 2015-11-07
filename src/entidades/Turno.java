@@ -20,11 +20,15 @@ public class Turno {
     private double gastosChequera;
     private String tipo;
     private String novedades;
+    private String detalleCaja;
+    private double importeCaja;
     
     public Turno(){
         
     }
-
+    public double calcularNeto(double comision){
+        return recaudacion*(1-comision)-gastosVarios;
+    }
     /**
      * @return the kmInicial
      */
@@ -261,5 +265,33 @@ public class Turno {
      */
     public void setChofer_DNI(int Chofer_DNI) {
         this.Chofer_DNI = Chofer_DNI;
+    }
+
+    /**
+     * @return the detalleCaja
+     */
+    public String getDetalleCaja() {
+        return detalleCaja;
+    }
+
+    /**
+     * @param detalleCaja the detalleCaja to set
+     */
+    public void setDetalleCaja(String detalleCaja) {
+        this.detalleCaja = detalleCaja;
+    }
+
+    /**
+     * @return the importeCaja
+     */
+    public double getImporteCaja() {
+        return importeCaja;
+    }
+
+    /**
+     * @param importeCaja the importeCaja to set
+     */
+    public void setImporteCaja(double importeCaja) {
+        this.importeCaja = importeCaja;
     }
 }

@@ -245,6 +245,34 @@ public class TurnoDAO {
         }
         return idTurno;
     }    
+    public ArrayList<Turno> obtenerNetos(String Fecha,String Turno){
+         DbConnection conex= new DbConnection();
+         ArrayList<Turno> turnos = new ArrayList<Turno>();
+        try { 
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * from Turno where fecha='"
+                    +Fecha+ "' AND tipo='"
+                    +Turno+ "'");
+            ResultSet res = consulta.executeQuery();
+            
+            while(res.next()){
+                Turno turno = new Turno();
+                turno.setMovil_idMovil(res.getInt("Movil_idMovil"));
+                turno.setRecaudacion(res.getDouble("recaudacion"));
+                turno.setGastosVarios(res.getDouble("gastosVarios"));
+                turno.setGastosChequera(res.getDouble("gastosChequera"));
+                turno.setDetalleCaja(res.getString("detalleCaja"));
+                turno.setImporteCaja(res.getDouble("importeCaja"));
+                turnos.add(turno);
+            }
+            res.close();
+            consulta.close();
+            conex.desconectar();
+
+        } catch (Exception e) {
+                System.out.println(e);
+        }
+        return turnos;
+    }
    }
 
 
