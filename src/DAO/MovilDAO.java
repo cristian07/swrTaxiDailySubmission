@@ -94,16 +94,24 @@ public class MovilDAO {
         
         try {
             PreparedStatement consulta = conex.getConnection()
-                    .prepareStatement("select * from movil WHERE idMovil= ?");
+                    .prepareStatement("Select * from Movil");
             ResultSet res = consulta.executeQuery();
 
             while(res.next()){
                 Movil movil = new Movil();
-                movil.setIdMovil(res.getInt("idMovil"));    
-                movil.setPatente(res.getString("patente"));
-                movil.setModelo(res.getString("modelo"));
-                movil.setLicencia(res.getString("licencia"));
-                movil.setNumeroLicencia(res.getInt("numeroLicencia"));
+                movil.setIdMovil(res.getInt("idMovil"));
+                movil.setModelo("modelo");
+                movil.setKilometraje(res.getInt("kilometraje"));
+                movil.setCorrea(res.getInt("correa"));
+                movil.setAceite(res.getInt("aceite"));
+                movil.setGrasa(res.getInt("grasa"));
+                movil.setFiltro(res.getInt("filtro"));
+                movil.setAditivoMotor("aditivoMotor");
+                movil.setAditivoCaja("aditivoCaja");
+                movil.setPatente("patente");
+                movil.setAjusteReloj(res.getDouble("ajusteReloj"));
+                movil.setFechaLicencia(res.getString("fechaLicencia"));
+                movil.setLicencia("licencia");
                 
                 moviles.add(movil);
             }
@@ -143,65 +151,5 @@ public class MovilDAO {
                 System.out.println(e);
             }
        return movil;
-    }
-    
-    public ArrayList<Movil> consultarMovil(int idMovil) {
-        ArrayList<Movil> moviles = new ArrayList<Movil>();
-        DbConnection conex= new DbConnection();
-        try {
-            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM movil where idMovil = ? ");
-            consulta.setInt(1, idMovil);
-            ResultSet res = consulta.executeQuery();
-    
-            if(res.next()){
-                Movil movil = new Movil();
-                movil.setIdMovil(idMovil);
-                movil.setModelo(res.getString("modelo"));
-                movil.setPatente(res.getString("patente"));
-                movil.setLicencia(res.getString("licencia"));
-                movil.setNumeroLicencia(idMovil);
-                movil.setKilometraje(idMovil);
-                moviles.add(movil);
-            }
-            
-            res.close();
-            consulta.close();
-            conex.desconectar();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        return moviles;
-    }
-        public ArrayList<Movil> getMoviles() {
-        ArrayList<Movil> moviles = new ArrayList<Movil>();
-        DbConnection conex= new DbConnection();
-        try {
-            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM movil ");
-            ResultSet res = consulta.executeQuery();
-    
-            while(res.next()){
-                Movil movil= new Movil();
-                movil.setIdMovil(res.getInt("idMovil"));
-                movil.setModelo("modelo");
-                movil.setKilometraje(res.getInt("kilometraje"));
-                movil.setCorrea(res.getInt("correa"));
-                movil.setAceite(res.getInt("aceite"));
-                movil.setGrasa(res.getInt("grasa"));
-                movil.setFiltro(res.getInt("filtro"));
-                movil.setAditivoMotor("aditivoMotor");
-                movil.setAditivoCaja("aditivoCaja");
-                movil.setPatente("patente");
-                movil.setAjusteReloj(res.getDouble("ajusteReloj"));
-                movil.setFechaLicencia(res.getString("fechaLicencia"));
-                movil.setLicencia("licencia");
-                moviles.add(movil);
-            }
-            res.close();
-            consulta.close();
-            conex.desconectar();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        return moviles;
     }
 }

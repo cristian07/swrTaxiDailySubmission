@@ -169,7 +169,7 @@ public class VentanaMovil extends javax.swing.JFrame {
                 jte_nroMovil.setText("");
                 jte_nroMovil.requestFocus();
             }
-            moviles = movilDAO.getMoviles();
+            moviles = movilDAO.obtenerIdMoviles();
             for (Movil movil: moviles){
                 String[] datos = {
                     String.valueOf(movil.getIdMovil()),
@@ -199,7 +199,7 @@ public class VentanaMovil extends javax.swing.JFrame {
         ArrayList<Movil> moviles = new ArrayList<Movil>();
         DefaultTableModel modelo = (DefaultTableModel) jt_movil.getModel();
         modelo.setNumRows(0);
-        moviles = movilDAO.getMoviles();
+        moviles = movilDAO.obtenerIdMoviles();
         for (Movil movil: moviles){
             String[] datos = {
                 String.valueOf(movil.getIdMovil()),
