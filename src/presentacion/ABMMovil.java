@@ -50,8 +50,9 @@ public class ABMMovil extends javax.swing.JFrame {
         jb_limpiar = new javax.swing.JButton();
         jb_cancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ingreso y modificación de Moviles");
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Movil"));
 

@@ -340,6 +340,7 @@ public class ABMChofer extends javax.swing.JFrame {
         chofer.setFechaCarnetOtorgamiento("2015-01-01");
         chofer.setFechaCarnetVencimiento("2015-01-01");
         choferDAO.modificarChofer(chofer);
+        this.dispose();
         
     }//GEN-LAST:event_jb_ModificarActionPerformed
 
