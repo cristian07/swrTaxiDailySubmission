@@ -1,5 +1,7 @@
 package entidades;
 
+import java.util.Date;
+
 public class Movil {
 
     private int idMovil;

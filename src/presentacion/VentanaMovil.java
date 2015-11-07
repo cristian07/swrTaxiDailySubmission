@@ -7,7 +7,10 @@ package presentacion;
 
 import DAO.MovilDAO;
 import entidades.Movil;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -162,19 +165,20 @@ public class VentanaMovil extends javax.swing.JFrame {
         try {
             nroMovil = Integer.parseInt(jte_nroMovil.getText());
             if (nroMovil == 0 || nroMovil < 0 ){
-                JOptionPane.showMessageDialog(null, "Ingrese un DNI valido.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Ingrese un Movil valido.", "Error", JOptionPane.ERROR_MESSAGE);
                 jte_nroMovil.setText("");
                 jte_nroMovil.requestFocus();
             }
-            moviles = movilDAO.obtenerIdMoviles();
+            moviles = movilDAO.getMoviles();
             for (Movil movil: moviles){
                 String[] datos = {
                     String.valueOf(movil.getIdMovil()),
-                    movil.getPatente(),
                     movil.getModelo(),
-                    movil.getLicencia(),
-                    String.valueOf(movil.getNumeroLicencia()),
-                    String.valueOf(movil.getKilometraje())};
+                    String.valueOf(movil.getKilometraje()),
+                    movil.getPatente(),
+                    String.valueOf(movil.getFechaLicencia()),
+                    movil.getLicencia()};                   
+                    
                 modelo.addRow(datos);
             }
         } catch (Exception e){
@@ -200,14 +204,16 @@ public class VentanaMovil extends javax.swing.JFrame {
             String[] datos = {
                 String.valueOf(movil.getIdMovil()),
                 movil.getModelo(),
-                movil.getPatente(),
-                movil.getLicencia(),
-                movil.getFechaLicencia(),
                 String.valueOf(movil.getKilometraje()),
+                movil.getPatente(),
+                movil.getFechaLicencia(),
+                movil.getLicencia()       
                 };
             modelo.addRow(datos);
         }
     }
+    
+       
     /**
      * @param args the command line arguments
      */

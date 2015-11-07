@@ -46,11 +46,18 @@ public class MovilDAO {
             estatuto.executeUpdate("INSERT INTO movil VALUES ('"
                 +movil.getIdMovil()+"', '"
                 +movil.getModelo()+"', '"
+                +movil.getKilometraje()+"', '"
+                +movil.getCorrea()+"', '"
+                +movil.getAceite()+"', '"
+                +movil.getGrasa()+"', '"
+                +movil.getFiltro()+"', '"
+                +movil.getAditivoMotor()+"', '"
+                +movil.getAditivoCaja()+"', '"
                 +movil.getPatente()+"', '"
-                +movil.getLicencia()+"', '"
-                +movil.getNumeroLicencia()+"', '"
+                +movil.getAjusteReloj()+"', '"
                 +movil.getFechaLicencia()+"', '"
-                +movil.getKilometraje()+")");
+                +movil.getNumeroLicencia()+"', '"
+                +movil.getLicencia()+"')");
             estatuto.close();
             conex.desconectar();
         } catch (SQLException e) {
@@ -87,7 +94,7 @@ public class MovilDAO {
         
         try {
             PreparedStatement consulta = conex.getConnection()
-                    .prepareStatement("select * from movil");
+                    .prepareStatement("select * from movil WHERE idMovil= ?");
             ResultSet res = consulta.executeQuery();
 
             while(res.next()){
@@ -165,7 +172,7 @@ public class MovilDAO {
             }
         return moviles;
     }
-    public ArrayList<Movil> getMoviles() {
+        public ArrayList<Movil> getMoviles() {
         ArrayList<Movil> moviles = new ArrayList<Movil>();
         DbConnection conex= new DbConnection();
         try {
@@ -176,10 +183,17 @@ public class MovilDAO {
                 Movil movil= new Movil();
                 movil.setIdMovil(res.getInt("idMovil"));
                 movil.setModelo("modelo");
-                movil.setPatente("patente");
-                movil.setLicencia("licencia");
                 movil.setKilometraje(res.getInt("kilometraje"));
-                movil.setFechaLicencia("fechaLicencia");
+                movil.setCorrea(res.getInt("correa"));
+                movil.setAceite(res.getInt("aceite"));
+                movil.setGrasa(res.getInt("grasa"));
+                movil.setFiltro(res.getInt("filtro"));
+                movil.setAditivoMotor("aditivoMotor");
+                movil.setAditivoCaja("aditivoCaja");
+                movil.setPatente("patente");
+                movil.setAjusteReloj(res.getDouble("ajusteReloj"));
+                movil.setFechaLicencia(res.getString("fechaLicencia"));
+                movil.setLicencia("licencia");
                 moviles.add(movil);
             }
             res.close();
