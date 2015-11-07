@@ -50,14 +50,7 @@ public class MovilDAO {
                 +movil.getLicencia()+"', '"
                 +movil.getNumeroLicencia()+"', '"
                 +movil.getFechaLicencia()+"', '"
-                +movil.getKilometraje()+"', '"
-                +movil.getAjusteReloj()+"', '"
-                +movil.getAditivoCaja()+"', '"
-                +movil.getAditivoMotor()+"', '"
-                +movil.getAceite()+"','"
-                + movil.getFiltro()+"','"
-                +movil.getCorrea()+"','"
-                +movil.getGrasa()+")");
+                +movil.getKilometraje()+")");
             estatuto.close();
             conex.desconectar();
         } catch (SQLException e) {
@@ -143,5 +136,58 @@ public class MovilDAO {
                 System.out.println(e);
             }
        return movil;
+    }
+    
+    public ArrayList<Movil> consultarMovil(int idMovil) {
+        ArrayList<Movil> moviles = new ArrayList<Movil>();
+        DbConnection conex= new DbConnection();
+        try {
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM movil where idMovil = ? ");
+            consulta.setInt(1, idMovil);
+            ResultSet res = consulta.executeQuery();
+    
+            if(res.next()){
+                Movil movil = new Movil();
+                movil.setIdMovil(idMovil);
+                movil.setModelo(res.getString("modelo"));
+                movil.setPatente(res.getString("patente"));
+                movil.setLicencia(res.getString("licencia"));
+                movil.setNumeroLicencia(idMovil);
+                movil.setKilometraje(idMovil);
+                moviles.add(movil);
+            }
+            
+            res.close();
+            consulta.close();
+            conex.desconectar();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        return moviles;
+    }
+    public ArrayList<Movil> getMoviles() {
+        ArrayList<Movil> moviles = new ArrayList<Movil>();
+        DbConnection conex= new DbConnection();
+        try {
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM movil ");
+            ResultSet res = consulta.executeQuery();
+    
+            while(res.next()){
+                Movil movil= new Movil();
+                movil.setIdMovil(res.getInt("idMovil"));
+                movil.setModelo("modelo");
+                movil.setPatente("patente");
+                movil.setLicencia("licencia");
+                movil.setKilometraje(res.getInt("kilometraje"));
+                movil.setFechaLicencia("fechaLicencia");
+                moviles.add(movil);
+            }
+            res.close();
+            consulta.close();
+            conex.desconectar();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        return moviles;
     }
 }

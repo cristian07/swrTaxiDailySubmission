@@ -5,6 +5,12 @@
  */
 package presentacion;
 
+import DAO.MovilDAO;
+import entidades.Movil;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Cristian
@@ -17,6 +23,7 @@ public class VentanaMovil extends javax.swing.JFrame {
     public VentanaMovil() {
         initComponents();
         this.setLocationRelativeTo(null);
+        verTodos();
 
     }
 
@@ -30,7 +37,7 @@ public class VentanaMovil extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jt_movil = new javax.swing.JTable();
         jb_ActionNuevo = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -41,7 +48,7 @@ public class VentanaMovil extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jt_movil.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -57,7 +64,7 @@ public class VentanaMovil extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jt_movil);
 
         jb_ActionNuevo.setText("Nuevo");
         jb_ActionNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -77,8 +84,18 @@ public class VentanaMovil extends javax.swing.JFrame {
         jLabel2.setText("Nro. Movil");
 
         jb_ActionBuscar.setText("Buscar");
+        jb_ActionBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_ActionBuscarActionPerformed(evt);
+            }
+        });
 
         jb_verTodos.setText("Ver Todos");
+        jb_verTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_verTodosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,7 +115,7 @@ public class VentanaMovil extends javax.swing.JFrame {
                         .addComponent(jb_ActionBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jb_verTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jb_ActionNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -108,14 +125,13 @@ public class VentanaMovil extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jb_verTodos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
-                        .addComponent(jLabel2)
-                        .addComponent(jte_nroMovil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jb_ActionBuscar)
-                        .addComponent(jb_ActionNuevo)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jLabel2)
+                    .addComponent(jte_nroMovil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_ActionBuscar)
+                    .addComponent(jb_ActionNuevo)
+                    .addComponent(jb_verTodos))
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -136,6 +152,62 @@ public class VentanaMovil extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jb_ActionBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ActionBuscarActionPerformed
+        // TODO add your handling code here:
+        MovilDAO movilDAO = new MovilDAO();
+        ArrayList<Movil> moviles = new ArrayList<Movil>();
+        DefaultTableModel modelo = (DefaultTableModel) jt_movil.getModel();
+        modelo.setNumRows(0);
+        int nroMovil;
+        try {
+            nroMovil = Integer.parseInt(jte_nroMovil.getText());
+            if (nroMovil == 0 || nroMovil < 0 ){
+                JOptionPane.showMessageDialog(null, "Ingrese un DNI valido.", "Error", JOptionPane.ERROR_MESSAGE);
+                jte_nroMovil.setText("");
+                jte_nroMovil.requestFocus();
+            }
+            moviles = movilDAO.obtenerIdMoviles();
+            for (Movil movil: moviles){
+                String[] datos = {
+                    String.valueOf(movil.getIdMovil()),
+                    movil.getPatente(),
+                    movil.getModelo(),
+                    movil.getLicencia(),
+                    String.valueOf(movil.getNumeroLicencia()),
+                    String.valueOf(movil.getKilometraje())};
+                modelo.addRow(datos);
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Ingrese un Movil valido.", "Error", JOptionPane.ERROR_MESSAGE);
+            jte_nroMovil.setText("");
+            jte_nroMovil.requestFocus();
+        }
+    
+    }//GEN-LAST:event_jb_ActionBuscarActionPerformed
+
+    private void jb_verTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_verTodosActionPerformed
+        // TODO add your handling code here:
+        verTodos();
+    }//GEN-LAST:event_jb_verTodosActionPerformed
+
+    public void verTodos(){
+        MovilDAO movilDAO = new MovilDAO();
+        ArrayList<Movil> moviles = new ArrayList<Movil>();
+        DefaultTableModel modelo = (DefaultTableModel) jt_movil.getModel();
+        modelo.setNumRows(0);
+        moviles = movilDAO.getMoviles();
+        for (Movil movil: moviles){
+            String[] datos = {
+                String.valueOf(movil.getIdMovil()),
+                movil.getModelo(),
+                movil.getPatente(),
+                movil.getLicencia(),
+                movil.getFechaLicencia(),
+                String.valueOf(movil.getKilometraje()),
+                };
+            modelo.addRow(datos);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -175,10 +247,10 @@ public class VentanaMovil extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jb_ActionBuscar;
     private javax.swing.JButton jb_ActionNuevo;
     private javax.swing.JButton jb_verTodos;
+    private javax.swing.JTable jt_movil;
     private javax.swing.JTextField jte_nroMovil;
     // End of variables declaration//GEN-END:variables
 }
