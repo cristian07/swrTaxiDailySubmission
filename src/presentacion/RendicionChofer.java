@@ -730,26 +730,32 @@ public class RendicionChofer extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-
+        try {
             // TODO add your handling code here:
-            
+
             registrarTurno();
             LoginChofer login = new LoginChofer();
             LoginChofer.jl_turno.setText(jl_Tipo.getText());
             login.setVisible(true);
-            this.dispose();
-            
+            TurnoDAO turnoDAO = new TurnoDAO();
+            int turno = Integer.parseInt(turnoDAO.obtenerUltimoTurnoIngresado());
             /* Cristian, armate una consulta para que el PARAMETRO que envie sea el utlimo turno creado
-            Por Ej:
-            SELECT idturno FROM turno ORDER BY idturno DESC LIMIT 1
-            El valor que te devuelva es el que tenes q enviar.
-            Tiene que ser un Int
-            La linea q tenes q agregar al codigo es la de abajo
-            Saludos*/           
-            
-            //new reportes.ImprimirReportes().RendicionCuenta(PARAMETRO,jtf_Comision.getText(),jtf_Neto.getText());
+             Por Ej:
+             SELECT idturno FROM turno ORDER BY idturno DESC LIMIT 1
+             El valor que te devuelva es el que tenes q enviar.
+             Tiene que ser un Int
+             La linea q tenes q agregar al codigo es la de abajo
+             Saludos*/
+
+            new reportes.ImprimirReportes().RendicionCuenta(turno, jtf_Comision.getText(), jtf_Neto.getText());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RendicionChofer.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(RendicionChofer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
         
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jtf_Gastos2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_Gastos2FocusLost
