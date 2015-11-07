@@ -6,6 +6,7 @@
             <file>file:/D:/swrTaxiDailySubmission/src/DAO/ChoferDAO.java</file>
             <file>file:/D:/swrTaxiDailySubmission/src/DAO/TurnoDAO.java</file>
             <file>file:/D:/swrTaxiDailySubmission/src/DAO/AjustesDAO.java</file>
+            <file>file:/D:/swrTaxiDailySubmission/src/reportes/ImprimirReportes.java</file>
             <file>file:/D:/swrTaxiDailySubmission/src/DAO/MovilDAO.java</file>
             <file>file:/D:/swrTaxiDailySubmission/src/presentacion/VentanaPlanillaCaja.java</file>
             <file>file:/D:/swrTaxiDailySubmission/src/entidades/Turno.java</file>
@@ -13,6 +14,7 @@
             <file>file:/D:/swrTaxiDailySubmission/src/presentacion/VentanaMovil.java</file>
             <file>file:/D:/swrTaxiDailySubmission/src/presentacion/MainWindow.java</file>
             <file>file:/D:/swrTaxiDailySubmission/src/presentacion/Planilla.java</file>
+            <file>file:/D:/swrTaxiDailySubmission/src/DAO/UsuarioDAO.java</file>
         </group>
     </open-files>
 </project-private>

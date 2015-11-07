@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package DAO;
 
 import entidades.Movil;
@@ -71,14 +65,12 @@ public class TurnoDAO {
  
     public void altaTurno(Turno turno, String DNI, String idMovil) {
         DbConnection conex= new DbConnection();
-        DbConnection conex2= new DbConnection();
       
         Calendar calendario = Calendar.getInstance();
         String fechaHoraSQL = new StringBuilder()
                 .append(Integer.toString(calendario.get(Calendar.YEAR))).append("-")
                 .append(Integer.toString(calendario.get(Calendar.MONTH)+1)).append("-")
                 .append(Integer.toString(calendario.get(Calendar.DATE))).toString();
-        String idTurno = "0";
         AjustesDAO ajustesDAO = new AjustesDAO();
         try {
             Statement estatuto = conex.getConnection().createStatement();
@@ -245,17 +237,18 @@ public class TurnoDAO {
         }
         return idTurno;
     }    
-    public ArrayList<Turno> obtenerNetos(String Fecha,String Turno){
+    public ArrayList<Turno> obtenerNetos(String fecha,String tipo){
          DbConnection conex= new DbConnection();
          ArrayList<Turno> turnos = new ArrayList<Turno>();
         try { 
-            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * from Turno where fecha='"
-                    +Fecha+ "' AND tipo='"
-                    +Turno+ "'");
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM Turno WHERE fecha='"
+                    +fecha+ "' AND tipo='"
+                    +tipo+ "'");
             ResultSet res = consulta.executeQuery();
             
             while(res.next()){
                 Turno turno = new Turno();
+                turno.setIdTurno(res.getInt("idTurno"));
                 turno.setMovil_idMovil(res.getInt("Movil_idMovil"));
                 turno.setRecaudacion(res.getDouble("recaudacion"));
                 turno.setGastosVarios(res.getDouble("gastosVarios"));
@@ -272,6 +265,20 @@ public class TurnoDAO {
                 System.out.println(e);
         }
         return turnos;
+    }
+    public void agregarCaja(Turno turno){
+       DbConnection conex= new DbConnection();
+        try {
+             Statement estatuto = conex.getConnection().createStatement();
+            estatuto.executeUpdate("UPDATE Turno SET detalleCaja='"
+                    +turno.getDetalleCaja()+ "',importeCaja="
+                    +turno.getImporteCaja()+ "  WHERE idTurno="
+                    +turno.getIdTurno());
+            estatuto.close();
+            conex.desconectar();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
    }
 

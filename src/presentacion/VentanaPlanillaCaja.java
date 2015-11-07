@@ -11,6 +11,7 @@ import DAO.TurnoDAO;
 import entidades.Movil;
 import entidades.Repuesto;
 import entidades.Turno;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
@@ -24,6 +25,10 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPlanillaCaja
      */
+    public double totalNeto = 0.0;
+    public double totalChequeras = 0.0;
+    public double totalGastos = 0.0;
+    public ArrayList<Turno> turnos = new ArrayList<Turno>();
     public VentanaPlanillaCaja() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -38,15 +43,47 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
     public void cargarDatos(){
         TurnoDAO turnoDAO = new TurnoDAO();
         
-        ArrayList<Turno> turnos = turnoDAO.obtenerNetos("2015-11-06","S");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+        String fecha = new SimpleDateFormat("yyyy-MM-dd").format(dcb_Fecha.getSelectedDate().getTime());
+        
+        String tipoTurno;
+        if (jcb_Turno.getSelectedItem().toString().equals("Primer Turno")){
+            tipoTurno = "P";
+        } else {
+            tipoTurno = "S";
+        }
+        turnos = turnoDAO.obtenerNetos(fecha,tipoTurno);
         DefaultTableModel modeloGanancias = (DefaultTableModel) jt_Ganancias.getModel();
+        modeloGanancias.setNumRows(0);
         for (Turno turno : turnos){
+            totalNeto +=turno.calcularNeto(0.35);
+            totalChequeras += turno.getGastosChequera();
             String[] datosGanacia = {
                 String.valueOf(turno.getMovil_idMovil()),
                 String.valueOf(turno.calcularNeto(0.35))};
             modeloGanancias.addRow(datosGanacia);
         }
-        jt_Ganancias.setModel(modeloGanancias);
+        jtf_Neto.setText(String.valueOf(totalNeto));
+        jtf_Chequera.setText(String.valueOf(totalChequeras));
+        cargarDatosAdicionales(turnos);
+        //jt_Ganancias.setModel(modeloGanancias);
+        
+    }
+    public void cargarDatosAdicionales(ArrayList<Turno> turnos){
+        DefaultTableModel modeloGastos = (DefaultTableModel) jt_Gastos.getModel();
+        modeloGastos.setNumRows(0);
+        for (Turno turno : turnos){
+            totalGastos += turno.getImporteCaja(); 
+            
+            String[] datosGastos = {
+                String.valueOf(turno.getMovil_idMovil()),
+                turno.getDetalleCaja(),
+                String.valueOf(totalGastos)
+                };
+            modeloGastos.addRow(datosGastos);
+        }
+        jtf_Efectivo.setText(String.valueOf(totalNeto-totalGastos-totalChequeras));
+        jtf_Total.setText(String.valueOf(totalNeto-totalGastos));
         
     }
     /**
@@ -73,8 +110,8 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
         jta_Detalles = new javax.swing.JTextArea();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jb_Guardar = new javax.swing.JButton();
+        jb_Agregar = new javax.swing.JButton();
+        jb_Imprimir = new javax.swing.JButton();
         jb_Cancelar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -106,7 +143,7 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Float.class
+                java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -145,7 +182,12 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
 
         jLabel12.setText("Importe");
 
-        jButton1.setText("Agregar");
+        jb_Agregar.setText("Agregar");
+        jb_Agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_AgregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -171,7 +213,7 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
                         .addComponent(jScrollPane3))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(jb_Agregar)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -190,11 +232,16 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
                             .addComponent(jLabel12)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(jb_Agregar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jb_Guardar.setText("Guardar");
+        jb_Imprimir.setText("Imprimir");
+        jb_Imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_ImprimirActionPerformed(evt);
+            }
+        });
 
         jb_Cancelar.setText("Cancelar");
         jb_Cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -275,7 +322,7 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
                             .addComponent(jScrollPane2)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jb_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jb_Imprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jb_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -298,7 +345,7 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jb_Guardar)
+                    .addComponent(jb_Imprimir)
                     .addComponent(jb_Cancelar))
                 .addContainerGap())
         );
@@ -306,7 +353,7 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel3.setText("Turno");
 
-        jcb_Turno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primer Turno\t", "Segundo Turno" }));
+        jcb_Turno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primer Turno", "Segundo Turno" }));
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel2.setText("Fecha:");
@@ -344,12 +391,13 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcb_Turno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(dcb_Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jb_Ver, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dcb_Fecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_Ver, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jcb_Turno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -366,6 +414,27 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
     private void jb_VerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_VerActionPerformed
         cargarDatos();
     }//GEN-LAST:event_jb_VerActionPerformed
+
+    private void jb_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_AgregarActionPerformed
+        TurnoDAO turnoDAO = new TurnoDAO();
+        Turno turno = new Turno();
+        int idTurno = 0;
+        for (Turno IDTurno : turnos){
+            if (IDTurno.getMovil_idMovil()==Integer.parseInt(jcb_Moviles.getSelectedItem().toString())){
+                idTurno = IDTurno.getIdTurno();
+            }
+        }
+        turno.setIdTurno(idTurno);
+        turno.setDetalleCaja(jta_Detalles.getText());
+        turno.setImporteCaja(Integer.parseInt(jtf_Importe.getText()));
+        turnoDAO.agregarCaja(turno);
+        cargarDatos();
+        
+    }//GEN-LAST:event_jb_AgregarActionPerformed
+
+    private void jb_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ImprimirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_ImprimirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -404,7 +473,6 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo dcb_Fecha;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -422,8 +490,9 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton jb_Agregar;
     private javax.swing.JButton jb_Cancelar;
-    private javax.swing.JButton jb_Guardar;
+    private javax.swing.JButton jb_Imprimir;
     private javax.swing.JButton jb_Ver;
     private javax.swing.JComboBox jcb_Moviles;
     private javax.swing.JComboBox jcb_Turno;

@@ -3,6 +3,7 @@ package entidades;
 import java.util.Calendar;
 
 public class Turno {
+    private int idTurno;
     private int Movil_idMovil;
     private int Ajustes_idAjustes;
     private int Chofer_DNI;
@@ -27,7 +28,7 @@ public class Turno {
         
     }
     public double calcularNeto(double comision){
-        return recaudacion*(1-comision)-gastosVarios;
+        return getRecaudacion()-(getRecaudacion()*comision)-getGastosVarios();
     }
     /**
      * @return the kmInicial
@@ -293,5 +294,19 @@ public class Turno {
      */
     public void setImporteCaja(double importeCaja) {
         this.importeCaja = importeCaja;
+    }
+
+    /**
+     * @return the idTurno
+     */
+    public int getIdTurno() {
+        return idTurno;
+    }
+
+    /**
+     * @param idTurno the idTurno to set
+     */
+    public void setIdTurno(int idTurno) {
+        this.idTurno = idTurno;
     }
 }
