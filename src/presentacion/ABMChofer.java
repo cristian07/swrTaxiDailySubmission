@@ -279,7 +279,7 @@ public class ABMChofer extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 23, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -301,19 +301,24 @@ public class ABMChofer extends javax.swing.JFrame {
     private void jb_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_GuardarActionPerformed
         Chofer chofer = new Chofer();
         ChoferDAO choferDAO = new ChoferDAO();
+        String fechaOtorgamiento = new SimpleDateFormat("yyyy-MM-dd").format(jtf_FechaOtorgamiento.getSelectedDate().getTime());
+        String fechaVencimiento = new SimpleDateFormat("yyyy-MM-dd").format(jtf_FechaVencimiento.getSelectedDate().getTime());
+        
         chofer.setDNI(Integer.parseInt(jtf_DNI.getText()));
         chofer.setNombre(jtf_Nombre.getText());
-        chofer.setApellido(jtf_DNI.getText());
+        chofer.setApellido(jtf_Apellido.getText());
         chofer.setDomicilio(jtf_Domicilio.getText());
         chofer.setLocalidad(jtf_Localidad.getText());
         chofer.setProvincia(jtf_Provincia.getText());
         chofer.setTelefono(jtf_TelefonoFijo.getText());
         chofer.setCelular(jtf_TelefonoCelular.getText());
-        chofer.setFechaCarnetOtorgamiento(jtf_FechaOtorgamiento.getText());
-        chofer.setFechaCarnetVencimiento(jtf_FechaVencimiento.getText());
+        chofer.setFechaCarnetOtorgamiento(fechaOtorgamiento);
+        chofer.setFechaCarnetVencimiento(fechaVencimiento);
         chofer.setCategoria(jtf_Categoria.getText());
-        //chofer.setFechaCarnetOtorgamiento(new SimpleDateFormat("yyyy-MM-dd").format(jtf_FechaOtorgamiento.getSelectedDate().getTime()));
         choferDAO.altaChofer(chofer);
+        this.dispose();
+        VentanaChofer choferwindow= new VentanaChofer();
+        choferwindow.setVisible(true); 
         
     }//GEN-LAST:event_jb_GuardarActionPerformed
 
@@ -326,6 +331,10 @@ public class ABMChofer extends javax.swing.JFrame {
     private void jb_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ModificarActionPerformed
         Chofer chofer = new Chofer();
         ChoferDAO choferDAO = new ChoferDAO();
+        String fechaOtorgamiento = new SimpleDateFormat("yyyy-MM-dd").format(jtf_FechaOtorgamiento.getSelectedDate().getTime());
+        String fechaVencimiento = new SimpleDateFormat("yyyy-MM-dd").format(jtf_FechaVencimiento.getSelectedDate().getTime());
+        
+        
         chofer.setDNI(Integer.parseInt(jtf_DNI.getText()));
         chofer.setNombre(jtf_Nombre.getText());
         chofer.setApellido(jtf_Apellido.getText());
@@ -337,11 +346,12 @@ public class ABMChofer extends javax.swing.JFrame {
         chofer.setFechaCarnetOtorgamiento(jtf_FechaOtorgamiento.getText());
         chofer.setFechaCarnetVencimiento(jtf_FechaVencimiento.getText());
         chofer.setCategoria(jtf_Categoria.getText());
-        chofer.setFechaCarnetOtorgamiento("2015-01-01");
-        chofer.setFechaCarnetVencimiento("2015-01-01");
+        chofer.setFechaCarnetOtorgamiento(fechaOtorgamiento);
+        chofer.setFechaCarnetVencimiento(fechaVencimiento);
         choferDAO.modificarChofer(chofer);
         this.dispose();
-        
+        VentanaChofer choferwindow= new VentanaChofer();
+        choferwindow.setVisible(true);
     }//GEN-LAST:event_jb_ModificarActionPerformed
 
     /**

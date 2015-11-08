@@ -48,9 +48,12 @@ public class ABMMovil extends javax.swing.JFrame {
         jte_nroLicencia = new javax.swing.JTextField();
         jte_Licencia = new javax.swing.JTextField();
         jte_fechaVto = new datechooser.beans.DateChooserCombo();
-        jb_ActionGuardar = new javax.swing.JButton();
+        jtf_Reloj = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jb_Guardar = new javax.swing.JButton();
         jb_limpiar = new javax.swing.JButton();
         jb_cancelar = new javax.swing.JButton();
+        jb_Modificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ingreso y modificación de Moviles");
@@ -72,6 +75,10 @@ public class ABMMovil extends javax.swing.JFrame {
 
         jLabel9.setText("Kilometraje");
 
+        jtf_Reloj.setText("0.99");
+
+        jLabel1.setText("Ajuste Reloj");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -85,7 +92,8 @@ public class ABMMovil extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel9))
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel1))
                 .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jte_kilometraje, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
@@ -94,7 +102,8 @@ public class ABMMovil extends javax.swing.JFrame {
                     .addComponent(jte_Licencia)
                     .addComponent(jte_modelo)
                     .addComponent(jte_fechaVto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jte_nroLicencia))
+                    .addComponent(jte_nroLicencia)
+                    .addComponent(jtf_Reloj))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -128,13 +137,17 @@ public class ABMMovil extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jte_kilometraje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtf_Reloj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jb_ActionGuardar.setText("Guardar");
-        jb_ActionGuardar.addActionListener(new java.awt.event.ActionListener() {
+        jb_Guardar.setText("Guardar");
+        jb_Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_ActionGuardarActionPerformed(evt);
+                jb_GuardarActionPerformed(evt);
             }
         });
 
@@ -147,39 +160,74 @@ public class ABMMovil extends javax.swing.JFrame {
             }
         });
 
+        jb_Modificar.setText("Modificar");
+        jb_Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_ModificarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jb_ActionGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jb_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jb_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jb_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jb_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jb_limpiar)
-                    .addComponent(jb_ActionGuardar)
-                    .addComponent(jb_cancelar))
+                    .addComponent(jb_Guardar)
+                    .addComponent(jb_cancelar)
+                    .addComponent(jb_Modificar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jb_ActionGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ActionGuardarActionPerformed
+    private void jb_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_GuardarActionPerformed
         // TODO add your handling code here:
         Movil movil =new Movil();
+        MovilDAO movilDAO=new MovilDAO();
+        String fechaLicencia = new SimpleDateFormat("yyyy-MM-dd").format(jte_fechaVto.getSelectedDate().getTime());
+        movil.setIdMovil(Integer.parseInt(jte_nroMovil.getText()));
+        movil.setNumeroLicencia(Integer.parseInt(jte_nroLicencia.getText()));
+        movil.setPatente(jte_patente.getText());
+        movil.setModelo(jte_modelo.getText());
+        movil.setKilometraje(Integer.parseInt(jte_kilometraje.getText()));
+        movil.setLicencia(jte_Licencia.getText());
+        movil.setFechaLicencia(fechaLicencia);
+        movil.setAjusteReloj(Double.parseDouble(jtf_Reloj.getText()));
+        movilDAO.altaMovil(movil);
+        this.dispose();
+        VentanaMovil ventanamovil= new VentanaMovil();
+        ventanamovil.setVisible(true);
+    }//GEN-LAST:event_jb_GuardarActionPerformed
+
+    private void jb_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jb_cancelarActionPerformed
+
+    private void jb_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ModificarActionPerformed
+      Movil movil =new Movil();
         MovilDAO movilDAO=new MovilDAO();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
         String fechaLicencia = new SimpleDateFormat("yyyy-MM-dd").format(jte_fechaVto.getSelectedDate().getTime());
@@ -190,14 +238,12 @@ public class ABMMovil extends javax.swing.JFrame {
         movil.setKilometraje(Integer.parseInt(jte_kilometraje.getText()));
         movil.setLicencia(jte_Licencia.getText());
         movil.setFechaLicencia(fechaLicencia);
-        movilDAO.altaMovil(movil);
+        movil.setAjusteReloj(Double.parseDouble(jtf_Reloj.getText()));
+        movilDAO.modificarMovil(movil);
         this.dispose();
-    }//GEN-LAST:event_jb_ActionGuardarActionPerformed
-
-    private void jb_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cancelarActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_jb_cancelarActionPerformed
+        VentanaMovil ventanamovil= new VentanaMovil();
+        ventanamovil.setVisible(true);
+    }//GEN-LAST:event_jb_ModificarActionPerformed
 
     
     /**
@@ -237,6 +283,7 @@ public class ABMMovil extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -245,15 +292,17 @@ public class ABMMovil extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton jb_ActionGuardar;
+    public static javax.swing.JButton jb_Guardar;
+    public static javax.swing.JButton jb_Modificar;
     private javax.swing.JButton jb_cancelar;
     private javax.swing.JButton jb_limpiar;
-    private javax.swing.JTextField jte_Licencia;
-    private datechooser.beans.DateChooserCombo jte_fechaVto;
-    private javax.swing.JTextField jte_kilometraje;
-    private javax.swing.JTextField jte_modelo;
-    private javax.swing.JTextField jte_nroLicencia;
-    private javax.swing.JTextField jte_nroMovil;
-    private javax.swing.JTextField jte_patente;
+    public static javax.swing.JTextField jte_Licencia;
+    public static datechooser.beans.DateChooserCombo jte_fechaVto;
+    public static javax.swing.JTextField jte_kilometraje;
+    public static javax.swing.JTextField jte_modelo;
+    public static javax.swing.JTextField jte_nroLicencia;
+    public static javax.swing.JTextField jte_nroMovil;
+    public static javax.swing.JTextField jte_patente;
+    public static javax.swing.JTextField jtf_Reloj;
     // End of variables declaration//GEN-END:variables
 }

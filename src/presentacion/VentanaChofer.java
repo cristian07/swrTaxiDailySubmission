@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
@@ -45,10 +46,13 @@ public class VentanaChofer extends javax.swing.JFrame {
                 chofer.getApellido()+", "+chofer.getNombre(),
                 chofer.getTelefono(),
                 chofer.getCelular(),
-                chofer.getFechaCarnetVencimiento(),
+                toFecha(chofer.getFechaCarnetVencimiento()),
                 chofer.getDomicilio()};
             modelo.addRow(datos);
         }
+    }
+    public String toFecha(String fecha){
+        return fecha.substring(8)+"-"+fecha.substring(5, 7)+"-"+fecha.substring(0, 4);
     }
 
     /**
@@ -93,6 +97,8 @@ public class VentanaChofer extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         jb_Nuevo.setText("Nuevo");
         jb_Nuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,24 +140,24 @@ public class VentanaChofer extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtf_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jb_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jb_Nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(225, 225, 225)
+                .addGap(286, 286, 286)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jb_Nuevo)
                     .addComponent(jb_Buscar)
@@ -179,11 +185,15 @@ public class VentanaChofer extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 912, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 912, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -191,14 +201,16 @@ public class VentanaChofer extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -260,12 +272,12 @@ public class VentanaChofer extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         verTodos();
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) jt_Chofer.getModel();
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date dateOtorgamiento = null;
-        Date dateVencimiento = null;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar dateOtorgamiento = Calendar.getInstance();
+        Calendar dateVencimiento = Calendar.getInstance();
         int fila = jt_Chofer.getSelectedRow();
         int dni = Integer.parseInt(modelo.getValueAt(jt_Chofer.getSelectedRow(), 0).toString());
         ChoferDAO choferDAO = new ChoferDAO();
@@ -289,13 +301,15 @@ public class VentanaChofer extends javax.swing.JFrame {
             ABMChofer.jtf_TelefonoCelular.setText(choferes.get(0).getCelular());
             ABMChofer.jtf_Categoria.setText(choferes.get(0).getCategoria());
             try {
-                dateOtorgamiento = format.parse(choferes.get(0).getFechaCarnetOtorgamiento());
-                dateVencimiento = format.parse(choferes.get(0).getFechaCarnetVencimiento());
+                dateOtorgamiento.setTime(format.parse(choferes.get(0).getFechaCarnetOtorgamiento()));
+                dateVencimiento.setTime(format.parse(choferes.get(0).getFechaCarnetVencimiento()));
             } catch (ParseException ex) {
                 Logger.getLogger(ABMChofer.class.getName()).log(Level.SEVERE, null, ex);
             }
-            ABMChofer.jtf_FechaOtorgamiento.setSelectedDate(new GregorianCalendar(dateOtorgamiento.getYear(),dateOtorgamiento.getMonth(),dateOtorgamiento.getDay()-1));
-            ABMChofer.jtf_FechaVencimiento.setSelectedDate(new GregorianCalendar(dateVencimiento.getYear(),dateVencimiento.getMonth(),dateVencimiento.getDay()-1));
+            
+            
+            ABMChofer.jtf_FechaOtorgamiento.setSelectedDate(dateOtorgamiento);
+            ABMChofer.jtf_FechaVencimiento.setSelectedDate(dateVencimiento);
             abmchofer.setVisible(true);
         }
     }//GEN-LAST:event_ModificarActionPerformed

@@ -8,9 +8,13 @@ package presentacion;
 import DAO.MovilDAO;
 import entidades.Movil;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -39,14 +43,34 @@ public class VentanaMovil extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popUp = new javax.swing.JPopupMenu();
+        jmi_Modificar = new javax.swing.JMenuItem();
+        jmi_Borrar = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jt_movil = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
         jb_ActionNuevo = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jte_nroMovil = new javax.swing.JTextField();
         jb_ActionBuscar = new javax.swing.JButton();
         jb_verTodos = new javax.swing.JButton();
+
+        jmi_Modificar.setText("Modificar");
+        jmi_Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_ModificarActionPerformed(evt);
+            }
+        });
+        popUp.add(jmi_Modificar);
+
+        jmi_Borrar.setText("Borrar");
+        jmi_Borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_BorrarActionPerformed(evt);
+            }
+        });
+        popUp.add(jmi_Borrar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -56,18 +80,28 @@ public class VentanaMovil extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nro. Movil", "Patente", "Nro. Licencia", "Kilometraje", "Modelo", "Fecha Vto. Licencia"
+                "Nro. Movil", "Patente", "Nro. Licencia", "Licencia", "Kilometraje", "Modelo", "Fecha Vto. Licencia"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                true, true, true, true, false, true
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jt_movil.setComponentPopupMenu(popUp);
         jScrollPane1.setViewportView(jt_movil);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jb_ActionNuevo.setText("Nuevo");
         jb_ActionNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -100,44 +134,61 @@ public class VentanaMovil extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addGap(6, 6, 6)
+                .addComponent(jte_nroMovil, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jb_ActionBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jb_verTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jb_ActionNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jte_nroMovil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_ActionBuscar)
+                    .addComponent(jb_verTodos)
+                    .addComponent(jb_ActionNuevo)
+                    .addComponent(jButton2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 949, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jte_nroMovil, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jb_ActionBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jb_verTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jb_ActionNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(43, 43, 43))
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jLabel2)
-                    .addComponent(jte_nroMovil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jb_ActionBuscar)
-                    .addComponent(jb_ActionNuevo)
-                    .addComponent(jb_verTodos))
-                .addGap(23, 23, 23)
+                .addGap(8, 8, 8)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -147,6 +198,7 @@ public class VentanaMovil extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
         ABMMovil abmmovil=new ABMMovil();
+        ABMMovil.jb_Modificar.setVisible(false);
         abmmovil.setVisible(true);
     }//GEN-LAST:event_jb_ActionNuevoActionPerformed
 
@@ -158,7 +210,7 @@ public class VentanaMovil extends javax.swing.JFrame {
     private void jb_ActionBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ActionBuscarActionPerformed
         // TODO add your handling code here:
         MovilDAO movilDAO = new MovilDAO();
-        ArrayList<Movil> moviles = new ArrayList<Movil>();
+        
         DefaultTableModel modelo = (DefaultTableModel) jt_movil.getModel();
         modelo.setNumRows(0);
         int nroMovil;
@@ -169,18 +221,17 @@ public class VentanaMovil extends javax.swing.JFrame {
                 jte_nroMovil.setText("");
                 jte_nroMovil.requestFocus();
             }
-            moviles = movilDAO.obtenerIdMoviles();
-            for (Movil movil: moviles){
-                String[] datos = {
-                    String.valueOf(movil.getIdMovil()),
-                    movil.getModelo(),
-                    String.valueOf(movil.getKilometraje()),
-                    movil.getPatente(),
-                    String.valueOf(movil.getFechaLicencia()),
-                    movil.getLicencia()};                   
-                    
-                modelo.addRow(datos);
-            }
+            Movil movil = movilDAO.obtenerMoviles(nroMovil);
+            String[] datos = {
+                String.valueOf(movil.getIdMovil()),
+                movil.getPatente(),
+                String.valueOf(movil.getNumeroLicencia()),
+                movil.getLicencia(),
+                String.valueOf(movil.getKilometraje()),
+                movil.getModelo(),
+                toFecha(movil.getFechaLicencia())};
+            modelo.addRow(datos);
+            
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, "Ingrese un Movil valido.", "Error", JOptionPane.ERROR_MESSAGE);
             jte_nroMovil.setText("");
@@ -194,6 +245,58 @@ public class VentanaMovil extends javax.swing.JFrame {
         verTodos();
     }//GEN-LAST:event_jb_verTodosActionPerformed
 
+    private void jmi_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_ModificarActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) jt_movil.getModel();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar dateFechaLicencia = Calendar.getInstance();
+        int fila = jt_movil.getSelectedRow();
+        int idMovil = Integer.parseInt(modelo.getValueAt(jt_movil.getSelectedRow(), 0).toString());
+        MovilDAO movilDAO = new MovilDAO();
+        
+        if (fila<0){
+            JOptionPane.showMessageDialog(null,"Seleccione un movil para realizar esta operacion.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            this.dispose();
+            ABMMovil abmmovil=new ABMMovil();
+            ABMMovil.jb_Modificar.setVisible(true);
+            ABMMovil.jb_Guardar.setVisible(false);
+       
+            Movil movil = movilDAO.obtenerMoviles(idMovil);
+            
+            ABMMovil.jte_nroMovil.setText(String.valueOf(movil.getIdMovil()));
+            ABMMovil.jte_nroMovil.setEditable(false);
+            ABMMovil.jte_patente.setText(movil.getPatente());
+            ABMMovil.jte_modelo.setText(movil.getModelo());
+            ABMMovil.jte_nroLicencia.setText(String.valueOf(movil.getNumeroLicencia()));
+            ABMMovil.jte_Licencia.setText(movil.getLicencia());
+            
+            ABMMovil.jte_kilometraje.setText(String.valueOf(movil.getKilometraje()));
+            ABMMovil.jtf_Reloj.setText(String.valueOf(movil.getAjusteReloj()));
+            
+            try {
+                dateFechaLicencia.setTime(format.parse(movil.getFechaLicencia()));
+            } catch (ParseException ex) {
+                Logger.getLogger(ABMChofer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            ABMMovil.jte_fechaVto.setSelectedDate(dateFechaLicencia);
+            
+            abmmovil.setVisible(true);
+        }
+    }//GEN-LAST:event_jmi_ModificarActionPerformed
+
+    private void jmi_BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_BorrarActionPerformed
+         DefaultTableModel modelo = (DefaultTableModel) jt_movil.getModel();
+        int fila = jt_movil.getSelectedRow();
+        int idMovil = Integer.parseInt(modelo.getValueAt(jt_movil.getSelectedRow(), 0).toString());
+        MovilDAO movilDAO = new MovilDAO();
+        if (fila<0){
+        JOptionPane.showMessageDialog(null,"Seleccione el chofer que desea borrar.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            movilDAO.eliminarMovil(idMovil);
+            modelo.removeRow(jt_movil.getSelectedRow()); 
+        }
+    }//GEN-LAST:event_jmi_BorrarActionPerformed
+
     public void verTodos(){
         MovilDAO movilDAO = new MovilDAO();
         ArrayList<Movil> moviles = new ArrayList<Movil>();
@@ -203,16 +306,18 @@ public class VentanaMovil extends javax.swing.JFrame {
         for (Movil movil: moviles){
             String[] datos = {
                 String.valueOf(movil.getIdMovil()),
-                movil.getModelo(),
-                String.valueOf(movil.getKilometraje()),
                 movil.getPatente(),
-                movil.getFechaLicencia(),
-                movil.getLicencia()       
-                };
+                String.valueOf(movil.getNumeroLicencia()),
+                movil.getLicencia(),
+                String.valueOf(movil.getKilometraje()),
+                movil.getModelo(),
+                toFecha(movil.getFechaLicencia())};
             modelo.addRow(datos);
         }
     }
-    
+    public String toFecha(String fecha){
+        return fecha.substring(8)+"-"+fecha.substring(5, 7)+"-"+fecha.substring(0, 4);
+    }
        
     /**
      * @param args the command line arguments
@@ -252,11 +357,17 @@ public class VentanaMovil extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jb_ActionBuscar;
     private javax.swing.JButton jb_ActionNuevo;
     private javax.swing.JButton jb_verTodos;
+    private javax.swing.JMenuItem jmi_Borrar;
+    private javax.swing.JMenuItem jmi_Modificar;
     private javax.swing.JTable jt_movil;
     private javax.swing.JTextField jte_nroMovil;
+    private javax.swing.JPopupMenu popUp;
     // End of variables declaration//GEN-END:variables
+
+    
 }

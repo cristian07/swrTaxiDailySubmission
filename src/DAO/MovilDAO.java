@@ -57,7 +57,7 @@ public class MovilDAO {
                 +movil.getAjusteReloj()+"', '"
                 +movil.getFechaLicencia()+"', '"
                 +movil.getNumeroLicencia()+"', '"
-                +movil.getLicencia()+"')");
+                +movil.getLicencia()+"','A')");
             estatuto.close();
             conex.desconectar();
         } catch (SQLException e) {
@@ -94,24 +94,25 @@ public class MovilDAO {
         
         try {
             PreparedStatement consulta = conex.getConnection()
-                    .prepareStatement("Select * from Movil");
+                    .prepareStatement("Select * from Movil where estado='A'");
             ResultSet res = consulta.executeQuery();
 
             while(res.next()){
                 Movil movil = new Movil();
                 movil.setIdMovil(res.getInt("idMovil"));
-                movil.setModelo("modelo");
+                movil.setModelo(res.getString("modelo"));
                 movil.setKilometraje(res.getInt("kilometraje"));
                 movil.setCorrea(res.getInt("correa"));
                 movil.setAceite(res.getInt("aceite"));
                 movil.setGrasa(res.getInt("grasa"));
                 movil.setFiltro(res.getInt("filtro"));
-                movil.setAditivoMotor("aditivoMotor");
-                movil.setAditivoCaja("aditivoCaja");
-                movil.setPatente("patente");
+                movil.setAditivoMotor(res.getString("aditivoMotor"));
+                movil.setAditivoCaja(res.getString("aditivoCaja"));
+                movil.setPatente(res.getString("patente"));
                 movil.setAjusteReloj(res.getDouble("ajusteReloj"));
                 movil.setFechaLicencia(res.getString("fechaLicencia"));
-                movil.setLicencia("licencia");
+                movil.setNumeroLicencia(res.getInt("numeroLicencia"));
+                movil.setLicencia(res.getString("licencia"));
                 
                 moviles.add(movil);
             }
@@ -132,16 +133,25 @@ public class MovilDAO {
         
         try {
             PreparedStatement consulta = conex.getConnection()
-                    .prepareStatement("select * from movil WHERE idMovil="
+                    .prepareStatement("select * from movil WHERE estado='A' and idMovil="
                             + idMovil);
             ResultSet res = consulta.executeQuery();
 
             if(res.next()){
-                movil.setIdMovil(res.getInt("idMovil"));    
-                movil.setPatente(res.getString("patente"));
+                movil.setIdMovil(res.getInt("idMovil"));
                 movil.setModelo(res.getString("modelo"));
-                movil.setLicencia(res.getString("licencia"));
+                movil.setKilometraje(res.getInt("kilometraje"));
+                movil.setCorrea(res.getInt("correa"));
+                movil.setAceite(res.getInt("aceite"));
+                movil.setGrasa(res.getInt("grasa"));
+                movil.setFiltro(res.getInt("filtro"));
+                movil.setAditivoMotor(res.getString("aditivoMotor"));
+                movil.setAditivoCaja(res.getString("aditivoCaja"));
+                movil.setPatente(res.getString("patente"));
+                movil.setAjusteReloj(res.getDouble("ajusteReloj"));
+                movil.setFechaLicencia(res.getString("fechaLicencia"));
                 movil.setNumeroLicencia(res.getInt("numeroLicencia"));
+                movil.setLicencia(res.getString("licencia"));
             }
             res.close();
             consulta.close();
@@ -151,5 +161,56 @@ public class MovilDAO {
                 System.out.println(e);
             }
        return movil;
+    }
+
+    public void eliminarMovil(int idMovil) {
+        DbConnection conex= new DbConnection();
+        try {
+             Statement estatuto = conex.getConnection().createStatement();
+            estatuto.executeUpdate("UPDATE Movil SET estado='B' WHERE idMovil='"
+                    +idMovil+ "'");
+            estatuto.close();
+            conex.desconectar();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+    }
+
+    public void modificarMovil(Movil movil) {
+        DbConnection conex= new DbConnection();
+        try {
+            Statement estatuto = conex.getConnection().createStatement();
+            estatuto.executeUpdate("UPDATE Movil SET patente='"+
+                    movil.getPatente()+ "',modelo='"
+                    + movil.getModelo()+"',kilometraje="
+                    +movil.getKilometraje()+ ",ajusteReloj="
+                    +movil.getAjusteReloj()+ ",fechaLicencia='"
+                    +movil.getFechaLicencia()+ "',licencia='"
+                    +movil.getLicencia()+ "' WHERE idMovil="
+                +movil.getIdMovil());
+            estatuto.close();
+            conex.desconectar();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void modificarAjustesMovil(Movil movil){
+        DbConnection conex= new DbConnection();
+        try {
+            Statement estatuto = conex.getConnection().createStatement();
+            estatuto.executeUpdate("UPDATE Movil SET correa="+
+                movil.getCorrea()+ ",aceite="
+                + movil.getAceite()+",grasa="
+                +movil.getGrasa()+ ",filtro="
+                +movil.getFiltro()+ ",aditivoMotor='"
+                +movil.getAditivoMotor()+ "',aditivoCaja='"
+                +movil.getAditivoCaja()+"',ajusteReloj="
+                +movil.getAjusteReloj()+ " WHERE idMovil="
+                +movil.getIdMovil());
+            estatuto.close();
+            conex.desconectar();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
