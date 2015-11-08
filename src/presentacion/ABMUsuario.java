@@ -141,7 +141,7 @@ public class ABMUsuario extends javax.swing.JFrame {
                     .addComponent(jb_Guardar)
                     .addComponent(jb_Salir)
                     .addComponent(jb_Modificar))
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();

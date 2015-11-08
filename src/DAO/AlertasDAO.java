@@ -8,6 +8,7 @@ package DAO;
 import entidades.Alertas;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import servicio.DbConnection;
 
 /**
@@ -19,14 +20,15 @@ public class AlertasDAO {
         DbConnection conex= new DbConnection();
         Alertas alertas = new Alertas();
         try { 
-            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM Ajustes");
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM Alertas");
             ResultSet res = consulta.executeQuery();
             
-            while(res.next()){
+            if(res.next()){
                 alertas.setAceite(res.getInt("aceite"));
                 alertas.setCorrea(res.getInt("correa"));
                 alertas.setFiltro(res.getInt("filtro"));
-                alertas.setVencimientoLicenciaConductor(res.getInt("vencimientoLicenciaCOonductor"));
+                alertas.setGrasa(res.getInt("grasa"));
+                alertas.setVencimientoLicenciaConductor(res.getInt("vencimientoLicenciaConductor"));
                 alertas.setVencimientoLicenciaTaxi(res.getInt("vencimientoLicenciaTaxi"));
             }
             
@@ -38,5 +40,24 @@ public class AlertasDAO {
                 System.out.println(e);
         }
         return alertas;
+    }
+    public void actualizarAlertas(Alertas alertas){
+        
+    DbConnection conex= new DbConnection();
+        try {
+             Statement estatuto = conex.getConnection().createStatement();
+            estatuto.executeUpdate("UPDATE Alertas SET "+
+                    "aceite="+alertas.getAceite()+
+                    ",correa="+alertas.getCorrea()+
+                    ",filtro="+alertas.getFiltro()+
+                    ",grasa="+alertas.getGrasa()+
+                    ",vencimientoLicenciaConductor="+alertas.getVencimientoLicenciaConductor()+
+                    ",vencimientoLicenciaTaxi="+alertas.getVencimientoLicenciaTaxi());
+            
+            estatuto.close();
+            conex.desconectar();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

@@ -7,6 +7,7 @@ package presentacion;
 
 import DAO.MovilDAO;
 import entidades.Movil;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -31,6 +32,7 @@ public class ABMMovil extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -45,7 +47,7 @@ public class ABMMovil extends javax.swing.JFrame {
         jte_modelo = new javax.swing.JTextField();
         jte_nroLicencia = new javax.swing.JTextField();
         jte_Licencia = new javax.swing.JTextField();
-        jte_fechaVto = new javax.swing.JTextField();
+        jte_fechaVto = new datechooser.beans.DateChooserCombo();
         jb_ActionGuardar = new javax.swing.JButton();
         jb_limpiar = new javax.swing.JButton();
         jb_cancelar = new javax.swing.JButton();
@@ -86,16 +88,14 @@ public class ABMMovil extends javax.swing.JFrame {
                     .addComponent(jLabel9))
                 .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jte_kilometraje, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jte_nroMovil)
-                            .addComponent(jte_patente)
-                            .addComponent(jte_Licencia)
-                            .addComponent(jte_fechaVto)
-                            .addComponent(jte_modelo))
-                        .addContainerGap())
-                    .addComponent(jte_nroLicencia)))
+                    .addComponent(jte_kilometraje, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                    .addComponent(jte_nroMovil)
+                    .addComponent(jte_patente)
+                    .addComponent(jte_Licencia)
+                    .addComponent(jte_modelo)
+                    .addComponent(jte_fechaVto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jte_nroLicencia))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,20 +113,17 @@ public class ABMMovil extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jte_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jte_nroLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel7))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jte_Licencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(jte_fechaVto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jte_nroLicencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jte_Licencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7)
+                    .addComponent(jte_fechaVto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -163,7 +160,7 @@ public class ABMMovil extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jb_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,13 +181,15 @@ public class ABMMovil extends javax.swing.JFrame {
         // TODO add your handling code here:
         Movil movil =new Movil();
         MovilDAO movilDAO=new MovilDAO();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+        String fechaLicencia = new SimpleDateFormat("yyyy-MM-dd").format(jte_fechaVto.getSelectedDate().getTime());
         movil.setIdMovil(Integer.parseInt(jte_nroMovil.getText()));
         movil.setNumeroLicencia(Integer.parseInt(jte_nroLicencia.getText()));
         movil.setPatente(jte_patente.getText());
         movil.setModelo(jte_modelo.getText());
         movil.setKilometraje(Integer.parseInt(jte_kilometraje.getText()));
         movil.setLicencia(jte_Licencia.getText());
-        movil.setFechaLicencia(jte_fechaVto.getText());
+        movil.setFechaLicencia(fechaLicencia);
         movilDAO.altaMovil(movil);
         this.dispose();
     }//GEN-LAST:event_jb_ActionGuardarActionPerformed
@@ -237,6 +236,7 @@ public class ABMMovil extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -249,7 +249,7 @@ public class ABMMovil extends javax.swing.JFrame {
     private javax.swing.JButton jb_cancelar;
     private javax.swing.JButton jb_limpiar;
     private javax.swing.JTextField jte_Licencia;
-    private javax.swing.JTextField jte_fechaVto;
+    private datechooser.beans.DateChooserCombo jte_fechaVto;
     private javax.swing.JTextField jte_kilometraje;
     private javax.swing.JTextField jte_modelo;
     private javax.swing.JTextField jte_nroLicencia;
