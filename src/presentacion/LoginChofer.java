@@ -128,10 +128,10 @@ public class LoginChofer extends javax.swing.JFrame {
         // TODO add your handling code here:
                 
         ChoferDAO choferDAO = new ChoferDAO();
-        ArrayList<Chofer> choferes = new ArrayList<Chofer>(); 
-        choferes = choferDAO.consultarChofer(Integer.parseInt(jtf_DNI.getText()));
+        Chofer chofer = new Chofer(); 
+        chofer = choferDAO.consultarChofer(Integer.parseInt(jtf_DNI.getText()));
         //jl_chofer.setText();
-        if (choferes.isEmpty()){
+        if (chofer.getDNI()==0){
             jtf_DNI.setText("");
             JOptionPane.showMessageDialog(null, "Chofer no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
             jtf_DNI.requestFocus();
@@ -140,7 +140,7 @@ public class LoginChofer extends javax.swing.JFrame {
             rendicion.setVisible(true);
             RendicionChofer.jl_Tipo.setText(jl_turno.getText());
             RendicionChofer.jl_DNI.setText(jtf_DNI.getText());
-            RendicionChofer.jl_chofer.setText(choferes.get(0).getApellido()+", "+choferes.get(0).getNombre());
+            RendicionChofer.jl_chofer.setText(chofer.getApellido()+", "+chofer.getNombre());
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed

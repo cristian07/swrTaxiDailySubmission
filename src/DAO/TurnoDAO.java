@@ -33,6 +33,7 @@ public class TurnoDAO {
 
             while(res.next()){
                 Turno turno = new Turno();
+                turno.setIdTurno(res.getInt("idTurno"));
                 turno.setMovil_idMovil(res.getInt("Movil_idMovil"));
                 turno.setAjustes_idAjustes(res.getInt("Ajustes_idAjustes"));
                 turno.setChofer_DNI(res.getInt("Chofer_DNI"));
@@ -74,24 +75,24 @@ public class TurnoDAO {
         AjustesDAO ajustesDAO = new AjustesDAO();
         try {
             Statement estatuto = conex.getConnection().createStatement();
-            estatuto.executeUpdate("INSERT INTO Turno VALUES (NULL,'"
-                +idMovil+"', '"
-                +ajustesDAO.obtenerIdUltimosAjustes()+"', '"
-                +DNI+"', '"
-                +fechaHoraSQL+"', '"
-                +turno.getKmInicial()+"', '"
-                +turno.getKmFinal()+"', '"
-                +turno.getGastosVarios()+"', '"
-                +turno.getRecaudacion()+"', '"
-                +turno.getGncBrutoCtaCte()+"', '"
-                +turno.getGncFueraCtaCte()+"', '"
-                +turno.getKmOcupados()+"', '"
-                +turno.getKmLibres()+"', '"
-                +turno.getTicketRelevo1()+"', '"
-                +turno.getTicketRelevo2()+"', '"
-                +turno.getTipo()+"', '"
-                +turno.getGastosChequera()+"', '"
-                +turno.getNovedades()+"')");
+            estatuto.executeUpdate("INSERT INTO Turno VALUES (NULL,"
+                +idMovil+","
+                +ajustesDAO.obtenerIdUltimosAjustes()+", "
+                +DNI+", '"
+                +fechaHoraSQL+"', "
+                +turno.getKmInicial()+", "
+                +turno.getKmFinal()+", "
+                +turno.getGastosVarios()+", "
+                +turno.getRecaudacion()+", "
+                +turno.getGncBrutoCtaCte()+", "
+                +turno.getGncFueraCtaCte()+", "
+                +turno.getKmOcupados()+", "
+                +turno.getKmLibres()+", "
+                +turno.getTicketRelevo1()+", "
+                +turno.getTicketRelevo2()+", '"
+                +turno.getTipo()+"', "
+                +turno.getGastosChequera()+", '"
+                +turno.getNovedades()+"',NULL,NULL)");
             estatuto.close();
             conex.desconectar();
         } catch (SQLException e) {
@@ -132,7 +133,7 @@ public class TurnoDAO {
         
         try {
             PreparedStatement consulta = conex.getConnection()
-                    .prepareStatement("select M.idMovil from movil M inner join turno T on M.idMovil=T.Movil_idMovil GROUP BY T.Movil_idMovil");
+                    .prepareStatement("select idMovil from Movil");
             ResultSet res = consulta.executeQuery();
 
             while(res.next()){

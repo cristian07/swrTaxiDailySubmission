@@ -18,16 +18,15 @@ import servicio.DbConnection;
  * @author sebastian.suarez
  */
 public class ChoferDAO {
-    public ArrayList<Chofer> consultarChofer(int documento) {
-        ArrayList<Chofer> choferes = new ArrayList<Chofer>();
+    public Chofer consultarChofer(int documento) {
+        Chofer chofer = new Chofer();
         DbConnection conex= new DbConnection();
         try {
-            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM chofer where DNI = ? and estado='A'");
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM chofer where DNI = ? ");
             consulta.setInt(1, documento);
             ResultSet res = consulta.executeQuery();
     
             if(res.next()){
-                Chofer chofer= new Chofer();
                 chofer.setDNI(documento);
                 chofer.setNombre(res.getString("nombre"));
                 chofer.setApellido(res.getString("apellido"));
@@ -39,7 +38,6 @@ public class ChoferDAO {
                 chofer.setFechaCarnetOtorgamiento(res.getString("fechaCarnetOtorgamiento"));
                 chofer.setFechaCarnetVencimiento(res.getString("fechaCarnetVencimiento"));
                 chofer.setCategoria(res.getString("categoria"));
-                choferes.add(chofer);
             }
             
             res.close();
@@ -48,7 +46,7 @@ public class ChoferDAO {
             } catch (Exception e) {
                 System.out.println(e);
             }
-        return choferes;
+        return chofer;
     }
     
     public ArrayList<Chofer> getChoferes() {

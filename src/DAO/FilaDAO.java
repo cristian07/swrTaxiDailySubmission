@@ -24,7 +24,7 @@ public class FilaDAO {
         MovilDAO movilDAO = new MovilDAO();
         AjustesDAO ajustesDAO = new AjustesDAO();
         Ajustes ajuste = ajustesDAO.obtenerAjustesId(turno.getAjustes_idAjustes());
-        Chofer chofer = choferDAO.consultarChofer(turno.getChofer_DNI()).get(0);
+        Chofer chofer = choferDAO.consultarChofer(turno.getChofer_DNI());
         
         double ajusteComision = ajuste.getComisionChofer();
         double ajusteGas = ajuste.getAjusteGas();

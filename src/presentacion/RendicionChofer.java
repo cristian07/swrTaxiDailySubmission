@@ -150,6 +150,8 @@ public class RendicionChofer extends javax.swing.JFrame {
         jtf_Comision = new javax.swing.JTextField();
         jtf_Neto = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jtf_TotalEfectivo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jl_Fecha = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -621,6 +623,10 @@ public class RendicionChofer extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel12.setText("Neto");
 
+        jLabel35.setText("Total Efectivo");
+
+        jtf_TotalEfectivo.setEditable(false);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -629,12 +635,16 @@ public class RendicionChofer extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtf_Comision, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jtf_Comision, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtf_Neto, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jtf_Neto, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtf_TotalEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -644,7 +654,9 @@ public class RendicionChofer extends javax.swing.JFrame {
                     .addComponent(jtf_Comision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
                     .addComponent(jLabel12)
-                    .addComponent(jtf_Neto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf_Neto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel35)
+                    .addComponent(jtf_TotalEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -705,9 +717,7 @@ public class RendicionChofer extends javax.swing.JFrame {
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jl_DNI))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, 0)))))
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
@@ -782,13 +792,12 @@ public class RendicionChofer extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Debe completar los datos requeridos");
             
     }else{
-        try {
+       
             // TODO add your handling code here:
 
+            
+        try {
             registrarTurno();
-            LoginChofer login = new LoginChofer();
-            LoginChofer.jl_turno.setText(jl_Tipo.getText());
-            login.setVisible(true);
             TurnoDAO turnoDAO = new TurnoDAO();
             int turno = Integer.parseInt(turnoDAO.obtenerUltimoTurnoIngresado());
             /* Cristian, armate una consulta para que el PARAMETRO que envie sea el utlimo turno creado
@@ -805,8 +814,11 @@ public class RendicionChofer extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(RendicionChofer.class.getName()).log(Level.SEVERE, null, ex);
         }
+        LoginChofer login = new LoginChofer();
+        LoginChofer.jl_turno.setText(jl_Tipo.getText());
+        login.setVisible(true);
         this.dispose();
-}
+    }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -840,7 +852,10 @@ public class RendicionChofer extends javax.swing.JFrame {
                 Double recaudacion = Double.parseDouble(jtf_Recaudacion.getText());
                 Double comision = Double.parseDouble(jtf_Comision.getText());
                 Double gastos = Double.parseDouble(jtf_Gastos.getText());
+                Double ticket1 = Double.parseDouble(jtf_TicketRelevo1.getText());
+                Double ticket2 = Double.parseDouble(jtf_TicketRelevo2.getText());
                 jtf_Neto.setText(Double.toString(recaudacion-comision-gastos));
+                jtf_TotalEfectivo.setText(Double.toString(recaudacion-comision-gastos-ticket1-ticket2));
             } catch(Exception e) {
                 jtf_Recaudacion.setText("");
                 jtf_Comision.setText("");
@@ -868,7 +883,13 @@ public class RendicionChofer extends javax.swing.JFrame {
     }//GEN-LAST:event_jtf_GastosChequeraActionPerformed
 
     private void jtf_GastosChequeraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_GastosChequeraFocusLost
-        // TODO add your handling code here:
+      try {
+        Double subtotal = Double.parseDouble(jtf_TotalEfectivo.getText());
+        Double gastosChequeras = Double.parseDouble(jtf_GastosChequera.getText());
+        jtf_TotalEfectivo.setText(String.valueOf(subtotal-gastosChequeras));
+      }catch (Exception e){
+          
+      }
     }//GEN-LAST:event_jtf_GastosChequeraFocusLost
 
     private void jtf_KmLibresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_KmLibresActionPerformed
@@ -1143,6 +1164,7 @@ public class RendicionChofer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1172,5 +1194,6 @@ public class RendicionChofer extends javax.swing.JFrame {
     private javax.swing.JTextField jtf_Recaudacion;
     private javax.swing.JTextField jtf_TicketRelevo1;
     private javax.swing.JTextField jtf_TicketRelevo2;
+    private javax.swing.JTextField jtf_TotalEfectivo;
     // End of variables declaration//GEN-END:variables
 }

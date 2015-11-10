@@ -246,7 +246,6 @@ public class VentanaChofer extends javax.swing.JFrame {
 
     private void jb_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_BuscarActionPerformed
         ChoferDAO choferDAO = new ChoferDAO();
-        ArrayList<Chofer> choferes = new ArrayList<Chofer>();
         DefaultTableModel modelo = (DefaultTableModel) jt_Chofer.getModel();
         modelo.setNumRows(0);
         int dni;
@@ -257,17 +256,15 @@ public class VentanaChofer extends javax.swing.JFrame {
                 jtf_DNI.setText("");
                 jtf_DNI.requestFocus();
             }
-            choferes = choferDAO.consultarChofer(dni);
-            for (Chofer chofer: choferes){
-                String[] datos = {
-                    String.valueOf(chofer.getDNI()),
-                    chofer.getApellido()+", "+chofer.getNombre(),
-                    chofer.getTelefono(),
-                    chofer.getCelular(),
-                    chofer.getFechaCarnetVencimiento(),
-                    chofer.getDomicilio()};
-                modelo.addRow(datos);
-            }
+            Chofer chofer = choferDAO.consultarChofer(dni);
+            String[] datos = {
+                String.valueOf(chofer.getDNI()),
+                chofer.getApellido()+", "+chofer.getNombre(),
+                chofer.getTelefono(),
+                chofer.getCelular(),
+                chofer.getFechaCarnetVencimiento(),
+                chofer.getDomicilio()};
+            modelo.addRow(datos);
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, "Ingrese un DNI valido.", "Error", JOptionPane.ERROR_MESSAGE);
             jtf_DNI.setText("");
@@ -287,7 +284,6 @@ public class VentanaChofer extends javax.swing.JFrame {
         int fila = jt_Chofer.getSelectedRow();
         int dni = Integer.parseInt(modelo.getValueAt(jt_Chofer.getSelectedRow(), 0).toString());
         ChoferDAO choferDAO = new ChoferDAO();
-        ArrayList<Chofer> choferes = new ArrayList<Chofer>();
         if (fila<0){
             JOptionPane.showMessageDialog(null,"Seleccione un chofer para realizar esta operacion.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -296,19 +292,19 @@ public class VentanaChofer extends javax.swing.JFrame {
             ABMChofer.jb_Modificar.setEnabled(true);
             ABMChofer.jb_Guardar.setVisible(false);
             
-            choferes = choferDAO.consultarChofer(dni);
-            ABMChofer.jtf_DNI.setText(String.valueOf(choferes.get(0).getDNI()));
-            ABMChofer.jtf_Nombre.setText(choferes.get(0).getNombre());
-            ABMChofer.jtf_Apellido.setText(choferes.get(0).getApellido());
-            ABMChofer.jtf_Domicilio.setText(choferes.get(0).getDomicilio());
-            ABMChofer.jtf_Localidad.setText(choferes.get(0).getLocalidad());
-            ABMChofer.jtf_Provincia.setText(choferes.get(0).getProvincia());
-            ABMChofer.jtf_TelefonoFijo.setText(choferes.get(0).getTelefono());
-            ABMChofer.jtf_TelefonoCelular.setText(choferes.get(0).getCelular());
-            ABMChofer.jtf_Categoria.setText(choferes.get(0).getCategoria());
+            Chofer chofer = choferDAO.consultarChofer(dni);
+            ABMChofer.jtf_DNI.setText(String.valueOf(chofer.getDNI()));
+            ABMChofer.jtf_Nombre.setText(chofer.getNombre());
+            ABMChofer.jtf_Apellido.setText(chofer.getApellido());
+            ABMChofer.jtf_Domicilio.setText(chofer.getDomicilio());
+            ABMChofer.jtf_Localidad.setText(chofer.getLocalidad());
+            ABMChofer.jtf_Provincia.setText(chofer.getProvincia());
+            ABMChofer.jtf_TelefonoFijo.setText(chofer.getTelefono());
+            ABMChofer.jtf_TelefonoCelular.setText(chofer.getCelular());
+            ABMChofer.jtf_Categoria.setText(chofer.getCategoria());
             try {
-                dateOtorgamiento.setTime(format.parse(choferes.get(0).getFechaCarnetOtorgamiento()));
-                dateVencimiento.setTime(format.parse(choferes.get(0).getFechaCarnetVencimiento()));
+                dateOtorgamiento.setTime(format.parse(chofer.getFechaCarnetOtorgamiento()));
+                dateVencimiento.setTime(format.parse(chofer.getFechaCarnetVencimiento()));
             } catch (ParseException ex) {
                 Logger.getLogger(ABMChofer.class.getName()).log(Level.SEVERE, null, ex);
             }
