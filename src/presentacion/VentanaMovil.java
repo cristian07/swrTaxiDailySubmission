@@ -6,6 +6,7 @@
 package presentacion;
 
 import DAO.MovilDAO;
+import com.sun.glass.events.KeyEvent;
 import entidades.Movil;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -120,6 +121,12 @@ public class VentanaMovil extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel2.setText("Nro. Movil");
 
+        jte_nroMovil.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jte_nroMovilKeyTyped(evt);
+            }
+        });
+
         jb_ActionBuscar.setText("Buscar");
         jb_ActionBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,13 +179,12 @@ public class VentanaMovil extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 949, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -296,6 +302,14 @@ public class VentanaMovil extends javax.swing.JFrame {
             modelo.removeRow(jt_movil.getSelectedRow()); 
         }
     }//GEN-LAST:event_jmi_BorrarActionPerformed
+
+    private void jte_nroMovilKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jte_nroMovilKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jte_nroMovilKeyTyped
 
     public void verTodos(){
         MovilDAO movilDAO = new MovilDAO();

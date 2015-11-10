@@ -8,6 +8,7 @@ package presentacion;
 import DAO.MovilDAO;
 import DAO.RepuestoDAO;
 import DAO.TurnoDAO;
+import com.sun.glass.events.KeyEvent;
 import entidades.Movil;
 import entidades.Repuesto;
 import entidades.Turno;
@@ -169,6 +170,12 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jt_Gastos);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jtf_Importe.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_ImporteKeyTyped(evt);
+            }
+        });
 
         jLabel1.setText("Movil");
 
@@ -435,6 +442,14 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
     private void jb_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ImprimirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_ImprimirActionPerformed
+
+    private void jtf_ImporteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_ImporteKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_ImporteKeyTyped
 
     /**
      * @param args the command line arguments

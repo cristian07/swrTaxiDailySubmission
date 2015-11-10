@@ -304,6 +304,9 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JTextField" name="jtf_Importe">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_ImporteKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>

@@ -6,6 +6,7 @@
 package presentacion;
 
 import DAO.ChoferDAO;
+import com.sun.glass.events.KeyEvent;
 import entidades.Chofer;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -116,6 +117,11 @@ public class VentanaChofer extends javax.swing.JFrame {
         jtf_DNI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtf_DNIActionPerformed(evt);
+            }
+        });
+        jtf_DNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_DNIKeyTyped(evt);
             }
         });
 
@@ -326,6 +332,14 @@ public class VentanaChofer extends javax.swing.JFrame {
             modelo.removeRow(jt_Chofer.getSelectedRow()); 
         }
     }//GEN-LAST:event_BorrarActionPerformed
+
+    private void jtf_DNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_DNIKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_DNIKeyTyped
 
     /**
      * @param args the command line arguments
