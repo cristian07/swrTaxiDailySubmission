@@ -6,6 +6,7 @@
 package presentacion;
 
 import DAO.ChoferDAO;
+import com.sun.glass.events.KeyEvent;
 import entidades.Chofer;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -16,6 +17,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -101,7 +103,25 @@ public class ABMChofer extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Calibri", 1, 12)); // NOI18N
         jLabel14.setText("Telefono Celular");
 
+        jtf_DNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_DNIKeyTyped(evt);
+            }
+        });
+
         jtf_Provincia.setText("Tucuman");
+
+        jtf_TelefonoFijo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_TelefonoFijoKeyTyped(evt);
+            }
+        });
+
+        jtf_TelefonoCelular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_TelefonoCelularKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -299,6 +319,17 @@ public class ABMChofer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jb_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_GuardarActionPerformed
+        if(
+        jtf_DNI.getText().isEmpty()||
+        jtf_Apellido.getText().isEmpty()||
+        jtf_Nombre.getText().isEmpty()||
+        jtf_Domicilio.getText().isEmpty()||
+        jtf_Localidad.getText().isEmpty()||
+        jtf_TelefonoCelular.getText().isEmpty()||
+        jtf_TelefonoFijo.getText().isEmpty()||
+        jtf_Categoria.getText().isEmpty()){
+        JOptionPane.showMessageDialog(rootPane, "Debe completar los campos con los datos requeridos");
+        }else{
         Chofer chofer = new Chofer();
         ChoferDAO choferDAO = new ChoferDAO();
         String fechaOtorgamiento = new SimpleDateFormat("yyyy-MM-dd").format(jtf_FechaOtorgamiento.getSelectedDate().getTime());
@@ -316,10 +347,12 @@ public class ABMChofer extends javax.swing.JFrame {
         chofer.setFechaCarnetVencimiento(fechaVencimiento);
         chofer.setCategoria(jtf_Categoria.getText());
         choferDAO.altaChofer(chofer);
+        JOptionPane.showMessageDialog(rootPane, "Los datos del chofer se guardaron con éxito");
+
         this.dispose();
         VentanaChofer choferwindow= new VentanaChofer();
         choferwindow.setVisible(true); 
-        
+        }
     }//GEN-LAST:event_jb_GuardarActionPerformed
 
     private void jb_VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_VolverActionPerformed
@@ -349,10 +382,36 @@ public class ABMChofer extends javax.swing.JFrame {
         chofer.setFechaCarnetOtorgamiento(fechaOtorgamiento);
         chofer.setFechaCarnetVencimiento(fechaVencimiento);
         choferDAO.modificarChofer(chofer);
+        JOptionPane.showMessageDialog(rootPane, "Los datos del chofer se modificaron con éxito");
         this.dispose();
         VentanaChofer choferwindow= new VentanaChofer();
         choferwindow.setVisible(true);
     }//GEN-LAST:event_jb_ModificarActionPerformed
+
+    private void jtf_DNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_DNIKeyTyped
+        // TODO add your handling code here:
+        
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_DNIKeyTyped
+
+    private void jtf_TelefonoFijoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_TelefonoFijoKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_TelefonoFijoKeyTyped
+
+    private void jtf_TelefonoCelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_TelefonoCelularKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_TelefonoCelularKeyTyped
 
     /**
      * @param args the command line arguments
