@@ -7,6 +7,7 @@ package presentacion;
 
 import DAO.AjustesDAO;
 import DAO.AlertasDAO;
+import com.sun.glass.events.KeyEvent;
 import entidades.Ajustes;
 import entidades.Alertas;
 
@@ -116,9 +117,32 @@ public class VentanaAjustes extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel4.setText("Precio Gas fuera Cta Cte");
 
+        jtf_ComisionChofer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_ComisionChoferKeyTyped(evt);
+            }
+        });
+
         jte_AjusteGas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jte_AjusteGasActionPerformed(evt);
+            }
+        });
+        jte_AjusteGas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jte_AjusteGasKeyTyped(evt);
+            }
+        });
+
+        jte_PrecioGasCtaCte.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jte_PrecioGasCtaCteKeyTyped(evt);
+            }
+        });
+
+        jte_PrecioGasFueraCta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jte_PrecioGasFueraCtaKeyTyped(evt);
             }
         });
 
@@ -133,9 +157,9 @@ public class VentanaAjustes extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
-                        .addGap(44, 44, 44)
+                        .addGap(40, 40, 40)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jte_PrecioGasCtaCte, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                            .addComponent(jte_PrecioGasCtaCte, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                             .addComponent(jte_AjusteGas)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,12 +167,12 @@ public class VentanaAjustes extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jtf_ComisionChofer, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jte_PrecioGasFueraCta, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(87, Short.MAX_VALUE))
+                                .addComponent(jte_PrecioGasFueraCta, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jtf_ComisionChofer, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,7 +193,7 @@ public class VentanaAjustes extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jte_PrecioGasFueraCta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jb_Actualizar.setText("Actualizar");
@@ -221,6 +245,36 @@ public class VentanaAjustes extends javax.swing.JFrame {
         jLabel9.setText("Grasa");
 
         jLabel10.setText("Filtro");
+
+        jtf_Taxi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_TaxiKeyTyped(evt);
+            }
+        });
+
+        jtf_Chofer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_ChoferKeyTyped(evt);
+            }
+        });
+
+        jtf_Correa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_CorreaKeyTyped(evt);
+            }
+        });
+
+        jtf_Aceite.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_AceiteKeyTyped(evt);
+            }
+        });
+
+        jtf_Grasa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_GrasaKeyTyped(evt);
+            }
+        });
 
         jLabel11.setText("dias");
 
@@ -398,6 +452,86 @@ public class VentanaAjustes extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose(); 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jtf_ComisionChoferKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_ComisionChoferKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != '.')) {
+            /* lo que deseo colocar aqui es si ya se pulso el caracter (.) el mismo no se pueda repetir*/
+            evt.consume();
+}
+    }//GEN-LAST:event_jtf_ComisionChoferKeyTyped
+
+    private void jte_AjusteGasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jte_AjusteGasKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != '.')) {
+            /* lo que deseo colocar aqui es si ya se pulso el caracter (.) el mismo no se pueda repetir*/
+            evt.consume();
+}
+    }//GEN-LAST:event_jte_AjusteGasKeyTyped
+
+    private void jte_PrecioGasCtaCteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jte_PrecioGasCtaCteKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != '.')) {
+            /* lo que deseo colocar aqui es si ya se pulso el caracter (.) el mismo no se pueda repetir*/
+            evt.consume();
+}
+    }//GEN-LAST:event_jte_PrecioGasCtaCteKeyTyped
+
+    private void jte_PrecioGasFueraCtaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jte_PrecioGasFueraCtaKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != '.')) {
+            /* lo que deseo colocar aqui es si ya se pulso el caracter (.) el mismo no se pueda repetir*/
+            evt.consume();
+}
+    }//GEN-LAST:event_jte_PrecioGasFueraCtaKeyTyped
+
+    private void jtf_TaxiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_TaxiKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_TaxiKeyTyped
+
+    private void jtf_ChoferKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_ChoferKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_ChoferKeyTyped
+
+    private void jtf_CorreaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_CorreaKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_CorreaKeyTyped
+
+    private void jtf_AceiteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_AceiteKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_AceiteKeyTyped
+
+    private void jtf_GrasaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_GrasaKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_GrasaKeyTyped
 
     /**
      * @param args the command line arguments
