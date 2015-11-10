@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -202,11 +203,17 @@ public class RendicionChofer extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_KmInicialKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_KmInicialKeyTyped(evt);
+            }
         });
 
         jtf_TicketRelevo1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_TicketRelevo1KeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_TicketRelevo1KeyTyped(evt);
             }
         });
 
@@ -224,6 +231,9 @@ public class RendicionChofer extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_GNCFueraKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_GNCFueraKeyTyped(evt);
+            }
         });
 
         jtf_KmOcupados.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -240,6 +250,9 @@ public class RendicionChofer extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_KmOcupadosKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_KmOcupadosKeyTyped(evt);
+            }
         });
 
         jtf_KmLibres.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -255,6 +268,9 @@ public class RendicionChofer extends javax.swing.JFrame {
         jtf_KmLibres.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_KmLibresKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_KmLibresKeyTyped(evt);
             }
         });
 
@@ -275,6 +291,9 @@ public class RendicionChofer extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_GastosChequeraKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_GastosChequeraKeyTyped(evt);
+            }
         });
 
         jtf_Recaudacion.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -285,6 +304,9 @@ public class RendicionChofer extends javax.swing.JFrame {
         jtf_Recaudacion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_RecaudacionKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_RecaudacionKeyTyped(evt);
             }
         });
 
@@ -302,11 +324,17 @@ public class RendicionChofer extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_GastosKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_GastosKeyTyped(evt);
+            }
         });
 
         jtf_KmFinal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_KmFinalKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_KmFinalKeyTyped(evt);
             }
         });
 
@@ -329,6 +357,9 @@ public class RendicionChofer extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_TicketRelevo2KeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_TicketRelevo2KeyTyped(evt);
+            }
         });
 
         jLabel16.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -347,6 +378,9 @@ public class RendicionChofer extends javax.swing.JFrame {
         jtf_GNCBruto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_GNCBrutoKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_GNCBrutoKeyTyped(evt);
             }
         });
 
@@ -458,30 +492,24 @@ public class RendicionChofer extends javax.swing.JFrame {
                             .addComponent(jLabel17)
                             .addComponent(jLabel16)
                             .addComponent(jLabel2))
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtf_Movil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtf_KmInicial)
+                            .addComponent(jtf_KmFinal)
+                            .addComponent(jtf_TicketRelevo1)
+                            .addComponent(jtf_TicketRelevo2)
+                            .addComponent(jtf_Recaudacion)
+                            .addComponent(jtf_Gastos)
+                            .addComponent(jtf_GNCBruto)
+                            .addComponent(jtf_GNCFuera)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jtf_KmOcupados)
+                            .addComponent(jtf_KmLibres)
+                            .addComponent(jtf_GastosChequera, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtf_Movil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jtf_KmInicial)
-                                    .addComponent(jtf_KmFinal)
-                                    .addComponent(jtf_TicketRelevo1)
-                                    .addComponent(jtf_TicketRelevo2)
-                                    .addComponent(jtf_Recaudacion)
-                                    .addComponent(jtf_Gastos)
-                                    .addComponent(jtf_GNCBruto)
-                                    .addComponent(jtf_GNCFuera)
-                                    .addComponent(jScrollPane1)
-                                    .addComponent(jtf_KmOcupados)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jtf_GastosChequera, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jtf_KmLibres, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(212, 212, 212)
+                                .addGap(194, 194, 194)
                                 .addComponent(jLabel21))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
@@ -509,21 +537,23 @@ public class RendicionChofer extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtf_Movil, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtf_Movil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel23)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtf_KmInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel24))
-                .addGap(14, 14, 14)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtf_KmFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel25)
-                    .addComponent(jLabel13))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel24)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtf_KmInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel25)
+                        .addComponent(jLabel13))
+                    .addComponent(jtf_KmFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtf_TicketRelevo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -538,13 +568,13 @@ public class RendicionChofer extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jtf_Recaudacion, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtf_Recaudacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel9)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jLabel29)
-                    .addComponent(jtf_Gastos, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf_Gastos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtf_GNCBruto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -564,12 +594,13 @@ public class RendicionChofer extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
                     .addComponent(jLabel33)
-                    .addComponent(jtf_KmLibres, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf_KmLibres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel34)
-                    .addComponent(jtf_GastosChequera, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtf_GastosChequera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel20)
+                        .addComponent(jLabel34)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
@@ -674,7 +705,9 @@ public class RendicionChofer extends javax.swing.JFrame {
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jl_DNI))
-                                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
@@ -732,7 +765,23 @@ public class RendicionChofer extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+    if( 
+    jtf_Comision.getText().isEmpty()||
+    jtf_GNCBruto.getText().isEmpty()||
+    jtf_GNCFuera.getText().isEmpty()||
+    jtf_Gastos.getText().isEmpty()||
+    jtf_GastosChequera.getText().isEmpty()||
+    jtf_KmFinal.getText().isEmpty()||
+    jtf_KmInicial.getText().isEmpty()||
+    jtf_KmLibres.getText().isEmpty()||
+    jtf_KmOcupados.getText().isEmpty()||
+    jtf_Recaudacion.getText().isEmpty()||
+    jtf_TicketRelevo1.getText().isEmpty()||
+    jtf_TicketRelevo2.getText().isEmpty()){
+    
+            JOptionPane.showMessageDialog(rootPane, "Debe completar los datos requeridos");
+            
+    }else{
         try {
             // TODO add your handling code here:
 
@@ -757,7 +806,7 @@ public class RendicionChofer extends javax.swing.JFrame {
             Logger.getLogger(RendicionChofer.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.dispose();
-        
+}
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -929,6 +978,102 @@ public class RendicionChofer extends javax.swing.JFrame {
            jButton1.requestFocus();
         }
     }//GEN-LAST:event_jta_NovedadesKeyPressed
+
+    private void jtf_KmInicialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_KmInicialKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+        
+    }//GEN-LAST:event_jtf_KmInicialKeyTyped
+
+    private void jtf_KmFinalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_KmFinalKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_KmFinalKeyTyped
+
+    private void jtf_KmOcupadosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_KmOcupadosKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_KmOcupadosKeyTyped
+
+    private void jtf_KmLibresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_KmLibresKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtf_KmLibresKeyTyped
+
+    private void jtf_TicketRelevo1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_TicketRelevo1KeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
+                && (caracter != '.')) {
+              evt.consume();
+}
+    }//GEN-LAST:event_jtf_TicketRelevo1KeyTyped
+
+    private void jtf_TicketRelevo2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_TicketRelevo2KeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
+                && (caracter != '.')) {
+              evt.consume();
+}
+    }//GEN-LAST:event_jtf_TicketRelevo2KeyTyped
+
+    private void jtf_RecaudacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_RecaudacionKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
+                && (caracter != '.')) {
+              evt.consume();
+}
+    }//GEN-LAST:event_jtf_RecaudacionKeyTyped
+
+    private void jtf_GastosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_GastosKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
+                && (caracter != '.')) {
+              evt.consume();
+}
+    }//GEN-LAST:event_jtf_GastosKeyTyped
+
+    private void jtf_GNCBrutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_GNCBrutoKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
+                && (caracter != '.')) {
+              evt.consume();
+}
+    }//GEN-LAST:event_jtf_GNCBrutoKeyTyped
+
+    private void jtf_GNCFueraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_GNCFueraKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
+                && (caracter != '.')) {
+              evt.consume();
+}
+    }//GEN-LAST:event_jtf_GNCFueraKeyTyped
+
+    private void jtf_GastosChequeraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_GastosChequeraKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
+                && (caracter != '.')) {
+              evt.consume();
+}
+    }//GEN-LAST:event_jtf_GastosChequeraKeyTyped
 
     /**
      * @param args the command line arguments

@@ -64,7 +64,10 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jl_DNI" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jPanel2" alignment="1" min="-2" pref="665" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jPanel2" min="-2" pref="728" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -179,35 +182,25 @@
                               <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jtf_Movil" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jtf_KmInicial" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jtf_KmFinal" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jtf_TicketRelevo1" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jtf_TicketRelevo2" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jtf_Recaudacion" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jtf_Gastos" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jtf_GNCBruto" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jtf_GNCFuera" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jtf_KmOcupados" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Component id="jtf_GastosChequera" min="-2" pref="342" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="jtf_KmLibres" min="-2" pref="343" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jtf_Movil" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtf_KmInicial" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtf_KmFinal" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtf_TicketRelevo1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtf_TicketRelevo2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtf_Recaudacion" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtf_Gastos" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtf_GNCBruto" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtf_GNCFuera" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtf_KmOcupados" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtf_KmLibres" max="32767" attributes="0"/>
+                              <Component id="jtf_GastosChequera" alignment="0" min="-2" pref="389" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="212" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
                                   <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -244,7 +237,7 @@
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jtf_Movil" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="jtf_Movil" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -254,16 +247,20 @@
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jtf_KmInicial" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jtf_KmInicial" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jtf_KmFinal" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jtf_KmFinal" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -281,7 +278,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel28" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                          <Component id="jtf_Recaudacion" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="jtf_Recaudacion" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -289,7 +286,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtf_Gastos" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="jtf_Gastos" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -313,13 +310,15 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel33" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtf_KmLibres" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="jtf_KmLibres" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel34" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtf_GastosChequera" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jtf_GastosChequera" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel34" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -336,11 +335,13 @@
         <Component class="javax.swing.JTextField" name="jtf_KmInicial">
           <Events>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_KmInicialKeyPressed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_KmInicialKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jtf_TicketRelevo1">
           <Events>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_TicketRelevo1KeyPressed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_TicketRelevo1KeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jtf_GNCFuera">
@@ -348,6 +349,7 @@
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtf_GNCFueraFocusLost"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtf_GNCFueraActionPerformed"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_GNCFueraKeyPressed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_GNCFueraKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jtf_KmOcupados">
@@ -355,6 +357,7 @@
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtf_KmOcupadosFocusLost"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtf_KmOcupadosActionPerformed"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_KmOcupadosKeyPressed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_KmOcupadosKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jtf_KmLibres">
@@ -362,6 +365,7 @@
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtf_KmLibresFocusLost"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtf_KmLibresActionPerformed"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_KmLibresKeyPressed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_KmLibresKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel20">
@@ -377,12 +381,14 @@
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtf_GastosChequeraFocusLost"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtf_GastosChequeraActionPerformed"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_GastosChequeraKeyPressed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_GastosChequeraKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jtf_Recaudacion">
           <Events>
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtf_RecaudacionFocusLost"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_RecaudacionKeyPressed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_RecaudacionKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jtf_Gastos">
@@ -390,11 +396,13 @@
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtf_GastosFocusLost"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtf_GastosActionPerformed"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_GastosKeyPressed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_GastosKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jtf_KmFinal">
           <Events>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_KmFinalKeyPressed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_KmFinalKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
@@ -440,6 +448,7 @@
         <Component class="javax.swing.JTextField" name="jtf_TicketRelevo2">
           <Events>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_TicketRelevo2KeyPressed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_TicketRelevo2KeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel16">
@@ -455,6 +464,7 @@
             <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtf_GNCBrutoFocusLost"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtf_GNCBrutoActionPerformed"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_GNCBrutoKeyPressed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtf_GNCBrutoKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel17">
