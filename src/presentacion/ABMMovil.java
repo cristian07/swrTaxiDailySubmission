@@ -6,8 +6,10 @@
 package presentacion;
 
 import DAO.MovilDAO;
+import com.sun.glass.events.KeyEvent;
 import entidades.Movil;
 import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -75,7 +77,24 @@ public class ABMMovil extends javax.swing.JFrame {
 
         jLabel9.setText("Kilometraje");
 
+        jte_nroMovil.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jte_nroMovilKeyTyped(evt);
+            }
+        });
+
+        jte_nroLicencia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jte_nroLicenciaKeyTyped(evt);
+            }
+        });
+
         jtf_Reloj.setText("0.99");
+        jtf_Reloj.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_RelojKeyTyped(evt);
+            }
+        });
 
         jLabel1.setText("Ajuste Reloj");
 
@@ -152,6 +171,11 @@ public class ABMMovil extends javax.swing.JFrame {
         });
 
         jb_limpiar.setText("Limpiar");
+        jb_limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_limpiarActionPerformed(evt);
+            }
+        });
 
         jb_cancelar.setText("Cancelar");
         jb_cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -204,6 +228,16 @@ public class ABMMovil extends javax.swing.JFrame {
 
     private void jb_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_GuardarActionPerformed
         // TODO add your handling code here:
+        if (jte_nroMovil.getText().isEmpty()
+                || jte_patente.getText().isEmpty()
+                || jte_modelo.getText().isEmpty()
+                || jte_nroLicencia.getText().isEmpty()
+                || jte_Licencia.getText().isEmpty()
+                || jte_fechaVto.getText().isEmpty()
+                || jte_kilometraje.getText().isEmpty()
+                || jtf_Reloj.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(rootPane, "Debe completar los campos con los datos requeridos");
+        }else{
         Movil movil =new Movil();
         MovilDAO movilDAO=new MovilDAO();
         String fechaLicencia = new SimpleDateFormat("yyyy-MM-dd").format(jte_fechaVto.getSelectedDate().getTime());
@@ -216,9 +250,11 @@ public class ABMMovil extends javax.swing.JFrame {
         movil.setFechaLicencia(fechaLicencia);
         movil.setAjusteReloj(Double.parseDouble(jtf_Reloj.getText()));
         movilDAO.altaMovil(movil);
+        JOptionPane.showMessageDialog(rootPane, "Los datos del móvil se guardaron con éxito");
         this.dispose();
         VentanaMovil ventanamovil= new VentanaMovil();
         ventanamovil.setVisible(true);
+        }
     }//GEN-LAST:event_jb_GuardarActionPerformed
 
     private void jb_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cancelarActionPerformed
@@ -240,12 +276,52 @@ public class ABMMovil extends javax.swing.JFrame {
         movil.setFechaLicencia(fechaLicencia);
         movil.setAjusteReloj(Double.parseDouble(jtf_Reloj.getText()));
         movilDAO.modificarMovil(movil);
+        JOptionPane.showMessageDialog(rootPane, "Los datos del móvil se modificaron con éxito");
         this.dispose();
         VentanaMovil ventanamovil= new VentanaMovil();
         ventanamovil.setVisible(true);
     }//GEN-LAST:event_jb_ModificarActionPerformed
 
-    
+    private void jte_nroMovilKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jte_nroMovilKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jte_nroMovilKeyTyped
+
+    private void jte_nroLicenciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jte_nroLicenciaKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jte_nroLicenciaKeyTyped
+
+    private void jtf_RelojKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_RelojKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACKSPACE)
+                && (caracter != '.')) {
+            /* lo que deseo colocar aqui es si ya se pulso el caracter (.) el mismo no se pueda repetir*/
+            evt.consume();
+}
+    }//GEN-LAST:event_jtf_RelojKeyTyped
+
+    private void jb_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_limpiarActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_jb_limpiarActionPerformed
+
+    public void limpiar() {
+        jte_Licencia.setText("");
+        jte_kilometraje.setText("");
+        jte_modelo.setText("");
+        jte_nroLicencia.setText("");
+        jte_nroMovil.setText("");
+        jte_patente.setText("");
+        
+    }
     /**
      * @param args the command line arguments
      */
