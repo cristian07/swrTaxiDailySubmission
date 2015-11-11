@@ -141,6 +141,7 @@ public class LoginChofer extends javax.swing.JFrame {
             RendicionChofer.jl_Tipo.setText(jl_turno.getText());
             RendicionChofer.jl_DNI.setText(jtf_DNI.getText());
             RendicionChofer.jl_chofer.setText(chofer.getApellido()+", "+chofer.getNombre());
+            RendicionChofer.nombre=chofer.getApellido()+", "+chofer.getNombre();
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -26,6 +26,7 @@ public class RendicionChofer extends javax.swing.JFrame {
     /**
      * Creates new form RendiciónChofer
      */
+    public static String nombre;
     public RendicionChofer() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -808,7 +809,7 @@ public class RendicionChofer extends javax.swing.JFrame {
              La linea q tenes q agregar al codigo es la de abajo
              Saludos*/
 
-            new reportes.ImprimirReportes().RendicionCuenta(turno, jtf_Comision.getText(), jtf_Neto.getText());
+            new reportes.ImprimirReportes().RendicionCuenta(turno, jtf_Comision.getText(), jtf_Neto.getText(),nombre);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RendicionChofer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
