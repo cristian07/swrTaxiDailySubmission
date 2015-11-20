@@ -67,7 +67,7 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
         jtf_Neto.setText(String.valueOf(totalNeto));
         jtf_Chequera.setText(String.valueOf(totalChequeras));
         cargarDatosAdicionales(turnos);
-        //jt_Ganancias.setModel(modeloGanancias);
+        jt_Ganancias.setModel(modeloGanancias);
         
     }
     public void cargarDatosAdicionales(ArrayList<Turno> turnos){

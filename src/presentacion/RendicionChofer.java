@@ -794,7 +794,7 @@ public class RendicionChofer extends javax.swing.JFrame {
             
     }else{
        
-            // TODO add your handling code here:
+           calcularCampos();
 
             
         try {
@@ -848,49 +848,39 @@ public class RendicionChofer extends javax.swing.JFrame {
     }//GEN-LAST:event_jtf_GastosActionPerformed
 
     private void jtf_GastosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_GastosFocusLost
-        if (jtf_Recaudacion.getText().length()>0 && jtf_Comision.getText().length()>0 && jtf_Gastos.getText().length()>0 ){
-            try{
-                Double recaudacion = Double.parseDouble(jtf_Recaudacion.getText());
-                Double comision = Double.parseDouble(jtf_Comision.getText());
-                Double gastos = Double.parseDouble(jtf_Gastos.getText());
-                Double ticket1 = Double.parseDouble(jtf_TicketRelevo1.getText());
-                Double ticket2 = Double.parseDouble(jtf_TicketRelevo2.getText());
-                jtf_Neto.setText(Double.toString(recaudacion-comision-gastos));
-                jtf_TotalEfectivo.setText(Double.toString(recaudacion-comision-gastos-ticket1-ticket2));
-            } catch(Exception e) {
-                jtf_Recaudacion.setText("");
-                jtf_Comision.setText("");
-                jtf_Gastos.setText("");
-            }
-        }
+        calcularCampos();        
     }//GEN-LAST:event_jtf_GastosFocusLost
 
     private void jtf_RecaudacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_RecaudacionFocusLost
-        // TODO add your handling code here:
-        AjustesDAO ajustesDAO = new AjustesDAO();
-        if (jtf_Recaudacion.getText().length()>0){
-            try{
-                Double recaudacion = Double.parseDouble(jtf_Recaudacion.getText());
-                jtf_Comision.setText(Double.toString(recaudacion*ajustesDAO.obtenerUltimosAjustes().getComisionChofer()));
-            } catch(Exception e) {
-                jtf_Recaudacion.setText("");
-                jtf_Comision.setText("");
-            }
-        }
+        calcularCampos();
     }//GEN-LAST:event_jtf_RecaudacionFocusLost
 
     private void jtf_GastosChequeraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_GastosChequeraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtf_GastosChequeraActionPerformed
-
+    public void calcularCampos(){
+        if (jtf_Recaudacion.getText().length()>0 && jtf_Gastos.getText().length()>0 ){
+            try{
+                AjustesDAO ajustesDAO = new AjustesDAO();
+                Double recaudacion = Double.parseDouble(jtf_Recaudacion.getText());
+                Double gastos = Double.parseDouble(jtf_Gastos.getText());
+                Double ticket1 = Double.parseDouble(jtf_TicketRelevo1.getText());
+                Double ticket2 = Double.parseDouble(jtf_TicketRelevo2.getText());
+                Double GNCFueraCtaCte = Double.parseDouble(jtf_GNCFuera.getText());
+                Double gastosChequera = Double.parseDouble(jtf_GastosChequera.getText());
+                Double recaudacionReal = recaudacion-ticket1-ticket2;
+                Double comision = recaudacionReal * ajustesDAO.obtenerUltimosAjustes().getComisionChofer();
+                Double neto = recaudacionReal - comision - gastos - GNCFueraCtaCte;
+                Double totalEfectivo = neto - gastosChequera;
+                jtf_Comision.setText(Double.toString(comision));
+                jtf_Neto.setText(Double.toString(neto));
+                jtf_TotalEfectivo.setText(Double.toString(totalEfectivo));
+            } catch(Exception e) {
+            }
+        }
+    }
     private void jtf_GastosChequeraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_GastosChequeraFocusLost
-      try {
-        Double subtotal = Double.parseDouble(jtf_TotalEfectivo.getText());
-        Double gastosChequeras = Double.parseDouble(jtf_GastosChequera.getText());
-        jtf_TotalEfectivo.setText(String.valueOf(subtotal-gastosChequeras));
-      }catch (Exception e){
-          
-      }
+        calcularCampos();
     }//GEN-LAST:event_jtf_GastosChequeraFocusLost
 
     private void jtf_KmLibresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_KmLibresActionPerformed
@@ -914,7 +904,7 @@ public class RendicionChofer extends javax.swing.JFrame {
     }//GEN-LAST:event_jtf_GNCFueraActionPerformed
 
     private void jtf_GNCFueraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_GNCFueraFocusLost
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_jtf_GNCFueraFocusLost
 
     private void jtf_KmInicialKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_KmInicialKeyPressed
