@@ -26,9 +26,6 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPlanillaCaja
      */
-    public double totalNeto = 0.0;
-    public double totalChequeras = 0.0;
-    public double totalGastos = 0.0;
     public ArrayList<Turno> turnos = new ArrayList<Turno>();
     public VentanaPlanillaCaja() {
         initComponents();
@@ -43,7 +40,9 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
     }
     public void cargarDatos(){
         TurnoDAO turnoDAO = new TurnoDAO();
-        
+        double totalNeto =0.0;
+        double totalChequeras=0.0;
+
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
         String fecha = new SimpleDateFormat("yyyy-MM-dd").format(dcb_Fecha.getSelectedDate().getTime());
         
@@ -66,13 +65,14 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
         }
         jtf_Neto.setText(String.valueOf(totalNeto));
         jtf_Chequera.setText(String.valueOf(totalChequeras));
-        cargarDatosAdicionales(turnos);
+        cargarDatosAdicionales(turnos,totalNeto ,totalChequeras);
         jt_Ganancias.setModel(modeloGanancias);
         
     }
-    public void cargarDatosAdicionales(ArrayList<Turno> turnos){
+    public void cargarDatosAdicionales(ArrayList<Turno> turnos, double totalNeto,double totalChequeras){
         DefaultTableModel modeloGastos = (DefaultTableModel) jt_Gastos.getModel();
         modeloGastos.setNumRows(0);
+        Double totalGastos = 0.0;
         for (Turno turno : turnos){
             totalGastos += turno.getImporteCaja(); 
             
