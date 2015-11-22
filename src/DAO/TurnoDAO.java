@@ -249,13 +249,23 @@ public class TurnoDAO {
             
             while(res.next()){
                 Turno turno = new Turno();
-                turno.setIdTurno(res.getInt("idTurno"));
                 turno.setMovil_idMovil(res.getInt("Movil_idMovil"));
-                turno.setRecaudacion(res.getDouble("recaudacion"));
+                turno.setAjustes_idAjustes(res.getInt("Ajustes_idAjustes"));
+                turno.setChofer_DNI(res.getInt("Chofer_DNI"));
+                turno.setKmInicial(res.getInt("kmInicial"));
+                turno.setKmFinal(res.getInt("kmFinal"));
                 turno.setGastosVarios(res.getDouble("gastosVarios"));
+                turno.setRecaudacion(res.getDouble("recaudacion"));
+                turno.setGncBrutoCtaCte(res.getDouble("gncBrutoCtaCte"));
+                turno.setGncFueraCtaCte(res.getDouble("gncFueraCtaCte"));
+                turno.setKmOcupados(res.getInt("kmOcupados"));
+                turno.setKmLibres(res.getInt("kmLibres"));
+                turno.setTicketRelevo1(res.getDouble("ticketRelevo1"));
+                turno.setTicketRelevo2(res.getDouble("ticketRelevo2"));
+                turno.setFecha(res.getString("fecha"));
                 turno.setGastosChequera(res.getDouble("gastosChequera"));
-                turno.setDetalleCaja(res.getString("detalleCaja"));
-                turno.setImporteCaja(res.getDouble("importeCaja"));
+                turno.setTipo(res.getString("tipo"));
+                turno.setNovedades(res.getString("novedades"));
                 turnos.add(turno);
             }
             res.close();

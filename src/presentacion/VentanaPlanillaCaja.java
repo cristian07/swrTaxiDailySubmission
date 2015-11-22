@@ -5,6 +5,7 @@
  */
 package presentacion;
 
+import DAO.AjustesDAO;
 import DAO.MovilDAO;
 import DAO.RepuestoDAO;
 import DAO.TurnoDAO;
@@ -12,8 +13,11 @@ import com.sun.glass.events.KeyEvent;
 import entidades.Movil;
 import entidades.Repuesto;
 import entidades.Turno;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -43,7 +47,6 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
         double totalNeto =0.0;
         double totalChequeras=0.0;
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
         String fecha = new SimpleDateFormat("yyyy-MM-dd").format(dcb_Fecha.getSelectedDate().getTime());
         
         String tipoTurno;
@@ -56,11 +59,15 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
         DefaultTableModel modeloGanancias = (DefaultTableModel) jt_Ganancias.getModel();
         modeloGanancias.setNumRows(0);
         for (Turno turno : turnos){
-            totalNeto +=turno.calcularNeto(0.35);
+            AjustesDAO ajustesDAO = new AjustesDAO();
+            double recuadacionReal = turno.getRecaudacion()-turno.getTicketRelevo1()-turno.getTicketRelevo2();
+            double comision = recuadacionReal* ajustesDAO.obtenerUltimosAjustes().getComisionChofer();
+            double neto = recuadacionReal - comision - turno.getGastosVarios() - turno.getGncFueraCtaCte();
+            totalNeto += neto;
             totalChequeras += turno.getGastosChequera();
             String[] datosGanacia = {
                 String.valueOf(turno.getMovil_idMovil()),
-                String.valueOf(turno.calcularNeto(0.35))};
+                String.valueOf(neto)};
             modeloGanancias.addRow(datosGanacia);
         }
         jtf_Neto.setText(String.valueOf(totalNeto));
@@ -83,6 +90,7 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
                 };
             modeloGastos.addRow(datosGastos);
         }
+        jl_totalGastos.setText(String.valueOf(totalGastos));
         jtf_Efectivo.setText(String.valueOf(totalNeto-totalGastos-totalChequeras));
         jtf_Total.setText(String.valueOf(totalNeto-totalGastos));
         
@@ -112,6 +120,7 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jb_Agregar = new javax.swing.JButton();
+        jl_totalGastos = new javax.swing.JLabel();
         jb_Imprimir = new javax.swing.JButton();
         jb_Cancelar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -196,6 +205,8 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
             }
         });
 
+        jl_totalGastos.setText("jLabel10");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -219,7 +230,9 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(jl_totalGastos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jb_Agregar)))
                 .addContainerGap())
         );
@@ -239,7 +252,9 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
                             .addComponent(jLabel12)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jb_Agregar)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jb_Agregar)
+                    .addComponent(jl_totalGastos))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -440,7 +455,20 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_AgregarActionPerformed
 
     private void jb_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ImprimirActionPerformed
-        // TODO add your handling code here:
+        String fecha = new SimpleDateFormat("yyyy-MM-dd").format(dcb_Fecha.getSelectedDate().getTime());
+        
+        String tipoTurno;
+        if (jcb_Turno.getSelectedItem().toString().equals("Primer Turno")){
+            tipoTurno = "P";
+        } else {
+            tipoTurno = "S";
+        }
+        try {
+            new reportes.ImprimirReportes().planillaCaja(fecha,tipoTurno,jtf_Neto.getText(),jl_totalGastos.getText(),jtf_Efectivo.getText(),jtf_Chequera.getText(),jtf_Total.getText());
+        } catch (Exception e)
+        {
+            
+        }
     }//GEN-LAST:event_jb_ImprimirActionPerformed
 
     private void jtf_ImporteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_ImporteKeyTyped
@@ -511,6 +539,7 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
     private javax.swing.JButton jb_Ver;
     private javax.swing.JComboBox jcb_Moviles;
     private javax.swing.JComboBox jcb_Turno;
+    private javax.swing.JLabel jl_totalGastos;
     private javax.swing.JTable jt_Ganancias;
     private javax.swing.JTable jt_Gastos;
     private javax.swing.JTextArea jta_Detalles;

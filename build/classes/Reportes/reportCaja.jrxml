@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportCaja" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b8b2d659-6f4a-4ad8-a1ba-72c294bc4825">
+	<property name="ireport.zoom" value="3.138428376721006"/>
+	<property name="ireport.x" value="1128"/>
+	<property name="ireport.y" value="349"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="fecha" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tipoTurno" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="totalNeto" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="totalGastos" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subEfectivo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subChequeras" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="total" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+T.detalleCaja AS Detalle,
+T.importeCaja AS Importe,
+T.Movil_idMovil AS Movil, ROUND(SUM(recaudacion-ticketRelevo1-ticketRelevo2 - (recaudacion-ticketRelevo1-ticketRelevo2)*(SELECT A.comisionChofer FROM Ajustes A WHERE A.idAjustes=T.Ajustes_idAjustes) - gastosVarios - gncFueraCtaCte ),2) AS NETO,
+IF (T.tipo='P','Primer Turno','Segundo Turno') AS tipo
+FROM Turno T
+WHERE T.fecha=$P{fecha} AND T.tipo=$P{tipoTurno}
+GROUP BY Movil_idMovil]]>
+	</queryString>
+	<field name="Detalle" class="java.lang.String"/>
+	<field name="Importe" class="java.lang.Float"/>
+	<field name="Movil" class="java.lang.Integer"/>
+	<field name="NETO" class="java.lang.Double"/>
+	<field name="tipo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="5" width="263" height="33" forecolor="#000000" uuid="76267896-0973-4a1c-81e6-13027085f6bf"/>
+				<textElement verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Planilla de caja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="32" height="20" uuid="7a54eb94-8022-47f1-a78c-4e3341b94c84"/>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="32" y="50" width="100" height="20" uuid="f5ab72d8-cdc7-4e76-8209-1376233c5f3d"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="454" y="50" width="100" height="20" uuid="ca0a990b-5a4c-4cbc-9871-64bd91cf444d"/>
+				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="44280d8f-0f7e-4ef4-be24-1f8ac9a80c83"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="147" y="21" width="345" height="15" uuid="18d02d1c-9e85-4a31-99cf-5182a8248477"/>
+				<text><![CDATA[Detalle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="492" y="21" width="63" height="15" uuid="b0f0ea58-1ad0-425d-be56-eb9ad515a1e5"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="0" y="21" width="63" height="15" uuid="8ed7bd59-a59a-4abf-8d15-da7322a271d1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Movil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="63" y="21" width="78" height="14" uuid="d3e9e774-5694-4b25-8abc-7a6e0d971656"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Neto]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="1f2c4d39-3ec7-4ec6-aa62-58d3c93d3c8e"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="1" width="63" height="15" uuid="40d24c7f-69be-4561-8292-2d54dd295bd3"/>
+				<textFieldExpression><![CDATA[$F{Movil}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="147" y="0" width="345" height="15" uuid="7b2f3570-9440-4140-ae3a-71f9a12fc479"/>
+				<textFieldExpression><![CDATA[$F{Detalle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="492" y="0" width="63" height="16" uuid="4fb3ca0d-2a13-4072-9150-33ba51651cca"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{Importe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="63" y="1" width="78" height="15" uuid="766b889d-9c90-40da-b819-97f6d2a42e22"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{NETO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement mode="Opaque" x="63" y="0" width="1" height="15" forecolor="#CCCCCC" backcolor="#FFFFFF" uuid="92b49445-82dd-4caa-b19b-5436d449e094"/>
+				<graphicElement fill="Solid">
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement mode="Opaque" x="146" y="-1" width="1" height="16" forecolor="#CCCCCC" backcolor="#FFFFFF" uuid="1c1961ba-1b1d-411a-9c33-209da901b2bb"/>
+				<graphicElement fill="Solid"/>
+			</line>
+			<line>
+				<reportElement mode="Opaque" x="492" y="0" width="1" height="15" forecolor="#CCCCCC" backcolor="#FFFFFF" uuid="752cf872-ba45-40bb-9d24-5c235b0b60a7"/>
+				<graphicElement fill="Solid"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="71" splitType="Stretch">
+			<rectangle>
+				<reportElement x="307" y="34" width="148" height="14" forecolor="#CCCCCC" uuid="c61da929-f969-4ab9-9489-026448630318"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="307" y="20" width="148" height="14" forecolor="#CCCCCC" uuid="be299f81-b975-4ab3-9a6a-b7424b77c117"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="307" y="6" width="148" height="14" forecolor="#CCCCCC" uuid="8312a68d-3451-40cb-bfde-f61bf8b24e17"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="2" y="19" width="63" height="13" uuid="9015a099-ff0f-42dd-9b23-ec7beb660387"/>
+				<text><![CDATA[Totales:]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="d811a7a7-f7b1-422d-acb9-d5bbedb9870a"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="64" y="5" width="78" height="14" uuid="5d4ec4b4-9f65-4486-9573-37bfc09cbaf5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Total Neto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="142" y="5" width="78" height="14" uuid="7863adeb-0210-4b8e-abd4-a0b6b40098e5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Total Gastos]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="19" width="220" height="1" forecolor="#CCCCCC" uuid="194d0b20-e383-45b8-ac25-1d85475bfe68"/>
+			</line>
+			<line>
+				<reportElement x="64" y="5" width="1" height="27" forecolor="#CCCCCC" uuid="d7a18228-bbc9-45f9-a4ed-8de42dd94d47"/>
+			</line>
+			<line>
+				<reportElement x="142" y="5" width="1" height="27" forecolor="#CCCCCC" uuid="0d1cc10d-cc0a-4e71-8166-49678d219aa0"/>
+			</line>
+			<line>
+				<reportElement x="0" y="32" width="220" height="1" forecolor="#CCCCCC" uuid="af6d685b-1969-432b-8c45-d30928f06cd8"/>
+			</line>
+			<line>
+				<reportElement x="219" y="5" width="1" height="27" forecolor="#CCCCCC" uuid="8f17d1b0-ad75-4f98-86ab-f03b163c4294"/>
+			</line>
+			<line>
+				<reportElement x="0" y="20" width="1" height="13" forecolor="#CCCCCC" uuid="eff617a2-fc88-4ac0-8194-c2d7d83f211b"/>
+			</line>
+			<line>
+				<reportElement x="64" y="5" width="156" height="1" forecolor="#CCCCCC" uuid="eb16f535-689d-4aa2-ad9d-c4cdd1d43c22"/>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="308" y="6" width="147" height="14" uuid="f3f271e5-6c36-4d51-93b5-068671887a17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[SUBTOTAL EN EFECTIVO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="308" y="20" width="147" height="14" uuid="820a1ca1-1348-4b2a-a32f-4e93ca6f8540"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[SUBTOTAL EN CHEQUERAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="415" y="34" width="38" height="14" uuid="0fa97cac-da88-4062-a43d-0c5d8c74f52c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="455" y="6" width="90" height="14" forecolor="#CCCCCC" uuid="3b2211e6-fa83-41f9-b5e9-b38004c8cc7c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="455" y="20" width="90" height="14" forecolor="#CCCCCC" uuid="391186f9-5c52-48d7-8882-f60ebb68808b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="455" y="34" width="90" height="14" forecolor="#CCCCCC" uuid="0a6d8ab1-d194-44ff-933c-636eccd08415"/>
+			</rectangle>
+			<textField>
+				<reportElement x="65" y="19" width="78" height="14" uuid="6943dc32-c121-408d-8fa5-144fd68f0a8d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[
+$P{totalNeto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="143" y="20" width="76" height="14" uuid="37654347-5377-4edc-8643-31150c043eb3"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{totalGastos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="454" y="6" width="90" height="13" uuid="bae16f6e-93ec-48aa-a9db-30fece96d48a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{subEfectivo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="454" y="20" width="90" height="13" uuid="50854e5b-29d9-467e-a422-68534b270db6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{subChequeras}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="454" y="35" width="90" height="14" uuid="69258dae-db4a-4c59-a6a9-0a62013b170e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="425" y="0" width="88" height="20" uuid="c9b8b5a0-2a4e-4623-87d3-d1e39c6afe26"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="42201d0c-a0ac-4353-9f70-94024b911fd1"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="2" y="0" width="100" height="20" uuid="73e5de4a-a29e-4753-8843-905abe7ad5f8"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

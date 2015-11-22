@@ -8,15 +8,7 @@ package presentacion;
 import DAO.ChoferDAO;
 import com.sun.glass.events.KeyEvent;
 import entidades.Chofer;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
