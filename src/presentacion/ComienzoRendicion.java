@@ -5,6 +5,7 @@
  */
 package presentacion;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -19,13 +20,6 @@ public class ComienzoRendicion extends javax.swing.JFrame {
     public ComienzoRendicion() {
         initComponents();
          this.setLocationRelativeTo(null);
-        Calendar calendario = Calendar.getInstance();
-        String fecha = new StringBuilder()
-                .append(Integer.toString(calendario.get(Calendar.DATE))).append("/")
-                .append(Integer.toString(calendario.get(Calendar.MONTH)+1)).append("/")
-                .append(Integer.toString(calendario.get(Calendar.YEAR))).toString();
-
-        jl_fechaHora.setText(fecha);
     }
 
     /**
@@ -39,9 +33,9 @@ public class ComienzoRendicion extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jl_fechaHora = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jcb_turno = new javax.swing.JComboBox();
+        jcb_FechaInicio = new datechooser.beans.DateChooserCombo();
         jPanel2 = new javax.swing.JPanel();
         jb_iniciarRendicion = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -54,8 +48,6 @@ public class ComienzoRendicion extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel1.setText("Fecha");
-
-        jl_fechaHora.setText("12/09/2015");
 
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel3.setText("Seleccione Truno");
@@ -77,18 +69,18 @@ public class ComienzoRendicion extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jl_fechaHora, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcb_turno, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jcb_turno, 0, 179, Short.MAX_VALUE)
+                    .addComponent(jcb_FechaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jl_fechaHora)
-                    .addComponent(jLabel1))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jcb_FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcb_turno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -159,6 +151,7 @@ public class ComienzoRendicion extends javax.swing.JFrame {
     private void jb_iniciarRendicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_iniciarRendicionActionPerformed
         LoginChofer login= new LoginChofer();
         LoginChofer.jl_turno.setText(jcb_turno.getSelectedItem().toString());
+        LoginChofer.jl_Fecha.setText(new SimpleDateFormat("yyyy-MM-dd").format(jcb_FechaInicio.getSelectedDate().getTime()));
         login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jb_iniciarRendicionActionPerformed
@@ -210,7 +203,7 @@ public class ComienzoRendicion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton jb_iniciarRendicion;
+    private datechooser.beans.DateChooserCombo jcb_FechaInicio;
     private javax.swing.JComboBox jcb_turno;
-    private javax.swing.JLabel jl_fechaHora;
     // End of variables declaration//GEN-END:variables
 }

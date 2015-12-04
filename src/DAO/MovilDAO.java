@@ -213,4 +213,19 @@ public class MovilDAO {
             System.out.println(e.getMessage());
         }
     }
+    
+    public void actualizarKilometraje(int idMovil, int kilometraje) {
+        DbConnection conex= new DbConnection();
+        try {
+             Statement estatuto = conex.getConnection().createStatement();
+            estatuto.executeUpdate("UPDATE Movil SET kilometraje="
+                    +kilometraje
+                    + " WHERE idMovil='"
+                    +idMovil+ "'");
+            estatuto.close();
+            conex.desconectar();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+    }
 }

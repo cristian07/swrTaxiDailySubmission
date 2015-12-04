@@ -6,9 +6,11 @@
 package presentacion;
 
 import DAO.AjustesDAO;
+import DAO.ChoferDAO;
 import DAO.FilaDAO;
 import DAO.MovilDAO;
 import DAO.TurnoDAO;
+import entidades.Chofer;
 import entidades.Fila;
 import entidades.Movil;
 import entidades.Turno;
@@ -35,6 +37,13 @@ public class Planilla extends javax.swing.JFrame {
          for (Movil movil : moviles) {
              jcb_Moviles.addItem(String.valueOf(movil.getIdMovil()));
          }
+         
+         ChoferDAO choferDAO = new ChoferDAO();
+         ArrayList<Chofer> choferes = choferDAO.getChoferes();
+
+         for (Chofer chofer : choferes) {
+             jcb_Chofer.addItem(chofer.getDNI());
+         }
          jl_Licencia.setVisible(false);
          jPanel3.setSize(363, 57);
          jPanel3.setPreferredSize(dimension);
@@ -56,10 +65,10 @@ public class Planilla extends javax.swing.JFrame {
         jb_Ver = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jcb_Moviles = new javax.swing.JComboBox();
         jcb_FechaInicio = new datechooser.beans.DateChooserCombo();
         jcb_FechaFin = new datechooser.beans.DateChooserCombo();
+        jcb_Chofer = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
         jl_Licencia = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -93,12 +102,13 @@ public class Planilla extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel3.setText("Fecha fin:");
 
-        jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel4.setText("Movil:");
+        jcb_Moviles.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Movil" }));
 
         jcb_FechaInicio.setWeekStyle(datechooser.view.WeekDaysStyle.SHORT);
 
         jcb_FechaFin.setWeekStyle(datechooser.view.WeekDaysStyle.SHORT);
+
+        jcb_Chofer.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Chofer" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -109,31 +119,36 @@ public class Planilla extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jcb_FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jcb_FechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jcb_Moviles, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jcb_Chofer, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jcb_Moviles, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jb_Ver)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jcb_FechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
-                        .addComponent(jb_Ver)
-                        .addComponent(jcb_Moviles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jcb_FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jb_Ver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)))
+                    .addComponent(jcb_FechaFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jcb_FechaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcb_Chofer)
+                            .addComponent(jcb_Moviles))))
                 .addContainerGap())
         );
 
@@ -253,7 +268,7 @@ public class Planilla extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1105, Short.MAX_VALUE))
+                .addComponent(jScrollPane2))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,8 +326,17 @@ public class Planilla extends javax.swing.JFrame {
         String fechaInicio = new SimpleDateFormat("yyyy-MM-dd").format(jcb_FechaInicio.getSelectedDate().getTime());
         String fechaFin = new SimpleDateFormat("yyyy-MM-dd").format(jcb_FechaFin.getSelectedDate().getTime());
         int idMovil = Integer.parseInt(jcb_Moviles.getSelectedItem().toString());
-
-        turnos = turnosDAO.obtenerTurnosFechas(fechaInicio, fechaFin, idMovil);
+        if (jcb_Moviles.getSelectedItem().toString().equals("Movil") && jcb_Chofer.getSelectedItem().toString().equals("Chofer")) {
+            turnos = turnosDAO.obtenerTurnosFechas(fechaInicio, fechaFin);
+        } else if (!jcb_Moviles.getSelectedItem().toString().equals("Movil") && jcb_Chofer.getSelectedItem().toString().equals("Chofer")){
+            turnos = turnosDAO.obtenerTurnosFechasMovil(fechaInicio, fechaFin, idMovil);
+        } else if (jcb_Moviles.getSelectedItem().toString().equals("Movil") && !jcb_Chofer.getSelectedItem().toString().equals("Chofer")) {
+             turnos = turnosDAO.obtenerTurnosFechasChofer(fechaInicio, fechaFin, Integer.parseInt(jcb_Chofer.getSelectedItem().toString()));
+        } else if (!jcb_Moviles.getSelectedItem().toString().equals("Movil") && !jcb_Chofer.getSelectedItem().toString().equals("Chofer")) {
+             turnos = turnosDAO.obtenerTurnosFechasChofer(fechaInicio, fechaFin, idMovil,Integer.parseInt(jcb_Chofer.getSelectedItem().toString()));
+        } 
+        
+        
         // hasta aqui falta poder convertir bien las fechas
 
         DefaultTableModel modelo = (DefaultTableModel) jt_planilla.getModel();
@@ -388,7 +412,6 @@ public class Planilla extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -397,6 +420,7 @@ public class Planilla extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jb_Ver;
+    private javax.swing.JComboBox jcb_Chofer;
     private datechooser.beans.DateChooserCombo jcb_FechaFin;
     private datechooser.beans.DateChooserCombo jcb_FechaInicio;
     private javax.swing.JComboBox jcb_Moviles;

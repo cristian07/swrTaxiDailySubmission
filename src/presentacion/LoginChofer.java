@@ -23,6 +23,7 @@ public class LoginChofer extends javax.swing.JFrame {
     public LoginChofer() {
         initComponents();
          this.setLocationRelativeTo(null);
+        jl_Fecha.setVisible(false);
     }
 
     /**
@@ -40,6 +41,7 @@ public class LoginChofer extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jl_turno = new javax.swing.JLabel();
+        jl_Fecha = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Selección de chofer");
@@ -77,6 +79,8 @@ public class LoginChofer extends javax.swing.JFrame {
 
         jl_turno.setText("<Turno>");
 
+        jl_Fecha.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,10 +89,6 @@ public class LoginChofer extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jl_turno))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(74, 74, 74)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -96,8 +96,15 @@ public class LoginChofer extends javax.swing.JFrame {
                                 .addComponent(jButton1)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton2))
-                            .addComponent(jtf_DNI))))
-                .addContainerGap(37, Short.MAX_VALUE))
+                            .addComponent(jtf_DNI))
+                        .addContainerGap(37, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jl_turno)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jl_Fecha)
+                        .addGap(51, 51, 51))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,7 +112,8 @@ public class LoginChofer extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jl_turno))
+                    .addComponent(jl_turno)
+                    .addComponent(jl_Fecha))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -142,6 +150,8 @@ public class LoginChofer extends javax.swing.JFrame {
             RendicionChofer.jl_DNI.setText(jtf_DNI.getText());
             RendicionChofer.jl_chofer.setText(chofer.getApellido()+", "+chofer.getNombre());
             RendicionChofer.nombre=chofer.getApellido()+", "+chofer.getNombre();
+            RendicionChofer.jl_Fecha.setText(jl_Fecha.getText());
+            jtf_DNI.setText("");
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -199,6 +209,7 @@ public class LoginChofer extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    public static javax.swing.JLabel jl_Fecha;
     public static javax.swing.JLabel jl_turno;
     private javax.swing.JTextField jtf_DNI;
     // End of variables declaration//GEN-END:variables

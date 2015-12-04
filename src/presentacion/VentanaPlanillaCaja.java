@@ -37,7 +37,7 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
          MovilDAO movilDAO = new MovilDAO();
         ArrayList<Movil> moviles = movilDAO.obtenerIdMoviles();
         DefaultListModel modelo = new DefaultListModel();
-        
+        jl_totalGastos.setVisible(false);
          for (Movil movil : moviles) {
              jcb_Moviles.addItem(movil.getIdMovil());
          }
@@ -86,7 +86,7 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
             String[] datosGastos = {
                 String.valueOf(turno.getMovil_idMovil()),
                 turno.getDetalleCaja(),
-                String.valueOf(totalGastos)
+                String.valueOf(turno.getImporteCaja())
                 };
             modeloGastos.addRow(datosGastos);
         }
@@ -451,7 +451,6 @@ public class VentanaPlanillaCaja extends javax.swing.JFrame {
         turno.setImporteCaja(Integer.parseInt(jtf_Importe.getText()));
         turnoDAO.agregarCaja(turno);
         cargarDatos();
-        
     }//GEN-LAST:event_jb_AgregarActionPerformed
 
     private void jb_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ImprimirActionPerformed

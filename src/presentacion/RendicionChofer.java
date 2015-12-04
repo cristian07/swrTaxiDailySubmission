@@ -31,11 +31,7 @@ public class RendicionChofer extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         Calendar calendario = Calendar.getInstance();
-        String fechaHoraSQL = new StringBuilder()
-                .append(Integer.toString(calendario.get(Calendar.DATE))).append("/")
-                .append(Integer.toString(calendario.get(Calendar.MONTH)+1)).append("/")
-                .append(Integer.toString(calendario.get(Calendar.YEAR))).toString();
-        jl_Fecha.setText(fechaHoraSQL);
+       
         TurnoDAO turnoDAO = new TurnoDAO();
         ArrayList<Movil> moviles = new ArrayList<Movil>();
         AjustesDAO ajustesDAO = new AjustesDAO();
@@ -54,6 +50,7 @@ public class RendicionChofer extends javax.swing.JFrame {
         String DNI = jl_DNI.getText();
         String idMovil = jtf_Movil.getSelectedItem().toString();
         turno.setGastosVarios(Double.parseDouble(jtf_Gastos.getText()));
+        turno.setFecha(jl_Fecha.getText());
         turno.setKmInicial(Integer.parseInt(jtf_KmInicial.getText()));
         turno.setKmFinal(Integer.parseInt(jtf_KmFinal.getText()));
         turno.setRecaudacion(Double.parseDouble(jtf_Recaudacion.getText()));
@@ -809,7 +806,7 @@ public class RendicionChofer extends javax.swing.JFrame {
              La linea q tenes q agregar al codigo es la de abajo
              Saludos*/
 
-            new reportes.ImprimirReportes().RendicionCuenta(turno, jtf_Comision.getText(), jtf_Neto.getText(),nombre);
+            new reportes.ImprimirReportes().RendicionCuenta(turno, jtf_Comision.getText(), jtf_Neto.getText(),jl_chofer.getText());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RendicionChofer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -817,6 +814,7 @@ public class RendicionChofer extends javax.swing.JFrame {
         }
         LoginChofer login = new LoginChofer();
         LoginChofer.jl_turno.setText(jl_Tipo.getText());
+        LoginChofer.jl_Fecha.setText(jl_Fecha.getText());
         login.setVisible(true);
         this.dispose();
     }
@@ -1166,7 +1164,7 @@ public class RendicionChofer extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JLabel jl_DNI;
-    private javax.swing.JLabel jl_Fecha;
+    public static javax.swing.JLabel jl_Fecha;
     public static javax.swing.JLabel jl_Tipo;
     public static javax.swing.JLabel jl_chofer;
     private javax.swing.JTextArea jta_Novedades;
