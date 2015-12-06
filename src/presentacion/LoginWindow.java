@@ -110,6 +110,11 @@ public class LoginWindow extends javax.swing.JFrame {
                 jb_IngresarActionPerformed(evt);
             }
         });
+        jb_Ingresar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jb_IngresarKeyPressed(evt);
+            }
+        });
 
         jb_Salir.setText("Salir");
         jb_Salir.addActionListener(new java.awt.event.ActionListener() {
@@ -200,7 +205,15 @@ public class LoginWindow extends javax.swing.JFrame {
 
     private void jtf_ClaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_ClaveKeyPressed
         // TODO add your handling code here:
+         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+                ingresar();
+        }
     }//GEN-LAST:event_jtf_ClaveKeyPressed
+
+    private void jb_IngresarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jb_IngresarKeyPressed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jb_IngresarKeyPressed
 
     /**
      * @param args the command line arguments

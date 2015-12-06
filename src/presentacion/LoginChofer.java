@@ -55,6 +55,9 @@ public class LoginChofer extends javax.swing.JFrame {
             }
         });
         jtf_DNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtf_DNIKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtf_DNIKeyTyped(evt);
             }
@@ -97,7 +100,7 @@ public class LoginChofer extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton2))
                             .addComponent(jtf_DNI))
-                        .addContainerGap(37, Short.MAX_VALUE))
+                        .addContainerGap(44, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -118,7 +121,7 @@ public class LoginChofer extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jtf_DNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -134,26 +137,8 @@ public class LoginChofer extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-                
-        ChoferDAO choferDAO = new ChoferDAO();
-        Chofer chofer = new Chofer(); 
-        chofer = choferDAO.consultarChofer(Integer.parseInt(jtf_DNI.getText()));
-        //jl_chofer.setText();
-        if (chofer.getDNI()==0){
-            jtf_DNI.setText("");
-            JOptionPane.showMessageDialog(null, "Chofer no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
-            jtf_DNI.requestFocus();
-        } else {
-            RendicionChofer rendicion= new RendicionChofer();
-            rendicion.setVisible(true);
-            RendicionChofer.jl_Tipo.setText(jl_turno.getText());
-            RendicionChofer.jl_DNI.setText(jtf_DNI.getText());
-            RendicionChofer.jl_chofer.setText(chofer.getApellido()+", "+chofer.getNombre());
-            RendicionChofer.nombre=chofer.getApellido()+", "+chofer.getNombre();
-            RendicionChofer.jl_Fecha.setText(jl_Fecha.getText());
-            jtf_DNI.setText("");
-            this.dispose();
-        }
+        nuevaRendicion();  
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -168,6 +153,13 @@ public class LoginChofer extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_jtf_DNIKeyTyped
+
+    private void jtf_DNIKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_DNIKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+                nuevaRendicion();
+        }
+    }//GEN-LAST:event_jtf_DNIKeyPressed
 
     /**
      * @param args the command line arguments
@@ -202,6 +194,27 @@ public class LoginChofer extends javax.swing.JFrame {
                 new LoginChofer().setVisible(true);
             }
         });
+    }
+    public void nuevaRendicion(){
+        ChoferDAO choferDAO = new ChoferDAO();
+        Chofer chofer = new Chofer(); 
+        chofer = choferDAO.consultarChofer(Integer.parseInt(jtf_DNI.getText()));
+        //jl_chofer.setText();
+        if (chofer.getDNI()==0){
+            jtf_DNI.setText("");
+            JOptionPane.showMessageDialog(null, "Chofer no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
+            jtf_DNI.requestFocus();
+        } else {
+            RendicionChofer rendicion= new RendicionChofer();
+            rendicion.setVisible(true);
+            RendicionChofer.jl_Tipo.setText(jl_turno.getText());
+            RendicionChofer.jl_DNI.setText(jtf_DNI.getText());
+            RendicionChofer.jl_chofer.setText(chofer.getApellido()+", "+chofer.getNombre());
+            RendicionChofer.nombre=chofer.getApellido()+", "+chofer.getNombre();
+            RendicionChofer.jl_Fecha.setText(jl_Fecha.getText());
+            jtf_DNI.setText("");
+            this.dispose();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -329,6 +329,11 @@ public class RendicionChofer extends javax.swing.JFrame {
             }
         });
 
+        jtf_KmFinal.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtf_KmFinalFocusLost(evt);
+            }
+        });
         jtf_KmFinal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_KmFinalKeyPressed(evt);
@@ -416,6 +421,11 @@ public class RendicionChofer extends javax.swing.JFrame {
         jtf_Movil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtf_MovilActionPerformed(evt);
+            }
+        });
+        jtf_Movil.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtf_MovilKeyPressed(evt);
             }
         });
 
@@ -606,7 +616,7 @@ public class RendicionChofer extends javax.swing.JFrame {
                     .addComponent(jLabel14)
                     .addComponent(jLabel21)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
+                .addGap(16, 16, 16))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -763,6 +773,10 @@ public class RendicionChofer extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
             this.dispose();
+            LoginChofer login = new LoginChofer();
+            LoginChofer.jl_turno.setText(jl_Tipo.getText());
+            LoginChofer.jl_Fecha.setText(jl_Fecha.getText());
+            login.setVisible(true);
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -907,79 +921,79 @@ public class RendicionChofer extends javax.swing.JFrame {
 
     private void jtf_KmInicialKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_KmInicialKeyPressed
         // TODO add your handling code here:
-//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-//            jtf_KmFinal.requestFocus();
-//        }
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            jtf_KmFinal.requestFocus();
+        }
     }//GEN-LAST:event_jtf_KmInicialKeyPressed
 
     private void jtf_KmFinalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_KmFinalKeyPressed
         // TODO add your handling code here:
-//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-//            jtf_TicketRelevo1.requestFocus();
-//        }
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            jtf_TicketRelevo1.requestFocus();
+        }
     }//GEN-LAST:event_jtf_KmFinalKeyPressed
 
     private void jtf_TicketRelevo1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_TicketRelevo1KeyPressed
         // TODO add your handling code here:
-//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-//            jtf_TicketRelevo2.requestFocus();
-//        }
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            jtf_TicketRelevo2.requestFocus();
+        }
     }//GEN-LAST:event_jtf_TicketRelevo1KeyPressed
 
     private void jtf_TicketRelevo2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_TicketRelevo2KeyPressed
         // TODO add your handling code here:
-//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-//            jtf_Recaudacion.requestFocus();
-//        }
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            jtf_Recaudacion.requestFocus();
+        }
     }//GEN-LAST:event_jtf_TicketRelevo2KeyPressed
 
     private void jtf_RecaudacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_RecaudacionKeyPressed
         // TODO add your handling code here:
-//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-//            jtf_Gastos.requestFocus();
-//        }
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            jtf_Gastos.requestFocus();
+        }
     }//GEN-LAST:event_jtf_RecaudacionKeyPressed
 
     private void jtf_GastosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_GastosKeyPressed
         // TODO add your handling code here:
-//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-//            jtf_GNCBruto.requestFocus();
-//        }
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            jtf_GNCBruto.requestFocus();
+        }
     }//GEN-LAST:event_jtf_GastosKeyPressed
 
     private void jtf_GNCBrutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_GNCBrutoKeyPressed
         // TODO add your handling code here:
-//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-//            jtf_GNCFuera.requestFocus();
-//        }
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            jtf_GNCFuera.requestFocus();
+        }
     }//GEN-LAST:event_jtf_GNCBrutoKeyPressed
 
     private void jtf_GNCFueraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_GNCFueraKeyPressed
         // TODO add your handling code here:
-//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-//            jtf_KmOcupados.requestFocus();
-//        }
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            jtf_KmOcupados.requestFocus();
+        }
     }//GEN-LAST:event_jtf_GNCFueraKeyPressed
 
     private void jtf_KmOcupadosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_KmOcupadosKeyPressed
         // TODO add your handling code here:
-//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-//            jtf_KmLibres.requestFocus();
-//        }
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            jtf_KmLibres.requestFocus();
+        }
     }//GEN-LAST:event_jtf_KmOcupadosKeyPressed
 
     private void jtf_KmLibresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_KmLibresKeyPressed
         // TODO add your handling code here:
-//         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-//            jtf_GastosChequera.requestFocus();
-//        }
+         if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            jtf_GastosChequera.requestFocus();
+        }
     }//GEN-LAST:event_jtf_KmLibresKeyPressed
 
     private void jtf_GastosChequeraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_GastosChequeraKeyPressed
         // TODO add your handling code here:
-//        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-//            jta_Novedades.requestFocus();
-//        }
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            jta_Novedades.requestFocus();
+        }
     }//GEN-LAST:event_jtf_GastosChequeraKeyPressed
 
     private void jta_NovedadesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jta_NovedadesKeyPressed
@@ -1085,6 +1099,19 @@ public class RendicionChofer extends javax.swing.JFrame {
 }
     }//GEN-LAST:event_jtf_GastosChequeraKeyTyped
 
+    private void jtf_KmFinalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtf_KmFinalFocusLost
+        // TODO add your handling code here
+        validateKmFields();
+        
+    }//GEN-LAST:event_jtf_KmFinalFocusLost
+
+    private void jtf_MovilKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_MovilKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
+            jtf_KmInicial.requestFocus();
+        }
+    }//GEN-LAST:event_jtf_MovilKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -1121,6 +1148,14 @@ public class RendicionChofer extends javax.swing.JFrame {
         });
     }
 
+    public void validateKmFields(){
+    Integer kmInicial= Integer.parseInt(jtf_KmInicial.getText());
+         Integer kmFinal= Integer.parseInt(jtf_KmFinal.getText());
+         if(kmFinal<=kmInicial){
+             JOptionPane.showMessageDialog(rootPane, "ATENCIÓN,KM final debe ser mayor a KM Final");
+         }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
