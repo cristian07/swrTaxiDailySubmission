@@ -10,6 +10,7 @@ import DAO.AlertasDAO;
 import com.sun.glass.events.KeyEvent;
 import entidades.Ajustes;
 import entidades.Alertas;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -280,11 +281,11 @@ public class VentanaAjustes extends javax.swing.JFrame {
 
         jLabel13.setText("dias");
 
-        jLabel14.setText("dias");
+        jLabel14.setText("Km");
 
-        jLabel15.setText("dias");
+        jLabel15.setText("Km");
 
-        jLabel16.setText("dias");
+        jLabel16.setText("Km");
 
         jLabel17.setText("dias");
 
@@ -423,13 +424,15 @@ public class VentanaAjustes extends javax.swing.JFrame {
     }//GEN-LAST:event_jte_AjusteGasActionPerformed
 
     private void jb_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ActualizarActionPerformed
-        AjustesDAO ajustesDAO = new AjustesDAO();
-        Ajustes ajustes = new Ajustes();
-        ajustes.setComisionChofer(Double.parseDouble(jtf_ComisionChofer.getText()));
-        ajustes.setAjusteGas(Double.parseDouble(jte_AjusteGas.getText()));
-        ajustes.setPrecioGasCtaCte(Double.parseDouble(jte_PrecioGasCtaCte.getText()));
-        ajustes.setPrecioGasFuera(Double.parseDouble(jte_PrecioGasFueraCta.getText()));
-        ajustesDAO.actualizarAjustes(ajustes);
+        if(jtf_ComisionChofer.getText().isEmpty()||
+           jte_AjusteGas.getText().isEmpty()||
+           jte_PrecioGasCtaCte.getText().isEmpty()||
+           jte_PrecioGasFueraCta.getText().isEmpty()){
+            
+            JOptionPane.showMessageDialog(rootPane, "Todos los campos deben estar completos");
+        }else{
+            actualizarAjustes();
+        }
     }//GEN-LAST:event_jb_ActualizarActionPerformed
 
     private void jb_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_SalirActionPerformed
@@ -437,16 +440,16 @@ public class VentanaAjustes extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_SalirActionPerformed
 
     private void jb_ActualizarAlarmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ActualizarAlarmasActionPerformed
-        AlertasDAO alertasDAO = new AlertasDAO();
-        Alertas alertas = new Alertas();
-        alertas.setAceite(Integer.parseInt(jtf_Aceite.getText()));
-        alertas.setCorrea(Integer.parseInt(jtf_Correa.getText()));
-        alertas.setFiltro(Integer.parseInt(jtf_Filtro.getText()));
-        alertas.setGrasa(Integer.parseInt(jtf_Grasa.getText()));
-        alertas.setVencimientoLicenciaConductor(Integer.parseInt(jtf_Chofer.getText()));
-        alertas.setVencimientoLicenciaTaxi(Integer.parseInt(jtf_Taxi.getText()));
-        alertasDAO.actualizarAlertas(alertas);
-                
+        if(jtf_Taxi.getText().isEmpty()||
+           jtf_Chofer.getText().isEmpty()||
+           jtf_Correa.getText().isEmpty()||
+           jtf_Aceite.getText().isEmpty()||
+           jtf_Grasa.getText().isEmpty()
+           ){
+            JOptionPane.showMessageDialog(rootPane, "Todos los campos deben estar completos");
+        }else{
+        actualizarAlarmas();
+        }
     }//GEN-LAST:event_jb_ActualizarAlarmasActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -567,7 +570,33 @@ public class VentanaAjustes extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void actualizarAjustes(){
+        
+        AjustesDAO ajustesDAO = new AjustesDAO();
+        Ajustes ajustes = new Ajustes();
+        ajustes.setComisionChofer(Double.parseDouble(jtf_ComisionChofer.getText()));
+        ajustes.setAjusteGas(Double.parseDouble(jte_AjusteGas.getText()));
+        ajustes.setPrecioGasCtaCte(Double.parseDouble(jte_PrecioGasCtaCte.getText()));
+        ajustes.setPrecioGasFuera(Double.parseDouble(jte_PrecioGasFueraCta.getText()));
+        ajustesDAO.actualizarAjustes(ajustes);
+        JOptionPane.showMessageDialog(rootPane, "Los datos se actualizaron con éxito");
+    }
+    
+    public void actualizarAlarmas(){
+    AlertasDAO alertasDAO = new AlertasDAO();
+        Alertas alertas = new Alertas();
+        alertas.setAceite(Integer.parseInt(jtf_Aceite.getText()));
+        alertas.setCorrea(Integer.parseInt(jtf_Correa.getText()));
+        alertas.setFiltro(Integer.parseInt(jtf_Filtro.getText()));
+        alertas.setGrasa(Integer.parseInt(jtf_Grasa.getText()));
+        alertas.setVencimientoLicenciaConductor(Integer.parseInt(jtf_Chofer.getText()));
+        alertas.setVencimientoLicenciaTaxi(Integer.parseInt(jtf_Taxi.getText()));
+        alertasDAO.actualizarAlertas(alertas);
+        JOptionPane.showMessageDialog(rootPane, "Los datos se actualizaron con éxito");
+    }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane Ajustes;
     private javax.swing.JButton jButton2;

@@ -782,7 +782,10 @@ public class RendicionChofer extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        LimpiarCampos();
+        int limpiar=JOptionPane.showConfirmDialog(rootPane, "Seguro desea limpiar los campos?");
+        if(limpiar==0){
+            LimpiarCampos();
+        }
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -803,10 +806,8 @@ public class RendicionChofer extends javax.swing.JFrame {
     
             JOptionPane.showMessageDialog(rootPane, "Debe completar los datos requeridos");
             
-    }else{
-       
+    }else{  
            calcularCampos();
-
             
         try {
             registrarTurno();

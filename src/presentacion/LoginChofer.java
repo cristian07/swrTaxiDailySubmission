@@ -8,6 +8,7 @@ package presentacion;
 import DAO.ChoferDAO;
 import com.sun.glass.events.KeyEvent;
 import entidades.Chofer;
+import static java.time.Clock.system;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -137,13 +138,22 @@ public class LoginChofer extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        nuevaRendicion();  
-        
+        if(jtf_DNI.getText().isEmpty()){
+            JOptionPane.showMessageDialog(rootPane,"Debe ingresar el DNI de un chofer");
+        }else{
+            nuevaRendicion();  
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        int showConfirmDialog = JOptionPane.showConfirmDialog(rootPane, "Esta seguro que desea terminar la rendición");
+        
+        if(showConfirmDialog==0){
+            this.dispose();
+        }
+           
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jtf_DNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_DNIKeyTyped
