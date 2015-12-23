@@ -9,6 +9,7 @@ import entidades.Alertas;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import servicio.DbConnection;
 
 /**
@@ -59,5 +60,24 @@ public class AlertasDAO {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+    private ArrayList<String> vencimientoLicenciaTaxi(int dias){
+         DbConnection conex= new DbConnection();
+          ArrayList<String> vencimientoLicenciaTaxi = new ArrayList<String>();
+        try {
+             PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT idMovil,fechaLicencia from Movil M where M.fechaLicencia >= DATE_SUB(NOW() , INTERVAL "+dias+" DAY)");
+             ResultSet res = consulta.executeQuery();
+            
+            while(res.next()){
+               vencimientoLicenciaTaxi.add("Licencia del movil "+res.getInt("idMovil")+" se vence proximamente");
+            }
+            res.close();
+            consulta.close();
+            conex.desconectar();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }  
+        return vencimientoLicenciaTaxi;
     }
 }

@@ -320,20 +320,26 @@ public class Planilla extends javax.swing.JFrame {
         Double sPrecioKm = 0.0;
         Double sGNCBn = 0.0;
         Double sRendimiento = 0.0;
-
+        int chofer=0;
         // todo: formato de la fecha jdatechooser
 
         String fechaInicio = new SimpleDateFormat("yyyy-MM-dd").format(jcb_FechaInicio.getSelectedDate().getTime());
         String fechaFin = new SimpleDateFormat("yyyy-MM-dd").format(jcb_FechaFin.getSelectedDate().getTime());
-        int idMovil = Integer.parseInt(jcb_Moviles.getSelectedItem().toString());
+        int idMovil = 0;
+        try {
+            idMovil = Integer.parseInt(jcb_Moviles.getSelectedItem().toString());
+        } catch(Exception e){}
+        
         if (jcb_Moviles.getSelectedItem().toString().equals("Movil") && jcb_Chofer.getSelectedItem().toString().equals("Chofer")) {
-            turnos = turnosDAO.obtenerTurnosFechas(fechaInicio, fechaFin);
+            turnos = turnosDAO.obtenerTurnosFechas(fechaInicio, fechaFin); // por fecha
         } else if (!jcb_Moviles.getSelectedItem().toString().equals("Movil") && jcb_Chofer.getSelectedItem().toString().equals("Chofer")){
-            turnos = turnosDAO.obtenerTurnosFechasMovil(fechaInicio, fechaFin, idMovil);
+            turnos = turnosDAO.obtenerTurnosFechasMovil(fechaInicio, fechaFin, idMovil); // por movil
         } else if (jcb_Moviles.getSelectedItem().toString().equals("Movil") && !jcb_Chofer.getSelectedItem().toString().equals("Chofer")) {
-             turnos = turnosDAO.obtenerTurnosFechasChofer(fechaInicio, fechaFin, Integer.parseInt(jcb_Chofer.getSelectedItem().toString()));
+             turnos = turnosDAO.obtenerTurnosFechasChofer(fechaInicio, fechaFin, Integer.parseInt(jcb_Chofer.getSelectedItem().toString())); // chofer
+              chofer = 1;
         } else if (!jcb_Moviles.getSelectedItem().toString().equals("Movil") && !jcb_Chofer.getSelectedItem().toString().equals("Chofer")) {
-             turnos = turnosDAO.obtenerTurnosFechasChofer(fechaInicio, fechaFin, idMovil,Integer.parseInt(jcb_Chofer.getSelectedItem().toString()));
+             turnos = turnosDAO.obtenerTurnosFechasChoferMovil(fechaInicio, fechaFin, Integer.parseInt(jcb_Chofer.getSelectedItem().toString()), idMovil); // chofer y movil
+            
         } 
         
         
@@ -360,7 +366,15 @@ public class Planilla extends javax.swing.JFrame {
         }
         movil = movilDAO.obtenerDetalleLicencia(idMovil);
         jt_planilla.setModel(modelo);
-        jl_Licencia.setText("LICENCIA "+movil.getNumeroLicencia()+" "+movil.getLicencia());
+        
+        
+        if (chofer>0) {
+            ChoferDAO choferDAO = new ChoferDAO();
+            Chofer choferA = choferDAO.consultarChofer(turnos.get(0).getChofer_DNI());
+            jl_Licencia.setText(choferA.getApellido()+", "+choferA.getNombre());
+        } else {
+            jl_Licencia.setText("LICENCIA "+movil.getNumeroLicencia()+" "+movil.getLicencia());
+        }
         jl_Licencia.setVisible(true);
         modeloTotales.setNumRows(0);
         String[] filaMdeloTotales = {String.valueOf(sRecaudacion),

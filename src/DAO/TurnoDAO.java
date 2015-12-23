@@ -437,6 +437,55 @@ public class TurnoDAO {
         }
     }
 
+    public ArrayList<Turno> obtenerTurnosFechasChoferMovil(String fechaInicio, String fechaFin, int DNI, int idMovil) {
+       DbConnection conex= new DbConnection();
+        ArrayList<Turno> turnos = new ArrayList<Turno>();
+        
+        try {
+            PreparedStatement consulta = conex.getConnection()
+                    .prepareStatement("SELECT * FROM Turno T WHERE T.fecha between ? and ? and T.Chofer_DNI=? and T.Movil_idMovil=? ORDER BY T.fecha");
+            
+            consulta.setString(1, fechaInicio);
+            consulta.setString(2, fechaFin);
+            consulta.setInt(3, DNI);
+            consulta.setInt(4, idMovil);
+            
+            ResultSet res = consulta.executeQuery();
+
+            while(res.next()){
+                Turno turno = new Turno();
+                turno.setIdTurno(res.getInt("idTurno"));
+                turno.setMovil_idMovil(res.getInt("Movil_idMovil"));
+                turno.setAjustes_idAjustes(res.getInt("Ajustes_idAjustes"));
+                turno.setChofer_DNI(res.getInt("Chofer_DNI"));
+                turno.setKmInicial(res.getInt("kmInicial"));
+                turno.setKmFinal(res.getInt("kmFinal"));
+                turno.setGastosVarios(res.getDouble("gastosVarios"));
+                turno.setRecaudacion(res.getDouble("recaudacion"));
+                turno.setGncBrutoCtaCte(res.getDouble("gncBrutoCtaCte"));
+                turno.setGncFueraCtaCte(res.getDouble("gncFueraCtaCte"));
+                turno.setKmOcupados(res.getInt("kmOcupados"));
+                turno.setKmLibres(res.getInt("kmLibres"));
+                turno.setTicketRelevo1(res.getDouble("ticketRelevo1"));
+                turno.setTicketRelevo2(res.getDouble("ticketRelevo2"));
+                turno.setFecha(res.getString("fecha"));
+                turno.setGastosChequera(res.getDouble("gastosChequera"));
+                turno.setTipo(res.getString("tipo"));
+                turno.setNovedades(res.getString("novedades"));
+                turno.setImporteCaja(res.getDouble("importeCaja"));
+                turno.setDetalleCaja(res.getString("detalleCaja"));
+                turnos.add(turno);
+            }
+            res.close();
+            consulta.close();
+            conex.desconectar();
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+       return turnos; 
+    }
+
     
    }
 

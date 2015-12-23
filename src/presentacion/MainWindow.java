@@ -5,6 +5,10 @@
  */
 package presentacion;
 
+import DAO.AlertasDAO;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author Cristian
@@ -17,6 +21,14 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
         this.setLocationRelativeTo(null);
+        DefaultListModel modelo = new DefaultListModel();
+        AlertasDAO alertasDAO = new AlertasDAO();
+       // ArrayList<String> listaAlertas = alertasDAO.
+      //  for(Repuesto repuesto : repuestos){
+      //       modelo.addElement(repuesto.getNombre());
+      //  }
+        
+      //  jl_Disponibles.setModel(modelo);
     }
     MainWindow(LoginWindow loginWindow, boolean b) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

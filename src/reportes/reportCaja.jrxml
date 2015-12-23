@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportCaja" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b8b2d659-6f4a-4ad8-a1ba-72c294bc4825">
-	<property name="ireport.zoom" value="1.4641000000000088"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="23"/>
+	<property name="ireport.zoom" value="2.3579476910000152"/>
+	<property name="ireport.x" value="571"/>
+	<property name="ireport.y" value="283"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
@@ -61,13 +61,14 @@ GROUP BY Movil_idMovil]]>
 				<reportElement x="0" y="43" width="32" height="20" uuid="7a54eb94-8022-47f1-a78c-4e3341b94c84"/>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="32" y="43" width="100" height="20" uuid="f5ab72d8-cdc7-4e76-8209-1376233c5f3d"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement x="455" y="43" width="100" height="20" uuid="ca0a990b-5a4c-4cbc-9871-64bd91cf444d"/>
 				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="32" y="43" width="100" height="20" uuid="0cfdb75e-d5eb-4ccf-a536-ef438cc596a7"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format( new SimpleDateFormat("yyyy-MM-dd").parse($P{fecha}))
+]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -266,8 +267,13 @@ GROUP BY Movil_idMovil]]>
 	</columnFooter>
 	<pageFooter>
 		<band height="20" splitType="Stretch">
-			<textField pattern="h.mm a">
-				<reportElement x="454" y="0" width="100" height="20" uuid="73e5de4a-a29e-4753-8843-905abe7ad5f8"/>
+			<textField pattern="HH.mm">
+				<reportElement x="492" y="0" width="62" height="20" uuid="73e5de4a-a29e-4753-8843-905abe7ad5f8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="393" y="0" width="100" height="20" uuid="8ea10843-24f8-42c5-b8fd-7a9ceb70a4f3"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
