@@ -2,13 +2,14 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte1" language="groovy" pageWidth="297" pageHeight="421" columnWidth="257" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="afb7009a-0631-457b-bc89-b468454a17da">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="37"/>
+	<property name="ireport.y" value="227"/>
 	<parameter name="idturno" class="java.lang.Integer"/>
 	<parameter name="comision" class="java.lang.String"/>
 	<parameter name="neto" class="java.lang.String"/>
 	<parameter name="nombre" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="recaudacionReal" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT * FROM turno WHERE idTurno=$P{idturno}]]>
 	</queryString>
@@ -182,7 +183,7 @@
 			</textField>
 			<textField>
 				<reportElement x="119" y="80" width="100" height="14" uuid="0f7e277b-1916-44c8-bc4d-e88d921dac9e"/>
-				<textFieldExpression><![CDATA[$F{recaudacion}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{recaudacionReal}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="119" y="94" width="100" height="14" uuid="46f9e734-04c0-4b2f-be3f-221d33cdaced"/>

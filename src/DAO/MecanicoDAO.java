@@ -13,38 +13,25 @@ import servicio.DbConnection;
  * @author laptop
  */
 public class MecanicoDAO {
-    public void altaMecanico(Mecanico mecanico,ArrayList<String> repuestos){
+    public String altaMecanico(Mecanico mecanico){
        DbConnection conex= new DbConnection();
-       int idMecanico;
         try {
             Statement estatuto = conex.getConnection().createStatement();
             estatuto.executeUpdate("INSERT INTO Mecanico VALUES (NULL,"
                 +mecanico.getMovil_idMovil()+", '"
                 +mecanico.getFecha()+"', '"
                 +mecanico.getReparacion()+"',"
-                +mecanico.getImporte()+")");
+                +mecanico.getImporte()+",'"
+                +mecanico.getRepuestos()+"')");
             estatuto.close();
             conex.desconectar();
-            idMecanico = ultimoIngreso();
-            for (String repuesto : repuestos){
-                altaRespuestos_has_Mecanico(repuesto,idMecanico,mecanico.getMovil_idMovil());
-            }
+            return "Exito!";
         } catch (SQLException e) {
             System.out.println("insertar en turno"+e.getMessage());
+            return "Ocurrio un problema al intentar grabar";
         } 
-       
     }
-    public void altaRespuestos_has_Mecanico(String nombre,int idMecanico,int idMovil){
-        DbConnection conex= new DbConnection();
-        try {
-            Statement estatuto = conex.getConnection().createStatement();
-            estatuto.executeUpdate("INSERT INTO Repuesto_has_Mecanico VALUES ('"+nombre+"',"+idMecanico+","+idMovil+")");
-            estatuto.close();
-            conex.desconectar();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
+    
     public int ultimoIngreso(){
         int idMecanico=0;
         DbConnection conex= new DbConnection();
@@ -64,5 +51,36 @@ public class MecanicoDAO {
                 System.out.println(e);
         }
         return idMecanico;
+    }
+    public ArrayList<Mecanico> obtenerMecanicoMovil(int idMovil,String fechaInicio,String fechaFin) {
+        DbConnection conex= new DbConnection();
+        ArrayList<Mecanico> mecanicos = new ArrayList<Mecanico>();
+        
+        try {
+            PreparedStatement consulta = conex.getConnection()
+                    .prepareStatement("SELECT * FROM Mecanico M WHERE M.fecha between ? and ? and M.Movil_idMovil=? ORDER BY M.fecha");
+            
+            consulta.setString(1, fechaInicio);
+            consulta.setString(2, fechaFin);
+            consulta.setInt(3, idMovil);
+            
+            ResultSet res = consulta.executeQuery();
+
+            while(res.next()){
+                Mecanico mecanico = new Mecanico();
+                mecanico.setFecha(res.getString("fecha"));
+                mecanico.setImporte(res.getDouble("importe"));
+                mecanico.setReparacion(res.getString("reparacion"));
+                mecanico.setRepuestos(res.getString("repuestos"));
+                mecanicos.add(mecanico);
+            }
+            res.close();
+            consulta.close();
+            conex.desconectar();
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+       return mecanicos; 
     }
 }

@@ -16,6 +16,7 @@ public class Mecanico {
     private String fecha;
     private String reparacion;
     private double importe;
+    private String repuestos;
 
     /**
      * @return the idMecanico
@@ -85,6 +86,20 @@ public class Mecanico {
      */
     public void setImporte(double importe) {
         this.importe = importe;
+    }
+
+    /**
+     * @return the repuestos
+     */
+    public String getRepuestos() {
+        return repuestos;
+    }
+
+    /**
+     * @param repuestos the repuestos to set
+     */
+    public void setRepuestos(String repuestos) {
+        this.repuestos = repuestos;
     }
     
 }

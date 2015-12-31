@@ -201,6 +201,11 @@ public class RendicionChofer extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jtf_KmInicial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_KmInicialActionPerformed(evt);
+            }
+        });
         jtf_KmInicial.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtf_KmInicialKeyPressed(evt);
@@ -301,6 +306,11 @@ public class RendicionChofer extends javax.swing.JFrame {
         jtf_Recaudacion.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jtf_RecaudacionFocusLost(evt);
+            }
+        });
+        jtf_Recaudacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_RecaudacionActionPerformed(evt);
             }
         });
         jtf_Recaudacion.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -832,7 +842,7 @@ public class RendicionChofer extends javax.swing.JFrame {
              La linea q tenes q agregar al codigo es la de abajo
              Saludos*/
 
-            new reportes.ImprimirReportes().RendicionCuenta(turno, jtf_Comision.getText(), jtf_Neto.getText(),jl_chofer.getText());
+            new reportes.ImprimirReportes().RendicionCuenta(turno, jtf_Comision.getText(), jtf_Neto.getText(),jl_chofer.getText(),jtf_recaudacionReal.getText());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RendicionChofer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -899,6 +909,7 @@ public class RendicionChofer extends javax.swing.JFrame {
                 jtf_Comision.setText(Double.toString(comision));
                 jtf_Neto.setText(Double.toString(neto));
                 jtf_TotalEfectivo.setText(Double.toString(totalEfectivo));
+                jtf_recaudacionReal.setText(Double.toString(recaudacionReal));
             } catch(Exception e) {
             }
         }
@@ -1123,6 +1134,14 @@ public class RendicionChofer extends javax.swing.JFrame {
             jtf_KmInicial.requestFocus();
         }
     }//GEN-LAST:event_jtf_MovilKeyPressed
+
+    private void jtf_RecaudacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_RecaudacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_RecaudacionActionPerformed
+
+    private void jtf_KmInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_KmInicialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_KmInicialActionPerformed
 
     /**
      * @param args the command line arguments

@@ -20,7 +20,7 @@ import net.sf.jasperreports.view.JasperViewer;
 
 public class ImprimirReportes {
     
-public void RendicionCuenta(int turno,String comision,String neto, String nombre)throws ClassNotFoundException, SQLException{
+public void RendicionCuenta(int turno,String comision,String neto, String nombre,String recaudacionReal)throws ClassNotFoundException, SQLException{
           
     Runtime basurero = Runtime.getRuntime(); 
     
@@ -35,6 +35,7 @@ public void RendicionCuenta(int turno,String comision,String neto, String nombre
             parametros.put("comision",comision);
             parametros.put("neto",neto);
             parametros.put("nombre",nombre);
+            parametros.put("recaudacionReal",recaudacionReal);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parametros, conexion);
             JasperViewer jviewer =  new JasperViewer(jasperPrint,false);
             System.gc();

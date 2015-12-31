@@ -11,9 +11,13 @@ import DAO.RepuestoDAO;
 import entidades.Mecanico;
 import entidades.Movil;
 import entidades.Repuesto;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -27,24 +31,42 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
     public VentanaParteMecanico() {
         initComponents();
         this.setLocationRelativeTo(null);
+        init(true);
+    }
+    
+    public void init(boolean bandera) {
         MovilDAO movilDAO = new MovilDAO();
         ArrayList<Movil> moviles = movilDAO.obtenerIdMoviles();
         DefaultListModel modelo = new DefaultListModel();
+        DefaultListModel modeloLimpio = new DefaultListModel();
+        jl_Agredados.setModel(modeloLimpio);
         RepuestoDAO repuestoDAO = new RepuestoDAO();
         ArrayList<Repuesto> repuestos = repuestoDAO.obtenerRepuestos();
-        
+        jta_Detalles.setText("");
+        jtf_Importe.setText("");
+        if (bandera){
          for (Movil movil : moviles) {
              jcb_Moviles.addItem(movil.getIdMovil());
              jcb_MovilAjustes.addItem(movil.getIdMovil());
+             jcb_Moviles2.addItem(movil.getIdMovil());
          }
-        
+        }
         for(Repuesto repuesto : repuestos){
              modelo.addElement(repuesto.getNombre());
         }
-        
+        jl_Licencia.setVisible(false);
         jl_Disponibles.setModel(modelo);
     }
-
+    public void verDatosMoviles(JLabel modeloMovil) {
+        MovilDAO movilDAO = new MovilDAO();
+        Movil movil = movilDAO.obtenerMoviles(Integer.parseInt(jcb_Moviles.getSelectedItem().toString()));
+        modeloMovil.setText(movil.getModelo()+"     PATENTE: "+movil.getPatente()+"     LICENCIA: "+String.valueOf(movil.getNumeroLicencia()));
+    }
+    
+    public String toFecha(String fecha){
+        return fecha.substring(8)+"-"+fecha.substring(5, 7)+"-"+fecha.substring(0, 4);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,13 +83,8 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jlb_modeloMovil = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jlb_patenteMovil = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jlb_licenciaMovil = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jcb_Moviles = new javax.swing.JComboBox();
-        jb_Ver = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -93,21 +110,22 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
-        jcb_idMovil = new javax.swing.JComboBox();
+        jcb_Moviles2 = new javax.swing.JComboBox();
         jLabel18 = new javax.swing.JLabel();
         dcc_FechaInicio = new datechooser.beans.DateChooserCombo();
-        jLabel19 = new javax.swing.JLabel();
         dcc_FechaFinal = new datechooser.beans.DateChooserCombo();
         jb_Mostrar = new javax.swing.JButton();
+        jLabel22 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jt_Planilla = new javax.swing.JTable();
         Salir = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
-        jLabel21 = new javax.swing.JLabel();
+        jl_Total = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
+        jl_Licencia = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -129,7 +147,6 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jcb_MovilAjustes = new javax.swing.JComboBox();
         jLabel9 = new javax.swing.JLabel();
-        jb_VerAjustes = new javax.swing.JButton();
         jb_Salir1 = new javax.swing.JButton();
 
         jmi_Borrar.setText("Borrar");
@@ -153,27 +170,20 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jlb_modeloMovil.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jlb_modeloMovil.setText("----------");
-
-        jLabel7.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel7.setText("PATENTE:");
-
-        jlb_patenteMovil.setText("--------");
-
-        jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel3.setText("LICENCIA:");
-
-        jlb_licenciaMovil.setText("-------");
+        jlb_modeloMovil.setText("-");
 
         jLabel5.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel5.setText("MOVIL:");
 
-        jcb_Moviles.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
-
-        jb_Ver.setText("Ver");
-        jb_Ver.addActionListener(new java.awt.event.ActionListener() {
+        jcb_Moviles.setEditable(true);
+        jcb_Moviles.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcb_MovilesItemStateChanged(evt);
+            }
+        });
+        jcb_Moviles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_VerActionPerformed(evt);
+                jcb_MovilesActionPerformed(evt);
             }
         });
 
@@ -185,35 +195,20 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jcb_Moviles, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jlb_modeloMovil)
+                .addComponent(jcb_Moviles, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlb_patenteMovil)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlb_licenciaMovil)
-                .addGap(16, 16, 16)
-                .addComponent(jb_Ver)
+                .addComponent(jlb_modeloMovil)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
+                .addGap(8, 8, 8)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlb_modeloMovil)
-                    .addComponent(jLabel7)
-                    .addComponent(jlb_patenteMovil)
-                    .addComponent(jLabel3)
-                    .addComponent(jlb_licenciaMovil)
                     .addComponent(jLabel5)
-                    .addComponent(jcb_Moviles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jb_Ver))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jcb_Moviles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -389,6 +384,11 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
     });
 
     jb_Limpiar.setText("Limpiar");
+    jb_Limpiar.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jb_LimpiarActionPerformed(evt);
+        }
+    });
 
     jb_Guardar.setText("Guardar");
     jb_Guardar.addActionListener(new java.awt.event.ActionListener() {
@@ -398,9 +398,20 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
     });
 
     jPanel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+    jPanel11.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyTyped(java.awt.event.KeyEvent evt) {
+            jPanel11KeyTyped(evt);
+        }
+    });
 
     jLabel16.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
     jLabel16.setText("IMPORTE");
+
+    jtf_Importe.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyTyped(java.awt.event.KeyEvent evt) {
+            jtf_ImporteKeyTyped(evt);
+        }
+    });
 
     javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
     jPanel11.setLayout(jPanel11Layout);
@@ -468,11 +479,18 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
 
     jLabel17.setText("Movil");
 
+    jcb_Moviles2.setEditable(true);
+
     jLabel18.setText("Fecha inicio");
 
-    jLabel19.setText("Fecha fin");
-
     jb_Mostrar.setText("Mostrar");
+    jb_Mostrar.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jb_MostrarActionPerformed(evt);
+        }
+    });
+
+    jLabel22.setText("Fecha fin");
 
     javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
     jPanel12.setLayout(jPanel12Layout);
@@ -482,16 +500,16 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
             .addContainerGap()
             .addComponent(jLabel17)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jcb_idMovil, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jcb_Moviles2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jLabel18)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(dcc_FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(dcc_FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jLabel19)
+            .addComponent(jLabel22)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(dcc_FechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(dcc_FechaFinal, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addComponent(jb_Mostrar)
             .addContainerGap())
     );
@@ -505,15 +523,13 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
                         .addComponent(dcc_FechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17)
-                            .addComponent(jcb_idMovil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel18))))
+                            .addComponent(jcb_Moviles2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel22))
+                        .addComponent(dcc_FechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel12Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jb_Mostrar)
-                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel19)
-                            .addComponent(dcc_FechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(jb_Mostrar)))
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
@@ -537,7 +553,7 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
     );
     jPanel13Layout.setVerticalGroup(
         jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
     );
 
     Salir.setText("Salir");
@@ -551,7 +567,7 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
 
     jPanel14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-    jLabel21.setText("00.00");
+    jl_Total.setText("00.00");
 
     jLabel20.setText("TOTAL:");
 
@@ -560,32 +576,41 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
     jPanel14Layout.setHorizontalGroup(
         jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addContainerGap()
             .addComponent(jLabel20)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(jLabel21)
-            .addContainerGap())
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jl_Total)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     jPanel14Layout.setVerticalGroup(
         jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanel14Layout.createSequentialGroup()
+            .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel20)
-                .addComponent(jLabel21))
-            .addGap(0, 12, Short.MAX_VALUE))
+                .addComponent(jl_Total))
+            .addContainerGap())
     );
 
     jPanel15.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+    jl_Licencia.setText("-");
 
     javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
     jPanel15.setLayout(jPanel15Layout);
     jPanel15Layout.setHorizontalGroup(
         jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGap(0, 337, Short.MAX_VALUE)
+        .addGroup(jPanel15Layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jl_Licencia)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     jPanel15Layout.setVerticalGroup(
         jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGap(0, 28, Short.MAX_VALUE)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jl_Licencia)
+            .addContainerGap())
     );
 
     javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -599,7 +624,7 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jButton2)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -614,14 +639,13 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
             .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Salir)
-                    .addComponent(jButton2))
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(21, 21, 21))
+                .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Salir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addContainerGap())
     );
 
     jTabbedPane1.addTab("Planillas Movil", jPanel2);
@@ -733,14 +757,14 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
 
     jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Seleccione movil"));
 
-    jLabel9.setText("Numero de movil");
-
-    jb_VerAjustes.setText("Ver");
-    jb_VerAjustes.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jb_VerAjustesActionPerformed(evt);
+    jcb_MovilAjustes.setEditable(true);
+    jcb_MovilAjustes.addItemListener(new java.awt.event.ItemListener() {
+        public void itemStateChanged(java.awt.event.ItemEvent evt) {
+            jcb_MovilAjustesItemStateChanged(evt);
         }
     });
+
+    jLabel9.setText("Numero de movil");
 
     javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
     jPanel10.setLayout(jPanel10Layout);
@@ -751,9 +775,7 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
             .addComponent(jLabel9)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jcb_MovilAjustes, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jb_VerAjustes)
-            .addContainerGap(76, Short.MAX_VALUE))
+            .addContainerGap(136, Short.MAX_VALUE))
     );
     jPanel10Layout.setVerticalGroup(
         jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -761,9 +783,8 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
             .addContainerGap()
             .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jcb_MovilAjustes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jLabel9)
-                .addComponent(jb_VerAjustes))
-            .addContainerGap(26, Short.MAX_VALUE))
+                .addComponent(jLabel9))
+            .addContainerGap(27, Short.MAX_VALUE))
     );
 
     jb_Salir1.setText("Salir");
@@ -861,45 +882,32 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
         item.setVisible(true);
     }//GEN-LAST:event_jb_NuevoActionPerformed
 
-    private void jb_VerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_VerActionPerformed
-        MovilDAO movilDAO = new MovilDAO();
-        Movil movil = movilDAO.obtenerMoviles(Integer.parseInt(jcb_Moviles.getSelectedItem().toString()));
-        jlb_modeloMovil.setText(movil.getModelo());
-        jlb_patenteMovil.setText(movil.getPatente());
-        jlb_licenciaMovil.setText(String.valueOf(movil.getNumeroLicencia()));
-    }//GEN-LAST:event_jb_VerActionPerformed
-
     private void jte_aditivoCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jte_aditivoCajaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jte_aditivoCajaActionPerformed
 
-    private void jb_VerAjustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_VerAjustesActionPerformed
-        MovilDAO movilDAO = new MovilDAO();
-        Movil movil = movilDAO.obtenerMoviles(Integer.parseInt(jcb_MovilAjustes.getSelectedItem().toString()));
-        jte_AjusteReloj.setText(String.valueOf(movil.getAjusteReloj()));
-        jte_correa.setText(String.valueOf(movil.getCorrea()));
-        jte_aceite.setText(String.valueOf(movil.getAceite()));
-        jte_grasa.setText(String.valueOf(movil.getGrasa()));
-        jte_filtro.setText(String.valueOf(movil.getFiltro()));
-        jte_aditivoMotor.setText(movil.getAditivoMotor());
-        jte_aditivoCaja.setText(movil.getAditivoCaja());
-    }//GEN-LAST:event_jb_VerAjustesActionPerformed
-
     private void jb_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_GuardarActionPerformed
-        MecanicoDAO mecanicoDAO = new MecanicoDAO();
-        Mecanico mecanico = new Mecanico();
-        mecanico.setMovil_idMovil(Integer.parseInt(jcb_Moviles.getSelectedItem().toString()));
-        mecanico.setReparacion(jta_Detalles.getText());
-        mecanico.setImporte(Double.parseDouble(jtf_Importe.getText()));
-        mecanico.setFecha(new SimpleDateFormat("yyyy-MM-dd").format(dcc_Fecha.getSelectedDate().getTime()));
-        ArrayList<String> agregados = new ArrayList<String>();
-        DefaultListModel modeloAgregados = new DefaultListModel();
-        modeloAgregados = (DefaultListModel) jl_Agredados.getModel();
-        for (int i=0 ; i < modeloAgregados.getSize();i++){
-            String agregado = modeloAgregados.get(i).toString();
-            agregados.add(agregado);
+        if (!jtf_Importe.getText().isEmpty()) {
+            MecanicoDAO mecanicoDAO = new MecanicoDAO();
+            Mecanico mecanico = new Mecanico();
+            mecanico.setMovil_idMovil(Integer.parseInt(jcb_Moviles.getSelectedItem().toString()));
+            mecanico.setReparacion(jta_Detalles.getText());
+            mecanico.setImporte(Double.parseDouble(jtf_Importe.getText()));
+            mecanico.setFecha(new SimpleDateFormat("yyyy-MM-dd").format(dcc_Fecha.getSelectedDate().getTime()));
+            StringBuilder agregados = new StringBuilder();
+            DefaultListModel modeloAgregados = new DefaultListModel();
+            modeloAgregados = (DefaultListModel) jl_Agredados.getModel();
+            for (int i=0 ; i < modeloAgregados.getSize();i++){
+                agregados.append(modeloAgregados.get(i).toString()).append(" ");
+            }
+            mecanico.setRepuestos(agregados.toString());
+            JOptionPane.showMessageDialog(null, mecanicoDAO.altaMecanico(mecanico));
+            init(false);
+        } else {
+            JOptionPane.showMessageDialog(null,"Ingrese importe!", "Mensaje de Error",JOptionPane.ERROR_MESSAGE); //Tipo de mensaje
+            jtf_Importe.requestFocus();
         }
-        mecanicoDAO.altaMecanico(mecanico, agregados);
+
     }//GEN-LAST:event_jb_GuardarActionPerformed
 
     private void jb_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ActualizarActionPerformed
@@ -942,8 +950,76 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_SalirActionPerformed
+
+    private void jb_MostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_MostrarActionPerformed
+        String fechaInicio = new SimpleDateFormat("yyyy-MM-dd").format(dcc_FechaInicio.getSelectedDate().getTime());
+        String fechaFin = new SimpleDateFormat("yyyy-MM-dd").format(dcc_FechaFinal.getSelectedDate().getTime());
+        int idMovil = 0;
+        MecanicoDAO mecanicoDAO = new MecanicoDAO();
+        DefaultTableModel modelo = (DefaultTableModel)jt_Planilla.getModel();
+        modelo.setNumRows(0);
+        Double subTotal = 0.0;
+        
+        try {
+            idMovil = Integer.parseInt(jcb_Moviles2.getSelectedItem().toString());
+            
+        } catch(Exception e){}
+        ArrayList<Mecanico> mecanicos = mecanicoDAO.obtenerMecanicoMovil(idMovil, fechaInicio, fechaFin);
+        jl_Licencia.setVisible(true);
+        verDatosMoviles(jl_Licencia);
+        for (Mecanico mecanico: mecanicos) {
+            subTotal += mecanico.getImporte();
+            String [] datos = {
+                toFecha(mecanico.getFecha()),
+                mecanico.getReparacion(),
+                mecanico.getRepuestos(),
+                String.valueOf(mecanico.getImporte())
+            };
+            modelo.addRow(datos);
+        }
+        jt_Planilla.setModel(modelo);
+        jl_Total.setText(String.valueOf(subTotal));
+        
+// TODO add your handling code here:
+    }//GEN-LAST:event_jb_MostrarActionPerformed
+
+    private void jcb_MovilesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcb_MovilesItemStateChanged
+        verDatosMoviles(jlb_modeloMovil);
+    }//GEN-LAST:event_jcb_MovilesItemStateChanged
+
+    private void jcb_MovilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_MovilesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcb_MovilesActionPerformed
+
+    private void jb_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_LimpiarActionPerformed
+        init(false);
+    }//GEN-LAST:event_jb_LimpiarActionPerformed
+
+    private void jPanel11KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel11KeyTyped
+    
+    }//GEN-LAST:event_jPanel11KeyTyped
+
+    private void jtf_ImporteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_ImporteKeyTyped
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)
+                && (caracter != '.')) {
+              evt.consume();
+        }
+    }//GEN-LAST:event_jtf_ImporteKeyTyped
+
+    private void jcb_MovilAjustesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcb_MovilAjustesItemStateChanged
+        MovilDAO movilDAO = new MovilDAO();
+        Movil movil = movilDAO.obtenerMoviles(Integer.parseInt(jcb_MovilAjustes.getSelectedItem().toString()));
+        jte_AjusteReloj.setText(String.valueOf(movil.getAjusteReloj()));
+        jte_correa.setText(String.valueOf(movil.getCorrea()));
+        jte_aceite.setText(String.valueOf(movil.getAceite()));
+        jte_grasa.setText(String.valueOf(movil.getGrasa()));
+        jte_filtro.setText(String.valueOf(movil.getFiltro()));
+        jte_aditivoMotor.setText(movil.getAditivoMotor());
+        jte_aditivoCaja.setText(movil.getAditivoCaja());
+    }//GEN-LAST:event_jcb_MovilAjustesItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -997,15 +1073,12 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -1036,16 +1109,14 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
     private javax.swing.JButton jb_Nuevo;
     private javax.swing.JButton jb_Salir;
     private javax.swing.JButton jb_Salir1;
-    private javax.swing.JButton jb_Ver;
-    private javax.swing.JButton jb_VerAjustes;
     private javax.swing.JComboBox jcb_MovilAjustes;
     private javax.swing.JComboBox jcb_Moviles;
-    private javax.swing.JComboBox jcb_idMovil;
+    private javax.swing.JComboBox jcb_Moviles2;
     public static javax.swing.JList jl_Agredados;
     private javax.swing.JList jl_Disponibles;
-    private javax.swing.JLabel jlb_licenciaMovil;
+    private javax.swing.JLabel jl_Licencia;
+    private javax.swing.JLabel jl_Total;
     private javax.swing.JLabel jlb_modeloMovil;
-    private javax.swing.JLabel jlb_patenteMovil;
     private javax.swing.JMenuItem jmi_Borrar;
     private javax.swing.JPopupMenu jpm_Disponibles;
     private javax.swing.JTable jt_Planilla;
