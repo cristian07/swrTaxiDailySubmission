@@ -78,6 +78,35 @@ public void RendicionCuenta(int turno,String comision,String neto, String nombre
     }
     
     }
+    
+    public void planillaMecanico(int idMovil,String descripcionMovil,String total,String fechaInicio,String fechaFin)throws ClassNotFoundException, SQLException{
+          
+    Runtime basurero = Runtime.getRuntime(); 
+    
+    try
+    {     Class.forName("com.mysql.jdbc.Driver");
+            Connection conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/swrtaxidailysubmission","root","");        
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(this.getClass().getResource("reportMecanico.jasper"));
+            
+            Map parametros = new HashMap();
+            parametros.clear();
+            parametros.put("idMovil",idMovil);
+            parametros.put("descripcionMovil",descripcionMovil);
+            parametros.put("total",total);
+            parametros.put("fechaInicio",fechaInicio);
+            parametros.put("fechaFin",fechaFin);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parametros, conexion);
+            JasperViewer jviewer =  new JasperViewer(jasperPrint,false);
+            System.gc();
+            jviewer.setVisible(true);
+            System.gc();
+       }
+    catch (JRException e)
+    {
+      e.printStackTrace();
+    }
+    
+    }
 
 }
 

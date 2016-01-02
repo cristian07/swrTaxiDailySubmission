@@ -339,7 +339,6 @@ public class Planilla extends javax.swing.JFrame {
               chofer = 1;
         } else if (!jcb_Moviles.getSelectedItem().toString().equals("Movil") && !jcb_Chofer.getSelectedItem().toString().equals("Chofer")) {
              turnos = turnosDAO.obtenerTurnosFechasChoferMovil(fechaInicio, fechaFin, Integer.parseInt(jcb_Chofer.getSelectedItem().toString()), idMovil); // chofer y movil
-            
         } 
         
         

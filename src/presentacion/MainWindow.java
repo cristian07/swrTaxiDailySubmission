@@ -23,12 +23,13 @@ public class MainWindow extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         DefaultListModel modelo = new DefaultListModel();
         AlertasDAO alertasDAO = new AlertasDAO();
-       // ArrayList<String> listaAlertas = alertasDAO.
-      //  for(Repuesto repuesto : repuestos){
-      //       modelo.addElement(repuesto.getNombre());
-      //  }
         
-      //  jl_Disponibles.setModel(modelo);
+        ArrayList<String> listaAlertas = alertasDAO.listaVencimientos();
+        for(String alerta : listaAlertas){
+             modelo.addElement(alerta);
+       }
+        
+       jl_Alertas.setModel(modelo);
     }
     MainWindow(LoginWindow loginWindow, boolean b) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -58,7 +59,7 @@ public class MainWindow extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        jl_Alertas = new javax.swing.JList();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -238,13 +239,13 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Alertas"));
         jPanel2.setMinimumSize(new java.awt.Dimension(500, 500));
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        jl_Alertas.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Licencia Movil 1234 se vence en 4 dias ", "El movil 123 necesita cambio de Aceite", "El movio 456 necesita cambio de correra", "Licencia Movil 4556 se vence en 30 dias", "Licencia Movil 453 se vence en 1 dia" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jList1.setEnabled(false);
-        jScrollPane1.setViewportView(jList1);
+        jl_Alertas.setEnabled(false);
+        jScrollPane1.setViewportView(jl_Alertas);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -431,7 +432,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
-    private javax.swing.JList jList1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
@@ -444,6 +444,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JButton jb_Usuario;
+    private javax.swing.JList jl_Alertas;
     public static javax.swing.JLabel jl_Permisos;
     public static javax.swing.JPanel jp_Administrador;
     public static javax.swing.JPanel jp_Encargado;

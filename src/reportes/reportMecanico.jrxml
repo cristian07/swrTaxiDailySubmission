@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportMecanico" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="94dd130f-d80a-4a38-8bf4-4f23c1eb4350">
+	<property name="ireport.zoom" value="1.5026296018031564"/>
+	<property name="ireport.x" value="43"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="descripcionMovil" class="java.lang.String"/>
+	<parameter name="idMovil" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaInicio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaFin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="total" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     M.idMecanico AS mecanico_idMecanico,
+     M.Movil_idMovil AS mecanico_Movil_idMovil,
+     M.fecha AS mecanico_fecha,
+     M.reparacion AS mecanico_reparacion,
+     M.importe AS mecanico_importe,
+     M.repuestos AS mecanico_repuestos
+
+FROM
+     mecanico M
+WHERE
+M.Movil_idMovil = $P{idMovil} and
+M.fecha between $P{fechaInicio} and $P{fechaFin}]]>
+	</queryString>
+	<field name="mecanico_idMecanico" class="java.lang.Integer"/>
+	<field name="mecanico_Movil_idMovil" class="java.lang.Integer"/>
+	<field name="mecanico_fecha" class="java.sql.Date"/>
+	<field name="mecanico_reparacion" class="java.lang.String"/>
+	<field name="mecanico_importe" class="java.lang.Float"/>
+	<field name="mecanico_repuestos" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="0" width="197" height="33" forecolor="#000000" uuid="9e6c9fca-4cc4-45c9-8ecf-344e463b6fb7"/>
+				<textElement verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Parte mecanico]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="50" width="337" height="20" uuid="6d93bd84-cbbf-4c66-bb3e-8308d864db6a"/>
+				<textFieldExpression><![CDATA[$P{descripcionMovil}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="433" y="50" width="52" height="20" uuid="43e429f2-0f13-4075-9dda-d29d230fa838"/>
+				<textElement textAlignment="Center">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format( new SimpleDateFormat("yyyy-MM-dd").parse($P{fechaInicio}))]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="496" y="50" width="57" height="20" uuid="0532dca6-6429-4361-baaa-36b919a7d1ab"/>
+				<textElement textAlignment="Center">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format( new SimpleDateFormat("yyyy-MM-dd").parse($P{fechaFin}))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="485" y="50" width="11" height="20" uuid="f5addc0d-5630-49e1-9941-512ca4c4b939"/>
+				<textElement textAlignment="Center">
+					<font isItalic="true"/>
+				</textElement>
+				<text><![CDATA[A]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="4bf6b71a-1eff-459d-b21f-6858b5696892"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="66" height="15" uuid="75fa5868-2b64-4330-a515-47d538c220df"/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="66" y="19" width="195" height="15" uuid="68c98024-d5e7-4297-8901-ecdc6af3f0b7"/>
+				<text><![CDATA[Reparacion/Gastos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="500" y="19" width="55" height="15" uuid="86597121-ea8b-480f-83a1-c1258dc3e3a7"/>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="261" y="19" width="239" height="15" uuid="ced0baba-99f6-479b-a292-9aa88d01d281"/>
+				<text><![CDATA[Repuestos cambiados]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="91d2b969-9f8c-4b55-8b9e-02aad3e34d64"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement style="Detail" x="0" y="0" width="66" height="15" uuid="97a4294b-5f84-49d2-96db-89cf60f03a5e"/>
+				<textFieldExpression><![CDATA[$F{mecanico_fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="66" y="1" width="195" height="15" uuid="871c703b-28af-4db1-9f11-4770b18769ed"/>
+				<textFieldExpression><![CDATA[$F{mecanico_reparacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="261" y="1" width="239" height="15" uuid="2ee31e1c-d71f-41ed-b4f2-71faa427a54f"/>
+				<textFieldExpression><![CDATA[$F{mecanico_repuestos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement style="Detail" x="500" y="1" width="53" height="15" uuid="2d9d6b9d-de0f-4064-8c4a-ff4abf9383d0"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{mecanico_importe}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="c714555d-0230-4382-afd0-ea205c3c9b1a"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="489" y="4" width="66" height="20" uuid="1daf3102-9fcf-4a3a-888f-f2299a2a22bb"/>
+				<textElement textAlignment="Right">
+					<font size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="389" y="4" width="54" height="20" uuid="f9f79886-7aab-4563-90f7-ab92c71702d1"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="479" y="4" width="10" height="20" uuid="7e1fa388-d2af-4bbb-b9a8-486905c43e8a"/>
+				<textElement>
+					<font size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="5657dd9e-3606-4f48-a631-015107d2c66d"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="a3148f9f-2ca1-4e4e-85eb-1c5a90a14b3a"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="64e84023-d666-4b49-8ea3-e9a86523e80d"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

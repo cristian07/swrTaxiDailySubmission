@@ -12,9 +12,13 @@ import entidades.Mecanico;
 import entidades.Movil;
 import entidades.Repuesto;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -57,9 +61,9 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
         jl_Licencia.setVisible(false);
         jl_Disponibles.setModel(modelo);
     }
-    public void verDatosMoviles(JLabel modeloMovil) {
+    public void verDatosMoviles(JLabel modeloMovil,JComboBox idMovil) {
         MovilDAO movilDAO = new MovilDAO();
-        Movil movil = movilDAO.obtenerMoviles(Integer.parseInt(jcb_Moviles.getSelectedItem().toString()));
+        Movil movil = movilDAO.obtenerMoviles(Integer.parseInt(idMovil.getSelectedItem().toString()));
         modeloMovil.setText(movil.getModelo()+"     PATENTE: "+movil.getPatente()+"     LICENCIA: "+String.valueOf(movil.getNumeroLicencia()));
     }
     
@@ -225,37 +229,37 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
 
         dcc_Fecha.setCurrentView(new datechooser.view.appearance.AppearancesList("Light",
             new datechooser.view.appearance.ViewAppearance("custom",
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
                     new java.awt.Color(51, 51, 51),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.ButtonPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
                     new java.awt.Color(51, 51, 51),
                     new java.awt.Color(0, 0, 255),
                     true,
                     true,
                     new datechooser.view.appearance.swing.ButtonPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
                     new java.awt.Color(0, 0, 255),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.ButtonPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
                     new java.awt.Color(128, 128, 128),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.LabelPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
                     new java.awt.Color(51, 51, 51),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.LabelPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
                     new java.awt.Color(51, 51, 51),
                     new java.awt.Color(255, 0, 0),
                     false,
@@ -564,6 +568,11 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
     });
 
     jButton2.setText("Imprimir");
+    jButton2.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton2ActionPerformed(evt);
+        }
+    });
 
     jPanel14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -968,7 +977,7 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
         } catch(Exception e){}
         ArrayList<Mecanico> mecanicos = mecanicoDAO.obtenerMecanicoMovil(idMovil, fechaInicio, fechaFin);
         jl_Licencia.setVisible(true);
-        verDatosMoviles(jl_Licencia);
+        verDatosMoviles(jl_Licencia,jcb_Moviles2);
         for (Mecanico mecanico: mecanicos) {
             subTotal += mecanico.getImporte();
             String [] datos = {
@@ -986,7 +995,7 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_MostrarActionPerformed
 
     private void jcb_MovilesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcb_MovilesItemStateChanged
-        verDatosMoviles(jlb_modeloMovil);
+        verDatosMoviles(jlb_modeloMovil,jcb_Moviles);
     }//GEN-LAST:event_jcb_MovilesItemStateChanged
 
     private void jcb_MovilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_MovilesActionPerformed
@@ -1020,6 +1029,22 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
         jte_aditivoMotor.setText(movil.getAditivoMotor());
         jte_aditivoCaja.setText(movil.getAditivoCaja());
     }//GEN-LAST:event_jcb_MovilAjustesItemStateChanged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        MovilDAO movilDAO = new MovilDAO();
+        Movil movil = movilDAO.obtenerMoviles(Integer.parseInt(jcb_Moviles2.getSelectedItem().toString()));
+        StringBuilder infoMovil = new StringBuilder(movil.getModelo()).append(" PATENTE: ").append(movil.getPatente()).append(" LICENCIA: ").append(String.valueOf(movil.getNumeroLicencia()));
+        String fechaInicio = new SimpleDateFormat("yyyy-MM-dd").format(dcc_FechaInicio.getSelectedDate().getTime());
+        String fechaFin = new SimpleDateFormat("yyyy-MM-dd").format(dcc_FechaFinal.getSelectedDate().getTime());
+        try {
+            try {
+                
+                new reportes.ImprimirReportes().planillaMecanico(Integer.parseInt(jcb_Moviles2.getSelectedItem().toString()), infoMovil.toString(), jl_Total.getText(), fechaInicio, fechaFin);        // TODO add your handling code here:
+            } catch (SQLException ex) {
+                Logger.getLogger(VentanaParteMecanico.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (ClassNotFoundException ex){}
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
