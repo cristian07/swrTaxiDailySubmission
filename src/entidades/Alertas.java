@@ -16,6 +16,10 @@ public class Alertas {
     private int aceite;
     private int grasa;
     private int filtro;
+    private int correaKM;
+    private int aceiteKM;
+    private int grasaKM;
+    private int filtroKM;
 
     /**
      * @return the vencimientoLicenciaTaxi
@@ -99,5 +103,61 @@ public class Alertas {
      */
     public void setFiltro(int filtro) {
         this.filtro = filtro;
+    }
+
+    /**
+     * @return the correaKM
+     */
+    public int getCorreaKM() {
+        return correaKM;
+    }
+
+    /**
+     * @param correaKM the correaKM to set
+     */
+    public void setCorreaKM(int correaKM) {
+        this.correaKM = correaKM;
+    }
+
+    /**
+     * @return the aceiteKM
+     */
+    public int getAceiteKM() {
+        return aceiteKM;
+    }
+
+    /**
+     * @param aceiteKM the aceiteKM to set
+     */
+    public void setAceiteKM(int aceiteKM) {
+        this.aceiteKM = aceiteKM;
+    }
+
+    /**
+     * @return the grasaKM
+     */
+    public int getGrasaKM() {
+        return grasaKM;
+    }
+
+    /**
+     * @param grasaKM the grasaKM to set
+     */
+    public void setGrasaKM(int grasaKM) {
+        this.grasaKM = grasaKM;
+    }
+
+    /**
+     * @return the filtroKM
+     */
+    public int getFiltroKM() {
+        return filtroKM;
+    }
+
+    /**
+     * @param filtroKM the filtroKM to set
+     */
+    public void setFiltroKM(int filtroKM) {
+        this.filtroKM = filtroKM;
     }
 }

@@ -22,6 +22,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import servicio.ManejadorTecla;
 
 /**
  *
@@ -36,6 +37,15 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         init(true);
+        ManejadorTecla manejador = new ManejadorTecla();
+        jcb_MovilAjustes.addKeyListener(manejador);
+        jte_AjusteReloj.addKeyListener(manejador);
+        jte_correa.addKeyListener(manejador);
+        jte_aceite.addKeyListener(manejador);
+        jte_grasa.addKeyListener(manejador);
+        jte_filtro.addKeyListener(manejador);
+        jte_aditivoMotor.addKeyListener(manejador);
+        jte_aditivoCaja.addKeyListener(manejador);
     }
     
     public void init(boolean bandera) {
@@ -198,7 +208,7 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(39, 39, 39)
                 .addComponent(jcb_Moviles, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jlb_modeloMovil)
@@ -229,37 +239,37 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
 
         dcc_Fecha.setCurrentView(new datechooser.view.appearance.AppearancesList("Light",
             new datechooser.view.appearance.ViewAppearance("custom",
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
                     new java.awt.Color(51, 51, 51),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.ButtonPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
                     new java.awt.Color(51, 51, 51),
                     new java.awt.Color(0, 0, 255),
                     true,
                     true,
                     new datechooser.view.appearance.swing.ButtonPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
                     new java.awt.Color(0, 0, 255),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.ButtonPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
                     new java.awt.Color(128, 128, 128),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.LabelPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
                     new java.awt.Color(51, 51, 51),
                     new java.awt.Color(0, 0, 255),
                     false,
                     true,
                     new datechooser.view.appearance.swing.LabelPainter()),
-                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                new datechooser.view.appearance.swing.SwingCellAppearance(new java.awt.Font("Dialog", java.awt.Font.PLAIN, 11),
                     new java.awt.Color(51, 51, 51),
                     new java.awt.Color(255, 0, 0),
                     false,
@@ -665,6 +675,12 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
 
     jLabel15.setText("Aditivo Caja");
 
+    jte_correa.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyTyped(java.awt.event.KeyEvent evt) {
+            jte_correaKeyTyped(evt);
+        }
+    });
+
     jte_aditivoCaja.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             jte_aditivoCajaActionPerformed(evt);
@@ -675,9 +691,27 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
 
     jLabel11.setText("Aceite");
 
+    jte_aceite.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyTyped(java.awt.event.KeyEvent evt) {
+            jte_aceiteKeyTyped(evt);
+        }
+    });
+
     jLabel12.setText("Grasa");
 
+    jte_grasa.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyTyped(java.awt.event.KeyEvent evt) {
+            jte_grasaKeyTyped(evt);
+        }
+    });
+
     jLabel13.setText("Filtro");
+
+    jte_filtro.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyTyped(java.awt.event.KeyEvent evt) {
+            jte_filtroKeyTyped(evt);
+        }
+    });
 
     javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
     jPanel8.setLayout(jPanel8Layout);
@@ -736,6 +770,12 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
 
     jLabel8.setText("Reloj");
 
+    jte_AjusteReloj.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyTyped(java.awt.event.KeyEvent evt) {
+            jte_AjusteRelojKeyTyped(evt);
+        }
+    });
+
     javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
     jPanel9.setLayout(jPanel9Layout);
     jPanel9Layout.setHorizontalGroup(
@@ -743,9 +783,9 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
         .addGroup(jPanel9Layout.createSequentialGroup()
             .addGap(155, 155, 155)
             .addComponent(jLabel8)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addComponent(jte_AjusteReloj, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addContainerGap(140, Short.MAX_VALUE))
     );
     jPanel9Layout.setVerticalGroup(
         jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -780,11 +820,11 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
     jPanel10Layout.setHorizontalGroup(
         jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanel10Layout.createSequentialGroup()
-            .addGap(98, 98, 98)
+            .addGap(92, 92, 92)
             .addComponent(jLabel9)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jcb_MovilAjustes, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(136, Short.MAX_VALUE))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     jPanel10Layout.setVerticalGroup(
         jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -929,9 +969,9 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
         movil.setAceite(Integer.parseInt(jte_aceite.getText()));
         movil.setGrasa(Integer.parseInt(jte_grasa.getText()));
         movil.setFiltro(Integer.parseInt(jte_filtro.getText()));
-         movil.setAditivoMotor(jte_aditivoMotor.getText());
+        movil.setAditivoMotor(jte_aditivoMotor.getText());
         movil.setAditivoCaja(jte_aditivoCaja.getText());
-        movilDAO.modificarAjustesMovil(movil);
+        JOptionPane.showMessageDialog(null,movilDAO.modificarAjustesMovil(movil));
     }//GEN-LAST:event_jb_ActualizarActionPerformed
 
     private void jb_Salir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_Salir1ActionPerformed
@@ -1045,6 +1085,41 @@ public class VentanaParteMecanico extends javax.swing.JFrame {
             }
         } catch (ClassNotFoundException ex){}
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jte_AjusteRelojKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jte_AjusteRelojKeyTyped
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != com.sun.glass.events.KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jte_AjusteRelojKeyTyped
+
+    private void jte_correaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jte_correaKeyTyped
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != com.sun.glass.events.KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jte_correaKeyTyped
+
+    private void jte_aceiteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jte_aceiteKeyTyped
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != com.sun.glass.events.KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jte_aceiteKeyTyped
+
+    private void jte_grasaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jte_grasaKeyTyped
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != com.sun.glass.events.KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jte_grasaKeyTyped
+
+    private void jte_filtroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jte_filtroKeyTyped
+        char caracter = evt.getKeyChar();
+        if (((caracter < '0') || (caracter > '9')) && (caracter != com.sun.glass.events.KeyEvent.VK_BACKSPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jte_filtroKeyTyped
 
     /**
      * @param args the command line arguments

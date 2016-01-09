@@ -8,6 +8,8 @@ package presentacion;
 
 import DAO.UsuarioDAO;
 import entidades.Usuario;
+import servicio.ManejadorTecla;
+import servicio.Utilidades;
 
 /**
  *
@@ -21,6 +23,9 @@ public class ABMUsuario extends javax.swing.JFrame {
     public ABMUsuario() {
         initComponents();
         this.setLocationRelativeTo(null);
+        ManejadorTecla manejador = new ManejadorTecla();
+        jtf_Nombre.addKeyListener(manejador);
+        jtf_Clave.addKeyListener(manejador);
     }
 
     /**
@@ -157,8 +162,9 @@ public class ABMUsuario extends javax.swing.JFrame {
     private void jb_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_GuardarActionPerformed
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         Usuario usuario = new Usuario();
+        Utilidades utilidades = new Utilidades();
         usuario.setNombre(jtf_Nombre.getText());
-        usuario.setClave(jtf_Clave.getText());
+        usuario.setClave(utilidades.Encriptar(jtf_Clave.getText()));
         if (jcb_Permisos.getSelectedItem().toString().equals("Administrador")){
             usuario.setPermisos("R");
         } else if (jcb_Permisos.getSelectedItem().toString().equals("Encargado")){

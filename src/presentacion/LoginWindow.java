@@ -7,7 +7,12 @@ package presentacion;
 
 import DAO.LoginPrincipalDAO;
 import com.sun.glass.events.KeyEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import servicio.ManejadorTecla;
+import servicio.Utilidades;
 
 /**
  *
@@ -21,15 +26,25 @@ public class LoginWindow extends javax.swing.JFrame {
     
 
     
-    public LoginWindow() {
+    public LoginWindow() throws IOException {
         initComponents();
         this.setLocationRelativeTo(null);
+        ManejadorTecla manejador = new ManejadorTecla();
+        jtf_Usuario.addKeyListener(manejador);
+        jtf_Clave.addKeyListener(manejador);
+        Utilidades utilidades = new Utilidades();
+        if (!utilidades.read()){
+            JOptionPane.showMessageDialog(null, "Contacte al programador!!", "Error", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
     }
     
-    private void ingresar(){
+    private void ingresar() throws IOException{
         LoginPrincipalDAO loginPrincipalDAO = new LoginPrincipalDAO();
+        Utilidades utilidades = new Utilidades();
         String nombre = jtf_Usuario.getText();
-        String clave = jtf_Clave.getText();
+        String clave = utilidades.Encriptar(jtf_Clave.getText());
+        
         String acceso = loginPrincipalDAO.logueoPrincipal(nombre,clave);
         MainWindow main= new MainWindow();
         if (acceso.equals("DENEGADO")){
@@ -188,8 +203,23 @@ public class LoginWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jtf_UsuarioActionPerformed
 
     private void jb_IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_IngresarActionPerformed
-        // TODO add your handling code here:
-        ingresar();
+            try {
+                Utilidades utilidades = new Utilidades();
+                if (jtf_Usuario.getText().equals("REGISTRAR")){
+                    if (utilidades.register()) {
+                        jtf_Usuario.setText("");
+                        JOptionPane.showMessageDialog(this, "Se registro el producto con exito!.", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                        jtf_Usuario.requestFocus();
+                        return;
+                    } else{
+                        JOptionPane.showMessageDialog(null, "Algo salio mal!.", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                }
+                ingresar();
+            } catch (IOException ex) {
+                Logger.getLogger(LoginWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
                     
     }//GEN-LAST:event_jb_IngresarActionPerformed
 
@@ -206,7 +236,11 @@ public class LoginWindow extends javax.swing.JFrame {
     private void jtf_ClaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_ClaveKeyPressed
         // TODO add your handling code here:
          if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-                ingresar();
+             try {
+                 ingresar();
+             } catch (IOException ex) {
+                 Logger.getLogger(LoginWindow.class.getName()).log(Level.SEVERE, null, ex);
+             }
         }
     }//GEN-LAST:event_jtf_ClaveKeyPressed
 
@@ -245,7 +279,11 @@ public class LoginWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginWindow().setVisible(true);
+                try {
+                    new LoginWindow().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
             }
         });

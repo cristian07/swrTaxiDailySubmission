@@ -5,8 +5,11 @@
  */
 package presentacion;
 
+import DAO.MovilDAO;
+import DAO.TurnoDAO;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import static presentacion.LoginChofer.jl_Fecha;
 
 /**
  *
@@ -152,6 +155,14 @@ public class ComienzoRendicion extends javax.swing.JFrame {
         LoginChofer login= new LoginChofer();
         LoginChofer.jl_turno.setText(jcb_turno.getSelectedItem().toString());
         LoginChofer.jl_Fecha.setText(new SimpleDateFormat("yyyy-MM-dd").format(jcb_FechaInicio.getSelectedDate().getTime()));
+        MovilDAO movilDAO = new MovilDAO();
+        int cantidadMoviles = movilDAO.obtenerCantidadMovilesActivos();
+        LoginChofer.jl_cantidadMoviles.setText(String.valueOf(cantidadMoviles));
+        TurnoDAO turnoDAO = new TurnoDAO();
+        String tipo = jcb_turno.getSelectedItem().toString().substring(0,1);
+        
+        int cantidadRendidos = turnoDAO.obtenerMovilesRendidos(jl_Fecha.getText(),tipo);
+        LoginChofer.jl_faltanRendir.setText(String.valueOf(cantidadMoviles-cantidadRendidos));
         login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jb_iniciarRendicionActionPerformed

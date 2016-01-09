@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import servicio.DbConnection;
 
 /**
@@ -194,7 +195,7 @@ public class MovilDAO {
             System.out.println(e.getMessage());
         }
     }
-    public void modificarAjustesMovil(Movil movil){
+    public String modificarAjustesMovil(Movil movil){
         DbConnection conex= new DbConnection();
         try {
             Statement estatuto = conex.getConnection().createStatement();
@@ -209,8 +210,9 @@ public class MovilDAO {
                 +movil.getIdMovil());
             estatuto.close();
             conex.desconectar();
+            return "Los datos se actualizaron con éxito";
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            return "Error al intentar realizar esta accion.";
         }
     }
     
@@ -227,5 +229,24 @@ public class MovilDAO {
             } catch (Exception e) {
                 System.out.println(e);
             }
+    }
+    public int obtenerCantidadMovilesActivos() {
+        DbConnection conex= new DbConnection();
+        int cantidad = 0;
+        try {
+            PreparedStatement consulta = conex.getConnection().prepareStatement("select COUNT(idMovil) AS cantidad from movil where estado = 'A'");
+            ResultSet res = consulta.executeQuery();
+    
+            if(res.next()){
+              cantidad = res.getInt("cantidad");
+            }
+            
+            res.close();
+            consulta.close();
+            conex.desconectar();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        return cantidad;
     }
 }

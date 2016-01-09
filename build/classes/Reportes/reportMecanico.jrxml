@@ -47,7 +47,7 @@ M.fecha between $P{fechaInicio} and $P{fechaFin}]]>
 			<staticText>
 				<reportElement style="Title" x="0" y="0" width="197" height="33" forecolor="#000000" uuid="9e6c9fca-4cc4-45c9-8ecf-344e463b6fb7"/>
 				<textElement verticalAlignment="Middle">
-					<font isUnderline="true"/>
+					<font size="24" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Parte mecanico]]></text>
 			</staticText>
@@ -56,7 +56,7 @@ M.fecha between $P{fechaInicio} and $P{fechaFin}]]>
 				<textFieldExpression><![CDATA[$P{descripcionMovil}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="433" y="50" width="52" height="20" uuid="43e429f2-0f13-4075-9dda-d29d230fa838"/>
+				<reportElement x="428" y="50" width="57" height="20" uuid="43e429f2-0f13-4075-9dda-d29d230fa838"/>
 				<textElement textAlignment="Center">
 					<font isItalic="true"/>
 				</textElement>

@@ -6,8 +6,15 @@
 package presentacion;
 
 import DAO.AlertasDAO;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.Timer;
+import servicio.Utilidades;
 
 /**
  *
@@ -21,7 +28,12 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
         this.setLocationRelativeTo(null);
-        DefaultListModel modelo = new DefaultListModel();
+        
+        Timer timer = new Timer (1000, new ActionListener ()
+        {
+
+            public void actionPerformed(ActionEvent e) {
+                DefaultListModel modelo = new DefaultListModel();
         AlertasDAO alertasDAO = new AlertasDAO();
         
         ArrayList<String> listaAlertas = alertasDAO.listaVencimientos();
@@ -30,6 +42,12 @@ public class MainWindow extends javax.swing.JFrame {
        }
         
        jl_Alertas.setModel(modelo);
+                }
+
+        });
+        timer.start();
+        
+        
     }
     MainWindow(LoginWindow loginWindow, boolean b) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -382,7 +400,12 @@ public class MainWindow extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        LoginWindow loginWindow=new LoginWindow();
+        LoginWindow loginWindow = null;
+        try {
+            loginWindow = new LoginWindow();
+        } catch (IOException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
         loginWindow.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 

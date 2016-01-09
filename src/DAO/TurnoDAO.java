@@ -341,9 +341,9 @@ public class TurnoDAO {
         PreparedStatement consulta;
         try {
             consulta = conex.getConnection()
-                    .prepareStatement("SELECT idMovil FROM Movil WHERE 1");
+                    .prepareStatement("select * from movil where idMovil NOT IN (SELECT Movil_idMovil from turno where fecha=?)");
             //consulta: seleccionar todos los moviles que aun no entraron en la rendicion
-            //consulta.setString(1, fecha);
+            consulta.setString(1, fecha);
            ResultSet res = consulta.executeQuery();
            while(res.next()){
                Movil movil = new Movil();
@@ -485,7 +485,32 @@ public class TurnoDAO {
             }
        return turnos; 
     }
+    
+    public  int obtenerMovilesRendidos(String fecha,String tipo){
+       DbConnection conex= new DbConnection();
+       int cantidad = 0;
+        
+        try {
+            PreparedStatement consulta = conex.getConnection()
+                    .prepareStatement("SELECT count(Movil_idMovil) as cantidad from turno where fecha = ? and tipo = ?");
+            
+            consulta.setString(1, fecha);
+            consulta.setString(2, tipo);
+            
+            ResultSet res = consulta.executeQuery();
 
+            if(res.next()){
+               cantidad = res.getInt("cantidad");
+            }
+            res.close();
+            consulta.close();
+            conex.desconectar();
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+       return cantidad;        
+    }
     
    }
 

@@ -33,6 +33,10 @@ public class AlertasDAO {
                 alertas.setGrasa(res.getInt("grasa"));
                 alertas.setVencimientoLicenciaConductor(res.getInt("vencimientoLicenciaConductor"));
                 alertas.setVencimientoLicenciaTaxi(res.getInt("vencimientoLicenciaTaxi"));
+                alertas.setAceiteKM(res.getInt("aceiteKM"));
+                alertas.setCorreaKM(res.getInt("correaKM"));
+                alertas.setFiltroKM(res.getInt("filtroKM"));
+                alertas.setGrasaKM(res.getInt("grasaKM"));
             }
             
             res.close();
@@ -55,6 +59,10 @@ public class AlertasDAO {
                     ",correa="+alertas.getCorrea()+
                     ",filtro="+alertas.getFiltro()+
                     ",grasa="+alertas.getGrasa()+
+                    ",aceiteKM="+alertas.getAceiteKM()+
+                    ",correaKM="+alertas.getCorreaKM()+
+                    ",filtroKM="+alertas.getFiltroKM()+
+                    ",grasaKM="+alertas.getGrasaKM()+
                     ",vencimientoLicenciaConductor="+alertas.getVencimientoLicenciaConductor()+
                     ",vencimientoLicenciaTaxi="+alertas.getVencimientoLicenciaTaxi());
             
@@ -68,12 +76,22 @@ public class AlertasDAO {
     private ArrayList<String> vencimientoLicenciaMovil(int dias){
         DbConnection conex= new DbConnection();
         ArrayList<String> vencimientoLicenciaTaxi = new ArrayList<String>();
+        
         try {
-             PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT idMovil,fechaLicencia from Movil M where M.fechaLicencia >= DATE_SUB(NOW() , INTERVAL "+dias+" DAY) and M.estado='A'");
+             PreparedStatement consulta = conex.getConnection()
+                     .prepareStatement("SELECT idMovil,fechaLicencia from Movil M where M.estado='A'");
              ResultSet res = consulta.executeQuery();
              // todo: calcular los dias con los jar
+             
             while(res.next()){
-               vencimientoLicenciaTaxi.add("Licencia del movil "+res.getInt("idMovil")+" se en "+calcularDias(res.getString("fechaLicencia"))+" dias.");
+               int calcularDias = calcularDias(res.getString("fechaLicencia"));
+               if (calcularDias > 0 && calcularDias<=30) {
+                   vencimientoLicenciaTaxi.add("Licencia del movil "+res.getInt("idMovil")+" se en "+calcularDias+" dias.");
+               } else if (calcularDias<0) {
+                   vencimientoLicenciaTaxi.add("Licencia del movil "+res.getInt("idMovil")+" esta vencida.");
+               } else if (calcularDias == 0) {
+                   vencimientoLicenciaTaxi.add("Licencia del movil "+res.getInt("idMovil")+" se vence HOY!!");
+               }
             }
             res.close();
             consulta.close();
@@ -89,11 +107,19 @@ public class AlertasDAO {
         DbConnection conex= new DbConnection();
         ArrayList<String> vencimientoLicenciaTaxi = new ArrayList<String>();
         try {
-             PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT DNI,nombre,apellido,fechaCarnetVencimiento from Chofer C where C.fechaCarnetVencimiento >= DATE_SUB(NOW() , INTERVAL "+dias+" DAY) and C.estado='A'");
+             PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT DNI,nombre,apellido,fechaCarnetVencimiento from Chofer C where C.estado='A'");
              ResultSet res = consulta.executeQuery();
             
             while(res.next()){
-               vencimientoLicenciaTaxi.add("Licencia del chofer "+res.getInt("DNI")+" "+res.getString("apellido")+", "+res.getString("nombre")+" se en "+calcularDias(res.getString("fechaCarnetVencimiento"))+" dias.");
+               int calcularDias = calcularDias(res.getString("fechaCarnetVencimiento"));
+               if (calcularDias > 0 && calcularDias<=30) {
+                   vencimientoLicenciaTaxi.add("Licencia del chofer "+res.getInt("DNI")+" "+res.getString("apellido")+", "+res.getString("nombre")+" se vence en "+calcularDias+" dias.");
+               } else if (calcularDias<0) {
+                   vencimientoLicenciaTaxi.add("Licencia del chofer "+res.getInt("DNI")+" "+res.getString("apellido")+", "+res.getString("nombre")+" esta vencida.");
+               } else if (calcularDias == 0) {
+                   vencimientoLicenciaTaxi.add("Licencia del chofer "+res.getInt("DNI")+" "+res.getString("apellido")+", "+res.getString("nombre")+" se vence HOY!!");
+               }               
+
             }
     
             res.close();
@@ -106,15 +132,27 @@ public class AlertasDAO {
         return vencimientoLicenciaTaxi;
     }
     
-    private ArrayList<String> vencimientosKilometros(int kilometrajeVencimiento,String vencimiento,String articulo) {
+    private ArrayList<String> vencimientosKilometros(int kmKm,int kmAlarma,String vencimiento,String articulo) {
         DbConnection conex= new DbConnection();
         ArrayList<String> vencimientoLicenciaTaxi = new ArrayList<String>();
         try {
-             PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * from Movil M where M.kilometraje < M."+vencimiento+"+ "+kilometrajeVencimiento);
+             PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * from Movil M where estado= 'A'");
              ResultSet res = consulta.executeQuery();
             
             while(res.next()){
-               vencimientoLicenciaTaxi.add(articulo+vencimiento+" del movil "+res.getInt("idMovil")+" necesita cambio ("+(res.getInt("kilometraje")-res.getInt(vencimiento))+"/"+kilometrajeVencimiento+").");
+                int km = res.getInt("kilometraje"); 
+                int kmFiltro = res.getInt(vencimiento);
+                int kmCambio = kmFiltro + kmAlarma;
+                int KMALARMA = kmCambio - kmKm;
+
+                if (km >= kmCambio) {
+                    vencimientoLicenciaTaxi.add(articulo+vencimiento+" del movil "+res.getInt("idMovil")+" necesita cambio URGENTE!");
+                } else if (km >= KMALARMA && km <= kmCambio) {
+                    vencimientoLicenciaTaxi.add(articulo+vencimiento+" del movil "+res.getInt("idMovil")+" necesita cambio en "+(kmCambio-km)+" Kilometros");
+                } 
+                    
+                
+                
             }
             res.close();
             consulta.close();
@@ -130,10 +168,10 @@ public class AlertasDAO {
         Alertas alertas = obtenerAlertas();
         ArrayList<String> listaAlertas = new ArrayList<String>();
         
-        listaAlertas.addAll(vencimientosKilometros(alertas.getCorrea(),"correa","La "));
-        listaAlertas.addAll(vencimientosKilometros(alertas.getFiltro(),"filtro","El "));
-        listaAlertas.addAll(vencimientosKilometros(alertas.getAceite(),"aceite","El "));
-        listaAlertas.addAll(vencimientosKilometros(alertas.getGrasa(),"grasa","La "));
+        listaAlertas.addAll(vencimientosKilometros(alertas.getCorreaKM(),alertas.getCorrea(),"correa","La "));
+        listaAlertas.addAll(vencimientosKilometros(alertas.getFiltroKM(),alertas.getFiltro(),"filtro","El "));
+        listaAlertas.addAll(vencimientosKilometros(alertas.getAceiteKM(),alertas.getAceite(),"aceite","El "));
+        listaAlertas.addAll(vencimientosKilometros(alertas.getGrasaKM(),alertas.getGrasa(),"grasa","La "));
         listaAlertas.addAll(vencimientoLicenciaMovil(alertas.getVencimientoLicenciaTaxi()));
         listaAlertas.addAll(vencimientoLicenciaChofer(alertas.getVencimientoLicenciaConductor()));
         
@@ -141,6 +179,6 @@ public class AlertasDAO {
     }
     
     private int calcularDias(String fecha){
-        return Days.daysBetween(new DateTime(fecha), new DateTime().now()).getDays();
+        return Days.daysBetween(new DateTime().now(), new DateTime(fecha)).getDays();
     }
 }

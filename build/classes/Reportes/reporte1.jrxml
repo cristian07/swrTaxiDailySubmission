@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte1" language="groovy" pageWidth="297" pageHeight="421" columnWidth="257" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="afb7009a-0631-457b-bc89-b468454a17da">
-	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.zoom" value="2.200000000000001"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="227"/>
+	<property name="ireport.y" value="363"/>
 	<parameter name="idturno" class="java.lang.Integer"/>
 	<parameter name="comision" class="java.lang.String"/>
 	<parameter name="neto" class="java.lang.String"/>
@@ -10,6 +10,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="recaudacionReal" class="java.lang.String"/>
+	<parameter name="recaudacion" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT * FROM turno WHERE idTurno=$P{idturno}]]>
 	</queryString>
@@ -183,7 +184,7 @@
 			</textField>
 			<textField>
 				<reportElement x="119" y="80" width="100" height="14" uuid="0f7e277b-1916-44c8-bc4d-e88d921dac9e"/>
-				<textFieldExpression><![CDATA[$P{recaudacionReal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{recaudacion}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="119" y="94" width="100" height="14" uuid="46f9e734-04c0-4b2f-be3f-221d33cdaced"/>
@@ -191,7 +192,7 @@
 			</textField>
 			<textField>
 				<reportElement x="119" y="108" width="100" height="14" uuid="e2b07955-fcd7-4072-9257-3ae38140898e"/>
-				<textFieldExpression><![CDATA[$F{gncFueraCtaCte}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{gncBrutoCtaCte}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="119" y="121" width="100" height="14" uuid="cef2f863-1426-4bf6-8027-efa55dcff909"/>
@@ -211,10 +212,12 @@
 			</textField>
 			<staticText>
 				<reportElement x="98" y="189" width="69" height="14" uuid="1fb28e22-59b6-4408-a0ef-62958b5ad36f"/>
+				<textElement textAlignment="Right"/>
 				<text><![CDATA[Comision:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="98" y="203" width="69" height="14" uuid="5f04336f-2372-4843-ba20-07e8b1c6dfa2"/>
+				<textElement textAlignment="Right"/>
 				<text><![CDATA[Neto:]]></text>
 			</staticText>
 			<textField>
@@ -257,6 +260,19 @@
 				<reportElement x="167" y="202" width="11" height="14" uuid="c37937f2-db97-4c05-8a0c-dffd016ae097"/>
 				<text><![CDATA[$]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="77" y="175" width="90" height="14" uuid="67aefbc0-937c-4873-b644-ca6692071360"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Recaudacion Real:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="175" width="11" height="14" uuid="3cf6e655-3e14-46aa-ae42-a4c36b08304f"/>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="178" y="175" width="73" height="14" uuid="3cf81f11-0616-4256-9e40-1ff6a535303c"/>
+				<textFieldExpression><![CDATA[$P{recaudacionReal}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 </jasperReport>

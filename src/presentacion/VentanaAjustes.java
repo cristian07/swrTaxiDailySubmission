@@ -11,6 +11,7 @@ import com.sun.glass.events.KeyEvent;
 import entidades.Ajustes;
 import entidades.Alertas;
 import javax.swing.JOptionPane;
+import servicio.ManejadorTecla;
 
 /**
  *
@@ -24,6 +25,19 @@ public class VentanaAjustes extends javax.swing.JFrame {
     public VentanaAjustes() {
         initComponents();
         this.setLocationRelativeTo(null);
+         ManejadorTecla manejador = new ManejadorTecla();
+        jtf_ComisionChofer.addKeyListener(manejador);
+        jte_AjusteGas.addKeyListener(manejador);
+        jte_PrecioGasCtaCte.addKeyListener(manejador);
+        jte_PrecioGasFueraCta.addKeyListener(manejador);
+        jtf_Taxi.addKeyListener(manejador);
+        jtf_Chofer.addKeyListener(manejador);
+        jtf_Correa.addKeyListener(manejador);
+        jtf_Aceite.addKeyListener(manejador);
+        jtf_Grasa.addKeyListener(manejador);
+        jtf_Filtro.addKeyListener(manejador);
+        
+        
         AjustesDAO ajustesDAO = new AjustesDAO();
         Ajustes ajustes = new Ajustes();
         ajustes = ajustesDAO.obtenerUltimosAjustes();
@@ -41,6 +55,11 @@ public class VentanaAjustes extends javax.swing.JFrame {
         jtf_Aceite.setText(String.valueOf(alertas.getAceite()));
         jtf_Grasa.setText(String.valueOf(alertas.getGrasa()));
         jtf_Filtro.setText(String.valueOf(alertas.getFiltro()));
+        jtf_CorreaKM.setText(String.valueOf(alertas.getCorreaKM()));
+        jtf_AceiteKM.setText(String.valueOf(alertas.getAceiteKM()));
+        jtf_GrasaKM.setText(String.valueOf(alertas.getGrasaKM()));
+        jtf_FiltroKM.setText(String.valueOf(alertas.getFiltroKM()));
+        
         
     }
 
@@ -54,6 +73,7 @@ public class VentanaAjustes extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel12 = new javax.swing.JLabel();
+        jtf_Correa1 = new javax.swing.JTextField();
         Ajustes = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jb_Salir = new javax.swing.JButton();
@@ -87,10 +107,24 @@ public class VentanaAjustes extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        jtf_CorreaKM = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jtf_AceiteKM = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        jtf_GrasaKM = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jtf_FiltroKM = new javax.swing.JTextField();
         jb_ActualizarAlarmas = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         jLabel12.setText("dias");
+
+        jtf_Correa1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_Correa1KeyTyped(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Configuración de ajustes");
@@ -154,26 +188,19 @@ public class VentanaAjustes extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(40, 40, 40)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jte_PrecioGasCtaCte, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                            .addComponent(jte_AjusteGas)))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jte_PrecioGasFueraCta, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jtf_ComisionChofer, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(89, Short.MAX_VALUE))
+                            .addComponent(jte_PrecioGasCtaCte, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jte_PrecioGasFueraCta, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jte_AjusteGas, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtf_ComisionChofer, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,7 +221,7 @@ public class VentanaAjustes extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jte_PrecioGasFueraCta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         jb_Actualizar.setText("Actualizar");
@@ -287,7 +314,39 @@ public class VentanaAjustes extends javax.swing.JFrame {
 
         jLabel16.setText("Km");
 
-        jLabel17.setText("dias");
+        jLabel17.setText("Km");
+
+        jtf_CorreaKM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_CorreaKMKeyTyped(evt);
+            }
+        });
+
+        jLabel18.setText("Km");
+
+        jLabel19.setText("Km");
+
+        jtf_AceiteKM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_AceiteKMKeyTyped(evt);
+            }
+        });
+
+        jLabel20.setText("Km");
+
+        jtf_GrasaKM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_GrasaKMKeyTyped(evt);
+            }
+        });
+
+        jLabel21.setText("Km");
+
+        jtf_FiltroKM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_FiltroKMKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -298,8 +357,8 @@ public class VentanaAjustes extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jtf_Taxi, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                        .addComponent(jtf_Taxi, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
@@ -308,21 +367,41 @@ public class VentanaAjustes extends javax.swing.JFrame {
                             .addComponent(jLabel9)
                             .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtf_Correa)
-                            .addComponent(jtf_Aceite)
-                            .addComponent(jtf_Grasa)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jtf_Correa, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                            .addComponent(jtf_Aceite, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtf_Grasa, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtf_Filtro)
-                            .addComponent(jtf_Chofer, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jtf_Chofer))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtf_CorreaKM, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel18))
                     .addComponent(jLabel13)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17))
-                .addContainerGap(148, Short.MAX_VALUE))
+                    .addComponent(jLabel11)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtf_AceiteKM, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel19))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtf_GrasaKM, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel20))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtf_FiltroKM, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel21)))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,22 +420,33 @@ public class VentanaAjustes extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jtf_Correa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
+                    .addComponent(jLabel14)
+                    .addComponent(jtf_CorreaKM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jtf_Aceite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
+                    .addComponent(jLabel16)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtf_AceiteKM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel19)))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jtf_Grasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15))
+                    .addComponent(jLabel15)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtf_GrasaKM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel20)))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jtf_Filtro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17))
+                    .addComponent(jLabel17)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtf_FiltroKM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel21)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -536,6 +626,26 @@ public class VentanaAjustes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jtf_GrasaKeyTyped
 
+    private void jtf_Correa1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_Correa1KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_Correa1KeyTyped
+
+    private void jtf_CorreaKMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_CorreaKMKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_CorreaKMKeyTyped
+
+    private void jtf_AceiteKMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_AceiteKMKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_AceiteKMKeyTyped
+
+    private void jtf_GrasaKMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_GrasaKMKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_GrasaKMKeyTyped
+
+    private void jtf_FiltroKMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_FiltroKMKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_FiltroKMKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -590,6 +700,10 @@ public class VentanaAjustes extends javax.swing.JFrame {
         alertas.setCorrea(Integer.parseInt(jtf_Correa.getText()));
         alertas.setFiltro(Integer.parseInt(jtf_Filtro.getText()));
         alertas.setGrasa(Integer.parseInt(jtf_Grasa.getText()));
+        alertas.setAceiteKM(Integer.parseInt(jtf_AceiteKM.getText()));
+        alertas.setCorreaKM(Integer.parseInt(jtf_CorreaKM.getText()));
+        alertas.setFiltroKM(Integer.parseInt(jtf_FiltroKM.getText()));
+        alertas.setGrasaKM(Integer.parseInt(jtf_GrasaKM.getText()));
         alertas.setVencimientoLicenciaConductor(Integer.parseInt(jtf_Chofer.getText()));
         alertas.setVencimientoLicenciaTaxi(Integer.parseInt(jtf_Taxi.getText()));
         alertasDAO.actualizarAlertas(alertas);
@@ -609,7 +723,11 @@ public class VentanaAjustes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -628,11 +746,16 @@ public class VentanaAjustes extends javax.swing.JFrame {
     private javax.swing.JTextField jte_PrecioGasCtaCte;
     private javax.swing.JTextField jte_PrecioGasFueraCta;
     private javax.swing.JTextField jtf_Aceite;
+    private javax.swing.JTextField jtf_AceiteKM;
     private javax.swing.JTextField jtf_Chofer;
     private javax.swing.JTextField jtf_ComisionChofer;
     private javax.swing.JTextField jtf_Correa;
+    private javax.swing.JTextField jtf_Correa1;
+    private javax.swing.JTextField jtf_CorreaKM;
     private javax.swing.JTextField jtf_Filtro;
+    private javax.swing.JTextField jtf_FiltroKM;
     private javax.swing.JTextField jtf_Grasa;
+    private javax.swing.JTextField jtf_GrasaKM;
     private javax.swing.JTextField jtf_Taxi;
     // End of variables declaration//GEN-END:variables
 }

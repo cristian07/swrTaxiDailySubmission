@@ -6,6 +6,7 @@
 package presentacion;
 
 import DAO.AjustesDAO;
+import DAO.MovilDAO;
 import DAO.TurnoDAO;
 import entidades.Movil;
 import entidades.Turno;
@@ -16,6 +17,8 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static presentacion.LoginChofer.jl_Fecha;
+import servicio.ManejadorTecla;
 
 /**
  *
@@ -30,19 +33,31 @@ public class RendicionChofer extends javax.swing.JFrame {
     public RendicionChofer() {
         initComponents();
         this.setLocationRelativeTo(null);
+        ManejadorTecla manejador = new ManejadorTecla();
+        jtf_Movil.addKeyListener(manejador);
+        jtf_KmInicial.addKeyListener(manejador);
+        jtf_KmFinal.addKeyListener(manejador);
+        jtf_TicketRelevo1.addKeyListener(manejador);
+        jtf_TicketRelevo2.addKeyListener(manejador);
+        jtf_Recaudacion.addKeyListener(manejador);
+        jtf_Gastos.addKeyListener(manejador);
+        jtf_GNCBruto.addKeyListener(manejador);
+        jtf_GNCFuera.addKeyListener(manejador);
+        jtf_KmOcupados.addKeyListener(manejador);
+        jtf_KmLibres.addKeyListener(manejador);
+        jtf_GastosChequera.addKeyListener(manejador);
+        jta_Novedades.addKeyListener(manejador);
+        
+        
+        
+        
         Calendar calendario = Calendar.getInstance();
        
-        TurnoDAO turnoDAO = new TurnoDAO();
-        ArrayList<Movil> moviles = new ArrayList<Movil>();
+        
         AjustesDAO ajustesDAO = new AjustesDAO();
         
         
-        moviles = turnoDAO.obtenerMovilesSinRendicion("TODO");//TO DO
         
-        jtf_Movil.addItem("");
-        for(Movil auto : moviles){
-            jtf_Movil.addItem(auto.getIdMovil());
-        }
     }
     private void registrarTurno() {
         TurnoDAO turnoDAO = new TurnoDAO();
@@ -834,14 +849,6 @@ public class RendicionChofer extends javax.swing.JFrame {
             registrarTurno();
             TurnoDAO turnoDAO = new TurnoDAO();
             int turno = Integer.parseInt(turnoDAO.obtenerUltimoTurnoIngresado());
-            /* Cristian, armate una consulta para que el PARAMETRO que envie sea el utlimo turno creado
-             Por Ej:
-             SELECT idturno FROM turno ORDER BY idturno DESC LIMIT 1
-             El valor que te devuelva es el que tenes q enviar.
-             Tiene que ser un Int
-             La linea q tenes q agregar al codigo es la de abajo
-             Saludos*/
-
             new reportes.ImprimirReportes().RendicionCuenta(turno, jtf_Comision.getText(), jtf_Neto.getText(),jl_chofer.getText(),jtf_recaudacionReal.getText());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RendicionChofer.class.getName()).log(Level.SEVERE, null, ex);
@@ -851,6 +858,13 @@ public class RendicionChofer extends javax.swing.JFrame {
         LoginChofer login = new LoginChofer();
         LoginChofer.jl_turno.setText(jl_Tipo.getText());
         LoginChofer.jl_Fecha.setText(jl_Fecha.getText());
+        MovilDAO movilDAO = new MovilDAO();
+        int cantidadMoviles = movilDAO.obtenerCantidadMovilesActivos();
+        LoginChofer.jl_cantidadMoviles.setText(String.valueOf(cantidadMoviles));
+        TurnoDAO turnoDAO = new TurnoDAO();
+        String tipo = jl_Tipo.getText().substring(0,1);
+        int cantidadRendidos = turnoDAO.obtenerMovilesRendidos(jl_Fecha.getText(),tipo);
+        LoginChofer.jl_faltanRendir.setText(String.valueOf(cantidadMoviles-cantidadRendidos));
         login.setVisible(true);
         this.dispose();
     }
@@ -1245,7 +1259,7 @@ public class RendicionChofer extends javax.swing.JFrame {
     private javax.swing.JTextField jtf_KmInicial;
     private javax.swing.JTextField jtf_KmLibres;
     private javax.swing.JTextField jtf_KmOcupados;
-    private javax.swing.JComboBox jtf_Movil;
+    public static javax.swing.JComboBox jtf_Movil;
     private javax.swing.JTextField jtf_Neto;
     private javax.swing.JTextField jtf_Recaudacion;
     private javax.swing.JTextField jtf_TicketRelevo1;
