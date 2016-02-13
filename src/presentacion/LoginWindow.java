@@ -216,6 +216,7 @@ public class LoginWindow extends javax.swing.JFrame {
                         return;
                     }
                 }
+                System.out.println(utilidades.Encriptar(jtf_Usuario.getText()));
                 ingresar();
             } catch (IOException ex) {
                 Logger.getLogger(LoginWindow.class.getName()).log(Level.SEVERE, null, ex);

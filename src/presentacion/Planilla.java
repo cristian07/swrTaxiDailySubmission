@@ -376,10 +376,16 @@ public class Planilla extends javax.swing.JFrame {
         }
         jl_Licencia.setVisible(true);
         modeloTotales.setNumRows(0);
-        String[] filaMdeloTotales = {String.valueOf(sRecaudacion),
-            String.valueOf(sGNCCtaCte),String.valueOf(sNeto),String.valueOf(sNeto),String.valueOf(sKmTotal),
-            String.valueOf(sComision),
-            String.valueOf(sPrecioKm),String.valueOf(sGNCBn),String.valueOf(sRendimiento)};
+        String[] filaMdeloTotales = {
+            String.valueOf(Math.round(sRecaudacion* 100.0 ) / 100.0),
+            String.valueOf(Math.round(sGNCCtaCte* 100.0 ) / 100.0),
+            String.valueOf(Math.round(sNeto* 100.0 ) / 100.0),
+            String.valueOf(Math.round(sNeto* 100.0 ) / 100.0),
+            String.valueOf(Math.round(sKmTotal* 100.0 ) / 100.0),
+            String.valueOf(Math.round(sComision* 100.0 ) / 100.0),
+            String.valueOf(Math.round(sPrecioKm* 100.0 ) / 100.0),
+            String.valueOf(Math.round(sGNCBn* 100.0 ) / 100.0),
+            String.valueOf(Math.round(sRendimiento* 100.0 ) / 100.0)};
         modeloTotales.addRow(filaMdeloTotales);
     }//GEN-LAST:event_jb_VerActionPerformed
 
